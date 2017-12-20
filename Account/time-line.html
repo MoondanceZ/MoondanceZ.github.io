@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="blank-translucent">
+
+    <link href="css/style.css" rel="stylesheet">
+    <style>
+        .header {
+            /* background-image:  */
+            background-color: #62dfed;
+            height: 46px;
+            /* margin-bottom: 23px; */
+            position: relative;
+        }
+
+        .total {
+            height: 23px;
+        }
+
+        .income>p,
+        .expend>p {
+            margin: 0;
+            padding: 0;
+            color: #8b8989;
+        }
+
+        .income>p:first-child,
+        .expend>p:first-child {
+            font-size: 12px;
+        }
+
+        .expend>p {
+            text-align: right;
+        }
+
+        .avatar {
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            max-width: 46px;
+            height: auto;
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .left {
+            height: 46px;
+            /* background-color: #caf7cd; */
+            line-height: 46px;
+            border-right: 1px solid #a1a2a5;
+            padding-right: 15px;
+            text-align: right;
+            color: #596161;
+        }
+
+        .right {
+            height: 46px;
+            /* background-color: #738de2; */
+            border-left: 1px solid #a1a2a5;
+            line-height: 46px;
+            padding-left: 15px;
+            color: #596161;
+        }
+
+        .mid {
+            position: absolute;
+            width: 26px;
+            height: 26px;
+            background-size: 26px 26px;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 99;
+        }
+
+        .mid-shalou {
+            background-image: url(icon/沙漏等待.png);
+        }
+
+        .mid-sheding {
+            background-image: url(icon/设定.png);
+        }
+
+        .mid-jiushengquan {
+            background-image: url(icon/救生圈.png);
+        }
+
+        .amount {
+            font-size: 12px;
+            color: #8b8989;
+        }
+
+        .day-left,
+        .day-right {
+            height: 16px;
+            line-height: 16px;
+        }
+
+        .day-left {
+            text-align: right;
+            border-right: 1px solid #a1a2a5;
+        }
+
+        .day-right {
+            border-left: 1px solid #a1a2a5;
+        }
+
+        .day {
+            font-size: 10px;
+            color: #8b8989;
+        }
+
+        .mid-day-total {
+            position: absolute;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: #a1a2a5;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 99;
+        }
+
+        .fix-add {
+            position: fixed;
+            right: 20px;
+            bottom: 20px;
+            background-color: #62dfed;
+            width: 46px;
+            height: 46px;
+            border-radius: 50%;
+            color: #ffffff;
+            text-align: center;
+            font-size: 46px;
+            line-height: 46px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="header">
+        <img class="avatar" src="image/avatar.jpg" alt="avatar" srcset="">
+    </div>
+    <div class="total">
+        <div class="col-6 income">
+            <p>当月收入</p>
+            <p>2345</p>
+        </div>
+        <div class="col-6 expend">
+            <p>当月支出</p>
+            <p>5678</p>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-6 day-left">
+                <span class="day">18日</span>
+            </div>
+            <div class="mid-day-total"></div>
+            <div class="col-6 day-right">
+                <span class="day">190.00</span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-6 left">
+                <!-- <span class="amount">78.00</span>
+                    左边 -->
+            </div>
+            <div class="mid mid-sheding"></div>
+            <div class="col-6 right">
+                吃饭
+                <span class="amount">90.00</span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-6 left">
+                <!-- <span class="amount">78.00</span>
+                    左边 -->
+            </div>
+            <div class="mid mid-jiushengquan"></div>
+            <div class="col-6 right">
+                购物
+                <span class="amount">90.00</span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-6 left">
+                <!-- <span class="amount">78.00</span>
+                    左边 -->
+            </div>
+            <div class="mid mid-shalou"></div>
+            <div class="col-6 right">
+                电影
+                <span class="amount">90.00</span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-6 day-left">
+                <span class="day">17日</span>
+            </div>
+            <div class="mid-day-total"></div>
+            <div class="col-6 day-right">
+                <span class="day">100.00</span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-6 left">
+                <span class="amount">1178.00</span>
+                工资
+            </div>
+            <div class="mid mid-shalou"></div>
+            <div class="col-6 right">
+                <!-- 右边
+                    <span class="amount">90.00</span> -->
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-6 left">
+                <!-- <span class="amount">78.00</span>
+                    左边 -->
+            </div>
+            <div class="mid mid-jiushengquan"></div>
+            <div class="col-6 right">
+                通讯
+                <span class="amount">90.00</span>
+            </div>
+        </div>
+    </div>
+    <div class="fix-add">+</div>
+</body>
+
+</html>
