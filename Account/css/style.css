@@ -30,6 +30,7 @@ body {
     margin-left: auto;
 }
 
+
 /* @media (min-width: 768px) {
     .container {
         width: 750px;
@@ -376,11 +377,106 @@ body {
     content: " ";
     clear: both;
 }
+.icon {
+    display: block;
+    background-color: #ffffff;
+    position: absolute;
+    width: 36px;
+    height: 36px;
+    background-size: 36px 36px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 99;
+}
+.icon-yiban {
+    background-image: url(../icon/一般.png);
+}
 
-.show-grid {
-    background: #eee;
-    border: 1px solid #999;
-    height: 50px;
-    text-align: center;
-    margin-top: 20px;
+.icon-liren {
+    background-image: url(../icon/丽人.png);
+}
+
+.icon-shu {
+    background-image: url(../icon/书.png);
+}
+
+.icon-jiaotong {
+    background-image: url(../icon/交通.png);
+}
+
+.icon-zhufang {
+    background-image: url(../icon/住房.png);
+}
+
+.icon-jianzhi {
+    background-image: url(../icon/兼职.png);
+}
+
+.icon-yiyuan {
+    background-image: url(../icon/医院.png);
+}
+
+.icon-gongzi {
+    background-image: url(../icon/工资.png);
+}
+
+.icon-touzi {
+    background-image: url(../icon/投资.png);
+}
+
+.icon-shouru {
+    background-image: url(../icon/收入.png);
+}
+
+.icon-shuma {
+    background-image: url(../icon/数码.png);
+}
+
+.icon-lvyou {
+    background-image: url(../icon/旅游.png);
+}
+
+.icon-riyong {
+    background-image: url(../icon/日用.png);
+}
+
+.icon-fushi {
+    background-image: url(../icon/服饰.png);
+}
+
+.icon-shuiguo {
+    background-image: url(../icon/水果.png);
+}
+
+.icon-wanggou {
+    background-image: url(../icon/网购.png);
+}
+
+.icon-shucai {
+    background-image: url(../icon/蔬菜.png);
+}
+
+.icon-chaoshi {
+    background-image: url(../icon/超市.png);
+}
+
+.icon-yundong {
+    background-image: url(../icon/运动.png);
+}
+
+.icon-tongxun {
+    background-image: url(../icon/通讯.png);
+}
+
+.icon-jiushui {
+    background-image: url(../icon/酒水.png);
+}
+
+.iocn-lingshi {
+    background-image: url(../icon/零食.png);
+}
+
+.icon-canyin {
+    background-image: url(../icon/餐饮.png);
 }
