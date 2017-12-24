@@ -395,94 +395,140 @@ body {
     z-index: 99;
 }
 
-.icon-yiban {
-    background-image: url(../icon/一般.png);
-}
-
-.icon-liren {
-    background-image: url(../icon/丽人.png);
-}
-
-.icon-shu {
-    background-image: url(../icon/书.png);
-}
-
-.icon-jiaotong {
-    background-image: url(../icon/交通.png);
-}
-
-.icon-zhufang {
-    background-image: url(../icon/住房.png);
-}
-
-.icon-jianzhi {
-    background-image: url(../icon/兼职.png);
-}
-
-.icon-yiyuan {
-    background-image: url(../icon/医院.png);
-}
-
-.icon-gongzi {
-    background-image: url(../icon/工资.png);
-}
-
-.icon-touzi {
-    background-image: url(../icon/投资.png);
-}
-
-.icon-shouru {
-    background-image: url(../icon/收入.png);
-}
-
-.icon-shuma {
-    background-image: url(../icon/数码.png);
-}
-
-.icon-lvyou {
-    background-image: url(../icon/旅游.png);
-}
-
-.icon-riyong {
-    background-image: url(../icon/日用.png);
-}
-
-.icon-fushi {
-    background-image: url(../icon/服饰.png);
-}
-
-.icon-shuiguo {
-    background-image: url(../icon/水果.png);
-}
-
-.icon-wanggou {
-    background-image: url(../icon/网购.png);
-}
-
-.icon-shucai {
-    background-image: url(../icon/蔬菜.png);
+.icon-canyin {
+    width: 64px;
+    height: 64px;
+    background: url('../image/css_sprites.png') -213px -213px;
 }
 
 .icon-chaoshi {
-    background-image: url(../icon/超市.png);
+    width: 64px;
+    height: 64px;
+    background: url('../image/css_sprites.png') -214px -143px;
 }
 
-.icon-yundong {
-    background-image: url(../icon/运动.png);
+.icon-fushi {
+    width: 64px;
+    height: 64px;
+    background: url('../image/css_sprites.png') -3px -73px;
 }
 
-.icon-tongxun {
-    background-image: url(../icon/通讯.png);
+.icon-gongzi {
+    width: 64px;
+    height: 64px;
+    background: url('../image/css_sprites.png') -73px -73px;
+}
+
+.icon-jianzhi {
+    width: 64px;
+    height: 64px;
+    background: url('../image/css_sprites.png') -144px -3px;
+}
+
+.icon-jiaotong {
+    width: 64px;
+    height: 64px;
+    background: url('../image/css_sprites.png') -144px -73px;
 }
 
 .icon-jiushui {
-    background-image: url(../icon/酒水.png);
+    width: 64px;
+    height: 64px;
+    background: url('../image/css_sprites.png') -3px -143px;
 }
 
-.iocn-lingshi {
-    background-image: url(../icon/零食.png);
+.icon-liren {
+    width: 64px;
+    height: 64px;
+    background: url('../image/css_sprites.png') -73px -143px;
 }
 
-.icon-canyin {
-    background-image: url(../icon/餐饮.png);
+.icon-lingshi {
+    width: 64px;
+    height: 64px;
+    background: url('../image/css_sprites.png') -143px -143px;
+}
+
+.icon-lvyou {
+    width: 64px;
+    height: 64px;
+    background: url('../image/css_sprites.png') -214px -3px;
+}
+
+.icon-riyong {
+    width: 64px;
+    height: 64px;
+    background: url('../image/css_sprites.png') -214px -73px;
+}
+
+.icon-shouru {
+    width: 64px;
+    height: 64px;
+    background: url('../image/css_sprites.png') -74px -3px;
+}
+
+.icon-shu {
+    width: 64px;
+    height: 64px;
+    background: url('../image/css_sprites.png') -3px -213px;
+}
+
+.icon-shucai {
+    width: 64px;
+    height: 64px;
+    background: url('../image/css_sprites.png') -73px -213px;
+}
+
+.icon-数码 {
+    width: 64px;
+    height: 64px;
+    background: url('../image/css_sprites.png') -143px -213px;
+}
+
+.icon-shuiguo {
+    width: 65px;
+    height: 64px;
+    background: url('../image/css_sprites.png') -3px -3px;
+}
+
+.icon-tongxun {
+    width: 64px;
+    height: 64px;
+    background: url('../image/css_sprites.png') -284px -3px;
+}
+
+.icon-touzi {
+    width: 64px;
+    height: 64px;
+    background: url('../image/css_sprites.png') -284px -73px;
+}
+
+.icon-wanggou {
+    width: 64px;
+    height: 64px;
+    background: url('../image/css_sprites.png') -284px -143px;
+}
+
+.icon-yiban {
+    width: 64px;
+    height: 64px;
+    background: url('../image/css_sprites.png') -284px -213px;
+}
+
+.icon-yiyuan {
+    width: 64px;
+    height: 64px;
+    background: url('../image/css_sprites.png') -3px -283px;
+}
+
+.icon-yundong {
+    width: 64px;
+    height: 64px;
+    background: url('../image/css_sprites.png') -73px -283px;
+}
+
+.icon-zhufang {
+    width: 64px;
+    height: 64px;
+    background: url('../image/css_sprites.png') -143px -283px;
 }

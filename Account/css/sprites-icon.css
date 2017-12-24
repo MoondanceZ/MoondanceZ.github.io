@@ -1,0 +1,137 @@
+.icon-餐饮 {
+    width: 64px;
+    height: 64px;
+    background: url('css_sprites.png') -213px -213px;
+}
+
+.icon-超市 {
+    width: 64px;
+    height: 64px;
+    background: url('css_sprites.png') -214px -143px;
+}
+
+.icon-服饰 {
+    width: 64px;
+    height: 64px;
+    background: url('css_sprites.png') -3px -73px;
+}
+
+.icon-工资 {
+    width: 64px;
+    height: 64px;
+    background: url('css_sprites.png') -73px -73px;
+}
+
+.icon-兼职 {
+    width: 64px;
+    height: 64px;
+    background: url('css_sprites.png') -144px -3px;
+}
+
+.icon-交通 {
+    width: 64px;
+    height: 64px;
+    background: url('css_sprites.png') -144px -73px;
+}
+
+.icon-酒水 {
+    width: 64px;
+    height: 64px;
+    background: url('css_sprites.png') -3px -143px;
+}
+
+.icon-丽人 {
+    width: 64px;
+    height: 64px;
+    background: url('css_sprites.png') -73px -143px;
+}
+
+.icon-零食 {
+    width: 64px;
+    height: 64px;
+    background: url('css_sprites.png') -143px -143px;
+}
+
+.icon-旅游 {
+    width: 64px;
+    height: 64px;
+    background: url('css_sprites.png') -214px -3px;
+}
+
+.icon-日用 {
+    width: 64px;
+    height: 64px;
+    background: url('css_sprites.png') -214px -73px;
+}
+
+.icon-收入 {
+    width: 64px;
+    height: 64px;
+    background: url('css_sprites.png') -74px -3px;
+}
+
+.icon-书 {
+    width: 64px;
+    height: 64px;
+    background: url('css_sprites.png') -3px -213px;
+}
+
+.icon-蔬菜 {
+    width: 64px;
+    height: 64px;
+    background: url('css_sprites.png') -73px -213px;
+}
+
+.icon-数码 {
+    width: 64px;
+    height: 64px;
+    background: url('css_sprites.png') -143px -213px;
+}
+
+.icon-水果 {
+    width: 65px;
+    height: 64px;
+    background: url('css_sprites.png') -3px -3px;
+}
+
+.icon-通讯 {
+    width: 64px;
+    height: 64px;
+    background: url('css_sprites.png') -284px -3px;
+}
+
+.icon-投资 {
+    width: 64px;
+    height: 64px;
+    background: url('css_sprites.png') -284px -73px;
+}
+
+.icon-网购 {
+    width: 64px;
+    height: 64px;
+    background: url('css_sprites.png') -284px -143px;
+}
+
+.icon-一般 {
+    width: 64px;
+    height: 64px;
+    background: url('css_sprites.png') -284px -213px;
+}
+
+.icon-医院 {
+    width: 64px;
+    height: 64px;
+    background: url('css_sprites.png') -3px -283px;
+}
+
+.icon-运动 {
+    width: 64px;
+    height: 64px;
+    background: url('css_sprites.png') -73px -283px;
+}
+
+.icon-住房 {
+    width: 64px;
+    height: 64px;
+    background: url('css_sprites.png') -143px -283px;
+}
