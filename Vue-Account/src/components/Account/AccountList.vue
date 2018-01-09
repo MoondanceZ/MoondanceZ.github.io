@@ -28,7 +28,7 @@
                 <!-- <span class="amount">78.00</span>
                     左边 -->
             </div>
-            <i class="mid icon icon-shucai"></i>
+            <i class="mid iconfont icon-shucai"></i>
             <div class="col-6 right">
                 蔬菜
                 <span class="amount">90.00</span>
@@ -39,7 +39,7 @@
                 <!-- <span class="amount">78.00</span>
                     左边 -->
             </div>
-            <i class="mid icon icon-wanggou"></i>
+            <i class="mid iconfont icon-gouwu"></i>
             <div class="col-6 right">
                 购物
                 <span class="amount">90.00</span>
@@ -50,7 +50,7 @@
                 <!-- <span class="amount">78.00</span>
                     左边 -->
             </div>
-            <i class="mid icon icon-yiban"></i>
+            <i class="mid iconfont icon-yiban"></i>
             <div class="col-6 right">
                 一般
                 <span class="amount">90.00</span>
@@ -70,7 +70,7 @@
                 <span class="amount">1178.00</span>
                 工资
             </div>
-            <i class="mid icon icon-gongzi"></i>
+            <i class="mid iconfont icon-gongzi"></i>
             <div class="col-6 right">
                 <!-- 右边
                     <span class="amount">90.00</span> -->
@@ -81,7 +81,7 @@
                 <!-- <span class="amount">78.00</span>
                     左边 -->
             </div>
-            <i class="mid icon icon-tongxun"></i>
+            <i class="mid iconfont icon-tongxun"></i>
             <div class="col-6 right">
                 通讯
                 <span class="amount">90.00</span>
@@ -174,7 +174,11 @@
   font-size: 10px;
   color: #8b8989;
 }
-
+.mid {
+  font-size: 2em;
+  z-index: 99;
+  background-color: #ffffff;
+}
 .mid-day-total {
   position: absolute;
   width: 12px;
