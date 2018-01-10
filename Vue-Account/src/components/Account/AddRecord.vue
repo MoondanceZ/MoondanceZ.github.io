@@ -240,7 +240,7 @@ export default {};
   height: 40px;
   padding: 0;
   color: #77787a;
-  border: 1px solid #ececee;
+  border: 1px solid #ffffff;
 }
 
 .calc-set {
