@@ -12,11 +12,11 @@ export default new Router({
     path: '/',
     component: Layout,
     children: [{
-      path: '/',
-      alias: '/Account/List',
+      path: '',
+      alias: 'Account/List',
       component: AcountList
     }, {
-      path: '/Account/Add',
+      path: 'Account/Add',
       component: AddAccount
     }]
   }]
