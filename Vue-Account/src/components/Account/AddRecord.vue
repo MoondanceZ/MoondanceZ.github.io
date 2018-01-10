@@ -1,7 +1,7 @@
 <template>
     <div class="container">
         <div class="row add-header">
-            <i class="close"></i>
+            <router-link class="close" to="/Account/List"></router-link>
             <div class="col-6 add-income active">收入</div>
             <div class="col-6 add-expend">支出</div>
         </div>
@@ -142,7 +142,7 @@ export default {};
   overflow: hidden;
   top: 8px;
   left: 12px;
-  /* background-color: purple; */
+  z-index: 99;
 }
 
 .close::after,

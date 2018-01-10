@@ -88,7 +88,7 @@
             </div>
         </div>
     </div>
-    <router-link class="fix-add" to="Add">+</router-link>
+    <router-link class="fix-add" to="/Account/Add">+</router-link>
     <!-- <a class="fix-add" href="add-record.html">+</a> -->
     </div>
 </template>
@@ -175,9 +175,10 @@
   color: #8b8989;
 }
 .mid {
-  font-size: 2em;
+  font-size: 24px;
   z-index: 99;
   background-color: #ffffff;
+  line-height: 20px;
 }
 .mid-day-total {
   position: absolute;
@@ -197,13 +198,14 @@
   right: 20px;
   bottom: 20px;
   background-color: #62dfed;
-  width: 1.6em;
-  height: 1.6em;
+  width: 1.8em;
+  height: 1.8em;
   border-radius: 50%;
   color: #ffffff;
   text-align: center;
-  font-size: 1.6em;
-  line-height: 1.6em;
+  font-size: 1.8em;
+  line-height: 1.8em;
   text-decoration: none;
+  z-index: 99;
 }
 </style>

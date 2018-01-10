@@ -3,7 +3,7 @@ import Router from 'vue-router'
 import Layout from '@/components/Layout'
 import HelloWorld from '@/components/HelloWorld'
 import AcountList from '@/components/Account/AccountList'
-import Add from '@/components/Account/AddRecord'
+import AddAccount from '@/components/Account/AddRecord'
 
 Vue.use(Router)
 
@@ -12,15 +12,12 @@ export default new Router({
     path: '/',
     component: Layout,
     children: [{
-        path: '/',
-        component: AcountList,
-        name: "Hello World"
-      },
-      {
-        path: '/Add',
-        component: Add,
-        name: "Add"
-      }
-    ]
+      path: '/',
+      alias: '/Account/List',
+      component: AcountList
+    }, {
+      path: '/Account/Add',
+      component: AddAccount
+    }]
   }]
 })
