@@ -125,7 +125,7 @@
   position: absolute;
   top: 100%;
   left: 50%;
-  max-width: 3em;
+  max-width: 4em;
   height: auto;
   border-radius: 50%;
   transform: translate(-50%, -50%);
