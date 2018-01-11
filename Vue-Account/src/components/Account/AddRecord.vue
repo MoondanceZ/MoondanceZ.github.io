@@ -139,7 +139,7 @@ export default {
       Amount: "0.00", //显示金额
       SumAmount: "0.00", //计算后的金额
       OperatorType: "", //操作
-      OkOperatorType: "",
+      OkOperatorType: "", //点击Ok时候的操作
       HasDot: false //是否存在小数点
     };
   },
@@ -152,7 +152,6 @@ export default {
       }
 
       if (this.HasDot) {
-        //   debugger;
         if (this.Decimal.length < 2) {
           this.Decimal += number;
         }
@@ -225,6 +224,10 @@ export default {
           this.SumAmount = "0.00";
         }
         this.OkOperatorType = "";
+        this.Integer = "";
+        this.Decimal = "";
+        this.HasDot = false;
+        this.OperatorType = "";
       }
     }
   }
