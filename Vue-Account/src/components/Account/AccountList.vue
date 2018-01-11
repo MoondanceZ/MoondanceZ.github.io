@@ -50,7 +50,7 @@
                 <!-- <span class="amount">78.00</span>
                     左边 -->
             </div>
-            <i class="mid iconfont icon-jinqian"></i>
+            <i class="mid iconfont icon-yiban"></i>
             <div class="col-6 right">
                 一般
                 <span class="amount">90.00</span>

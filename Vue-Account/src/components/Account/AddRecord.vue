@@ -7,10 +7,10 @@
         </div>
         <div class="row add-type">
             <div class="col-2">
-                <i class="icon iconfont icon-jinqian"></i>
+                <i :class="SelectedTypeClass"></i>
             </div>
             <div class="col-2 type-info">
-                一般
+                {{SelectedTypeName}}
             </div>
             <div class="col-8 type-amount">
                 {{Amount}}
@@ -18,10 +18,10 @@
         </div>
         <div class="row">
             <div class="col-2 type-icon-list-icon">
-                <i class="icon iconfont icon-jinqian"></i>
+                <i class="icon iconfont icon-yiban"></i>
                 <p>一般</p>
             </div>
-            <div class="col-2 type-icon-list-icon">
+            <div class="col-2 type-icon-list-icon" @click="selectType('liren', '丽人')">
                 <i class="icon iconfont icon-liren"></i>
                 <p>丽人</p>
             </div>
@@ -50,7 +50,7 @@
                 <p>旅行</p>
             </div>
             <div class="col-2 type-icon-list-icon">
-                <i class="icon iconfont icon-richangyongpin"></i>
+                <i class="icon iconfont icon-riyong"></i>
                 <p>日用</p>
             </div>
             <div class="col-2 type-icon-list-icon">
@@ -133,6 +133,9 @@
 export default {
   data() {
     return {
+      SelectedType: "",
+      SelectedTypeName: "一般",
+      SelectedTypeClass: "icon iconfont icon-yiban",
       Type: 1, //0:支出，1：收入
       Integer: "", //记录整数部分
       Decimal: "", //记录小数部分
@@ -229,6 +232,11 @@ export default {
         this.HasDot = false;
         this.OperatorType = "";
       }
+    },
+    selectType(type, name) {
+      this.SelectedType = type;
+      this.SelectedTypeName = name;
+      this.SelectedTypeClass = "icon iconfont icon-" + type;
     }
   }
 };
