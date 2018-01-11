@@ -28,9 +28,9 @@
                 <!-- <span class="amount">78.00</span>
                     左边 -->
             </div>
-            <i class="mid iconfont icon-shucai"></i>
+            <i class="mid iconfont icon-shicai"></i>
             <div class="col-6 right">
-                蔬菜
+                食材
                 <span class="amount">90.00</span>
             </div>
         </div>

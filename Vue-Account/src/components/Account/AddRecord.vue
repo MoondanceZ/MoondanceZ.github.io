@@ -38,8 +38,8 @@
                 <p>住房</p>
             </div>
             <div class="col-2 type-icon-list-icon">
-                <i class="icon iconfont icon-yiyuan"></i>
-                <p>医院</p>
+                <i class="icon iconfont icon-yiliao"></i>
+                <p>医疗</p>
             </div>
             <div class="col-2 type-icon-list-icon">
                 <i class="icon iconfont icon-shuma"></i>
@@ -66,8 +66,8 @@
                 <p>网购</p>
             </div>
             <div class="col-2 type-icon-list-icon">
-                <i class="icon iconfont icon-shucai"></i>
-                <p>蔬菜</p>
+                <i class="icon iconfont icon-shicai"></i>
+                <p>食材</p>
             </div>
             <div class="col-2 type-icon-list-icon">
                 <i class="icon iconfont icon-chaoshi"></i>
