@@ -6,13 +6,13 @@
             <div class="col-6 add-expend">支出</div>
         </div>
         <div class="row add-type">
-            <div class="col-2 col-md-1">
+            <div class="col-2">
                 <i class="icon iconfont icon-jinqian"></i>
             </div>
-            <div class="col-2 col-md-1 type-info">
+            <div class="col-2 type-info">
                 一般
             </div>
-            <div class="col-8 col-md-10 type-amount">
+            <div class="col-8 type-amount">
                 996.00
             </div>
         </div>
