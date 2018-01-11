@@ -15,13 +15,9 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-.icon-fushi:before { content: "\e6b0"; }
-
-.icon-yundong:before { content: "\e607"; }
-
-.icon-lvxing:before { content: "\e613"; }
-
 .icon-shouru:before { content: "\e63b"; }
+
+.icon-yundong:before { content: "\e66e"; }
 
 .icon-tongxun:before { content: "\e603"; }
 
@@ -49,6 +45,8 @@
 
 .icon-richangyongpin:before { content: "\e635"; }
 
+.icon-fushi:before { content: "\e63c"; }
+
 .icon-yiyuan:before { content: "\e684"; }
 
 .icon-lingshi:before { content: "\e6f9"; }
@@ -58,6 +56,8 @@
 .icon-jinqian:before { content: "\e609"; }
 
 .icon-shucai:before { content: "\e600"; }
+
+.icon-lvxing:before { content: "\e656"; }
 
 .icon-touzi:before { content: "\e60b"; }
 
