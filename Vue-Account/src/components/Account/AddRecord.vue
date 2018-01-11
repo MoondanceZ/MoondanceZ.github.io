@@ -190,7 +190,7 @@ export default {};
 .add-type {
   text-align: center;
   height: 4em;
-  background-color: #62dfed;
+  background-color: #e5e5e5;
 }
 
 .type-info,
@@ -208,11 +208,14 @@ export default {};
   padding-top: 10px;
   text-align: center;
 }
-
+.iconfont {
+  background-color: #e5e5e5;
+}
 .type-icon-list-icon .icon {
   /* width: 36px;
             height: 36px; */
   margin: 0 auto;
+  border-radius: 50%;
 }
 
 .type-icon-list-icon p {
@@ -226,7 +229,7 @@ export default {};
   left: 0;
   bottom: 0;
   height: 190px;
-  background-color: #62dfed;
+  background-color: #e5e5e5;
   width: 100%;
   text-align: center;
   font-size: 2em;
@@ -237,7 +240,7 @@ export default {};
   height: 40px;
   padding: 0;
   color: #77787a;
-  border: 1px solid #ececee;
+  border: 1px solid #ffffff;
 }
 
 .calc-set {

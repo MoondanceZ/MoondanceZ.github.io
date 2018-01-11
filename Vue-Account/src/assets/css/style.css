@@ -429,3 +429,80 @@ table { border-collapse: collapse; border-spacing: 0; }
     font-size: 3em !important;
     z-index: 99;
 }
+
+.icon-jinqian{
+    color: #2ed460;
+}
+
+.icon-liren{
+    color: #e05f9b;
+}
+
+.icon-tushu{
+    color:#f09f42;
+}
+
+.icon-jiaotong{
+    color:#6f4cb1;
+}
+
+.icon-zhufang{
+    color:#60b2e2;
+}
+
+.icon-yiyuan{
+    color:#bd2121;
+}
+
+.icon-shuma{
+    color:#f76ef0;
+}
+
+.icon-lvxing{
+    color:#1255b9;
+}
+
+.icon-richangyongpin{
+    color:#498b0b;
+}
+
+.icon-fushi{
+    color:#be460e;
+}
+
+.icon-shuiguo{
+    color:#b82c82;
+}
+.icon-gouwu{
+    color:#5795b3;
+}
+.icon-shucai{
+    color:#77034b;
+}
+
+.icon-chaoshi{
+    color:#2cb8ac;
+}
+
+.icon-yundong{
+    color:#f08140;
+}
+.icon-tongxun{
+    color:#2d0cbe;
+}
+
+.icon-jiushui{
+    color:#902cb8;
+}
+
+.icon-lingshi{
+    color:#d80c31;
+}
+
+.icon-yongcan{
+    color:#61a2f8;
+}
+
+.icon-gongzi{
+    color:#e98e59;
+}
