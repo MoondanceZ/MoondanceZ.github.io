@@ -2,8 +2,8 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Layout from '@/components/Layout'
 import HelloWorld from '@/components/HelloWorld'
-import AcountList from '@/components/Account/AccountList'
-import AddAccount from '@/components/Account/AddRecord'
+import AcountList from '@/components/account/AccountList'
+import AddAccount from '@/components/account/AddRecord'
 
 Vue.use(Router)
 

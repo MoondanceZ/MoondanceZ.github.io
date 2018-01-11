@@ -13,7 +13,7 @@
                 一般
             </div>
             <div class="col-8 type-amount">
-                996.00
+                {{Amount}}
             </div>
         </div>
         <div class="row">
@@ -105,23 +105,23 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-3">1</div>
-                <div class="col-3">2</div>
-                <div class="col-3">3</div>
-                <div class="col-3">+</div>
-                <div class="col-3">4</div>
-                <div class="col-3">5</div>
-                <div class="col-3">6</div>
-                <div class="col-3">-</div>
+                <div class="col-3" @click="clickCalcNumber(1)">1</div>
+                <div class="col-3" @click="clickCalcNumber(2)">2</div>
+                <div class="col-3" @click="clickCalcNumber(3)">3</div>
+                <div class="col-3" @click="clickCalcOperate('+')">+</div>
+                <div class="col-3" @click="clickCalcNumber(4)">4</div>
+                <div class="col-3" @click="clickCalcNumber(5)">5</div>
+                <div class="col-3" @click="clickCalcNumber(6)">6</div>
+                <div class="col-3" @click="clickCalcOperate('-')">-</div>
                 <div class="col-9">
-                    <div class="col-4">7</div>
-                    <div class="col-4">8</div>
-                    <div class="col-4">9</div>
-                    <div class="col-4 calc-clear">清零</div>
-                    <div class="col-4">0</div>
-                    <div class="col-4">.</div>
+                    <div class="col-4" @click="clickCalcNumber(7)">7</div>
+                    <div class="col-4" @click="clickCalcNumber(8)">8</div>
+                    <div class="col-4" @click="clickCalcNumber(9)">9</div>
+                    <div class="col-4 calc-clear" @click="clickCalcClear">清零</div>
+                    <div class="col-4" @click="clickCalcNumber(0)">0</div>
+                    <div class="col-4" @click="clickCalcDot">.</div>
                 </div>
-                <div class="col-3 calc-ok">
+                <div class="col-3 calc-ok" @click="clickCalcOk">
                     OK
                 </div>
             </div>
@@ -130,7 +130,105 @@
 </template>
 
 <script>
-export default {};
+export default {
+  data() {
+    return {
+      Type: 1, //0:支出，1：收入
+      Integer: "", //记录整数部分
+      Decimal: "", //记录小数部分
+      Amount: "0.00", //显示金额
+      SumAmount: "0.00", //计算后的金额
+      OperatorType: "", //操作
+      OkOperatorType: "",
+      HasDot: false //是否存在小数点
+    };
+  },
+  methods: {
+    clickCalcNumber(number) {
+      if (this.OperatorType != "") {
+        this.Amount = "0.00";
+        this.Integer = "";
+        this.Decimal = "";
+      }
+
+      if (this.HasDot) {
+        //   debugger;
+        if (this.Decimal.length < 2) {
+          this.Decimal += number;
+        }
+        if (this.Integer == "") {
+          this.Integer = "0";
+        }
+      } else {
+        this.Integer += number;
+      }
+      var amountSplit = this.Amount.split(".");
+      amountSplit[0] = this.Integer;
+      if (this.Decimal.length == 1) {
+        amountSplit[1] = this.Decimal + "0";
+      } else if (this.Decimal.length == 2) {
+        amountSplit[1] = this.Decimal;
+      } else {
+        amountSplit[1] = "00";
+      }
+      this.Amount = amountSplit[0] + "." + amountSplit[1];
+
+      this.OperatorType = "";
+    },
+    clickCalcDot() {
+      this.HasDot = true;
+    },
+    clickCalcClear() {
+      this.Amount = "0.00";
+      this.Integer = "";
+      this.Decimal = "";
+      this.SumAmount = "0.00";
+      this.OperatorType = "";
+      this.HasDot = false;
+    },
+    clickCalcOperate(type) {
+      this.OkOperatorType = type;
+      if (this.OperatorType == "") {
+        if (type == "+") {
+          this.OperatorType = "+";
+          this.SumAmount = (parseFloat(this.SumAmount) + parseFloat(this.Amount)
+          ).toFixed(2);
+          this.Amount = this.SumAmount;
+        } else if (type == "-") {
+          this.OperatorType = "-";
+          if (parseFloat(this.SumAmount) != 0) {
+            this.SumAmount = (parseFloat(this.SumAmount) -
+              parseFloat(this.Amount)
+            ).toFixed(2);
+            this.Amount = this.SumAmount;
+          } else {
+            this.SumAmount = this.Amount;
+          }
+        } else {
+          this.OperatorType = "";
+        }
+        this.HasDot = false;
+      }
+    },
+    clickCalcOk() {
+      if (this.OkOperatorType != "") {
+        console.log(this.SumAmount + this.OkOperatorType + this.Amount);
+        if (this.OkOperatorType == "+") {
+          this.Amount = (parseFloat(this.SumAmount) + parseFloat(this.Amount)
+          ).toFixed(2);
+          this.SumAmount = "0.00";
+        } else if (this.OkOperatorType == "-") {
+          if (parseFloat(this.SumAmount) != 0) {
+            this.Amount = (parseFloat(this.SumAmount) - parseFloat(this.Amount)
+            ).toFixed(2);
+          }
+          this.SumAmount = "0.00";
+        }
+        this.OkOperatorType = "";
+      }
+    }
+  }
+};
 </script>
 
 <style scoped>
