@@ -185,6 +185,7 @@ export default {
       this.Decimal = "";
       this.SumAmount = "0.00";
       this.OperatorType = "";
+      this.OkOperatorType = "";
       this.HasDot = false;
     },
     clickCalcOperate(type) {
@@ -212,8 +213,9 @@ export default {
       }
     },
     clickCalcOk() {
+      if (this.OperatorType != "") return;
+
       if (this.OkOperatorType != "") {
-        console.log(this.SumAmount + this.OkOperatorType + this.Amount);
         if (this.OkOperatorType == "+") {
           this.Amount = (parseFloat(this.SumAmount) + parseFloat(this.Amount)
           ).toFixed(2);
