@@ -7,7 +7,7 @@
         </div>
         <div class="row add-type">
             <div class="col-2">
-                <i :class="SelectedTypeClass"></i>
+                <i :class="'icon iconfont icon-' + SelectedType"></i>
             </div>
             <div class="col-2 type-info">
                 {{SelectedTypeName}}
@@ -133,9 +133,8 @@
 export default {
   data() {
     return {
-      SelectedType: "",
+      SelectedType: "yiban",
       SelectedTypeName: "一般",
-      SelectedTypeClass: "icon iconfont icon-yiban",
       Type: 1, //0:支出，1：收入
       Integer: "", //记录整数部分
       Decimal: "", //记录小数部分
@@ -236,7 +235,6 @@ export default {
     selectType(type, name) {
       this.SelectedType = type;
       this.SelectedTypeName = name;
-      this.SelectedTypeClass = "icon iconfont icon-" + type;
     }
   }
 };
