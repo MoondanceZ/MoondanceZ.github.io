@@ -7,7 +7,7 @@
         </div>
         <div class="row add-type">
             <div class="col-2">
-                <i :class="'icon iconfont icon-' + SelectedType"></i>
+                <i :class="'selectedType icon iconfont icon-' + SelectedType"></i>
             </div>
             <div class="col-2 type-info">
                 {{SelectedTypeName}}
@@ -17,81 +17,9 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-2 type-icon-list-icon">
-                <i class="icon iconfont icon-yiban"></i>
-                <p>一般</p>
-            </div>
-            <div class="col-2 type-icon-list-icon" @click="selectType('liren', '丽人')">
-                <i class="icon iconfont icon-liren"></i>
-                <p>丽人</p>
-            </div>
-            <div class="col-2 type-icon-list-icon">
-                <i class="icon iconfont icon-tushu"></i>
-                <p>书籍</p>
-            </div>
-            <div class="col-2 type-icon-list-icon">
-                <i class="icon iconfont icon-jiaotong"></i>
-                <p>交通</p>
-            </div>
-            <div class="col-2 type-icon-list-icon">
-                <i class="icon iconfont icon-zhufang"></i>
-                <p>住房</p>
-            </div>
-            <div class="col-2 type-icon-list-icon">
-                <i class="icon iconfont icon-yiliao"></i>
-                <p>医疗</p>
-            </div>
-            <div class="col-2 type-icon-list-icon">
-                <i class="icon iconfont icon-shuma"></i>
-                <p>数码</p>
-            </div>
-            <div class="col-2 type-icon-list-icon">
-                <i class="icon iconfont icon-lvxing"></i>
-                <p>旅行</p>
-            </div>
-            <div class="col-2 type-icon-list-icon">
-                <i class="icon iconfont icon-riyong"></i>
-                <p>日用</p>
-            </div>
-            <div class="col-2 type-icon-list-icon">
-                <i class="icon iconfont icon-fushi"></i>
-                <p>服饰</p>
-            </div>
-            <div class="col-2 type-icon-list-icon">
-                <i class="icon iconfont icon-shuiguo"></i>
-                <p>水果</p>
-            </div>
-            <div class="col-2 type-icon-list-icon">
-                <i class="icon iconfont icon-gouwu"></i>
-                <p>网购</p>
-            </div>
-            <div class="col-2 type-icon-list-icon">
-                <i class="icon iconfont icon-shicai"></i>
-                <p>食材</p>
-            </div>
-            <div class="col-2 type-icon-list-icon">
-                <i class="icon iconfont icon-chaoshi"></i>
-                <p>超市</p>
-            </div>
-            <div class="col-2 type-icon-list-icon">
-                <i class="icon iconfont icon-yundong"></i>
-                <p>运动</p>
-            </div>
-            <div class="col-2 type-icon-list-icon">
-                <i class="icon iconfont icon-tongxun"></i>
-                <p>通讯</p>
-            </div>
-            <div class="col-2 type-icon-list-icon">
-                <i class="icon iconfont icon-jiushui"></i>
-                <p>酒水</p>
-            </div>
-            <div class="col-2 type-icon-list-icon">
-                <i class="icon iconfont icon-lingshi"></i>
-                <p>零食</p>
-            </div>
-            <div class="col-2 type-icon-list-icon">
-                <i class="icon iconfont icon-yongcan"></i>
-                <p>用餐</p>
+            <div v-for="item in AccountTypeList" :key="item.Code" class="col-2 type-icon-list-icon" @click="selectType(item.Code, item.Name)">
+                <i :class="'icon iconfont icon-' + item.Code"></i>
+                <p>{{item.Name}}</p>
             </div>
         </div>
         <div class="container calc">
@@ -130,9 +58,11 @@
 </template>
 
 <script>
+let _self;
 export default {
   data() {
     return {
+      AccountTypeList: [],
       SelectedType: "yiban",
       SelectedTypeName: "一般",
       Type: 1, //0:支出，1：收入
@@ -145,7 +75,21 @@ export default {
       HasDot: false //是否存在小数点
     };
   },
+  created() {
+    _self = this;
+    _self.getAccountTypeList();
+  },
   methods: {
+    getAccountTypeList() {
+      _self.axios
+        .get("http://localhost:3000/AccountType")
+        .then(response => {
+          this.AccountTypeList = response.data;
+        })
+        .catch(error => {
+          console.error(error);
+        });
+    },
     clickCalcNumber(number) {
       if (this.OperatorType != "") {
         this.Amount = "0.00";
@@ -301,16 +245,20 @@ export default {
   height: 4em;
   background-color: #e5e5e5;
 }
-
+.selectedType {
+  line-height: 1.4em;
+}
 .type-info,
 .type-amount {
   color: #77787a;
   line-height: 46px;
+  font-size: 1.6em;
 }
 
 .type-amount {
   text-align: right;
   padding-right: 30px;
+  font-size: 2em;
 }
 
 .type-icon-list-icon {
@@ -321,8 +269,6 @@ export default {
   background-color: #e5e5e5;
 }
 .type-icon-list-icon .icon {
-  /* width: 36px;
-            height: 36px; */
   margin: 0 auto;
   border-radius: 50%;
 }
