@@ -1,6 +1,18 @@
 {
 
   "AccountType": [{
+    "Type": "0",
+    "Code": "shouru",
+    "Name": "一般"
+  },{
+    "Type": "0",
+    "Code": "gongzi",
+    "Name": "工资"
+  },{
+    "Type": "0",
+    "Code": "touzi",
+    "Name": "投资"
+  },{
     "Type": "1",
     "Code": "yiban",
     "Name": "一般"

@@ -2,8 +2,8 @@
     <div class="container">
         <div class="row add-header">
             <router-link class="close" to="/Account/List"></router-link>
-            <div class="col-6 add-income active">收入</div>
-            <div class="col-6 add-expend">支出</div>
+            <div :class="'col-6 add-income'+ IsIncome" @click="selectAccountType(0)">收入</div>
+            <div :class="'col-6 add-expend'+ IsExpend" @click="selectAccountType(1)">支出</div>
         </div>
         <div class="row add-type">
             <div class="col-2">
@@ -17,7 +17,7 @@
             </div>
         </div>
         <div class="row">
-            <div v-for="item in AccountTypeList" :key="item.Code" class="col-2 type-icon-list-icon" @click="selectType(item.Code, item.Name)">
+            <div v-for="item in AccountTypeFilterList" :key="item.Code" class="col-2 type-icon-list-icon" @click="selectType(item.Code, item.Name)">
                 <i :class="'icon iconfont icon-' + item.Code"></i>
                 <p>{{item.Name}}</p>
             </div>
@@ -33,10 +33,11 @@ export default {
   data() {
     return {
       AccountTypeList: [],
+      AccountTypeFilterList: [],
       SelectedType: "yiban",
       SelectedTypeName: "一般",
-      Type: 1, //0:支出，1：收入
-      Amount: { Value: "0.00" }  //JavaScript 中对象和数组是引用类型，指向同一个内存空间，如果 prop 是一个对象或数组，在子组件内部改变它会影响父组件的状态
+      Type: 1, //0:收入，1：支出
+      Amount: { Value: "0.00" } //JavaScript 中对象和数组是引用类型，指向同一个内存空间，如果 prop 是一个对象或数组，在子组件内部改变它会影响父组件的状态
     };
   },
   created() {
@@ -49,10 +50,22 @@ export default {
         .get("http://localhost:3000/AccountType")
         .then(response => {
           this.AccountTypeList = response.data;
+          this.AccountTypeFilterList = this.AccountTypeList.filter(
+            m => m.Type == this.Type
+          );
         })
         .catch(error => {
           console.error(error);
         });
+    },
+    selectAccountType(type) {
+      this.Type = type;
+      this.AccountTypeFilterList = this.AccountTypeList.filter(
+        m => m.Type == this.Type
+      );
+
+      this.SelectedType = this.Type == 0 ? "shouru" : "yiban";
+      this.SelectedTypeName = "一般";
     },
     selectType(type, name) {
       this.SelectedType = type;
@@ -60,6 +73,14 @@ export default {
     },
     showAmount(val) {
       this.Amount = val;
+    }
+  },
+  computed: {
+    IsIncome: function() {
+      return this.Type == 0 ? " active" : "";
+    },
+    IsExpend: function() {
+      return this.Type == 1 ? " active" : "";
     }
   },
   components: {
