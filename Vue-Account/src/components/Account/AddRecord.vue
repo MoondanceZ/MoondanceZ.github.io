@@ -13,16 +13,20 @@
                 {{SelectedTypeName}}
             </div>
             <div class="col-8 type-amount">
-                {{Amount.Value}}
+                {{Amount}}
             </div>
         </div>
         <div class="row">
-            <div v-for="item in AccountTypeFilterList" :key="item.Code" class="col-2 type-icon-list-icon" @click="selectType(item.Code, item.Name)">
+            <div v-show="Type==0" v-for="item in AccountIncomeTypeList" :key="item.Code" class="col-2 type-icon-list-icon" @click="selectType(item.Code, item.Name)">
+                <i :class="'icon iconfont icon-' + item.Code"></i>
+                <p>{{item.Name}}</p>
+            </div>
+            <div v-show="Type==1" v-for="item in AccountExpendTypeList" :key="item.Code" class="col-2 type-icon-list-icon" @click="selectType(item.Code, item.Name)">
                 <i :class="'icon iconfont icon-' + item.Code"></i>
                 <p>{{item.Name}}</p>
             </div>
         </div>
-        <Calculator :Amount="Amount"></Calculator>
+        <Calculator :Amount="Amount" @showAmount="showAmount"></Calculator>
     </div>
 </template>
 
@@ -33,11 +37,12 @@ export default {
   data() {
     return {
       AccountTypeList: [],
-      AccountTypeFilterList: [],
+      AccountIncomeTypeList: [],
+      AccountExpendTypeList: [],
       SelectedType: "yiban",
       SelectedTypeName: "一般",
       Type: 1, //0:收入，1：支出
-      Amount: { Value: "0.00" } //JavaScript 中对象和数组是引用类型，指向同一个内存空间，如果 prop 是一个对象或数组，在子组件内部改变它会影响父组件的状态
+      Amount: "0.00" //传递到子组件
     };
   },
   created() {
@@ -49,10 +54,8 @@ export default {
       _self.axios
         .get("http://localhost:3000/AccountType")
         .then(response => {
-          this.AccountTypeList = response.data;
-          this.AccountTypeFilterList = this.AccountTypeList.filter(
-            m => m.Type == this.Type
-          );
+          this.AccountIncomeTypeList = response.data.filter(m => m.Type == 0);
+          this.AccountExpendTypeList = response.data.filter(m => m.Type == 1);
         })
         .catch(error => {
           console.error(error);
@@ -60,11 +63,7 @@ export default {
     },
     selectAccountType(type) {
       this.Type = type;
-      this.AccountTypeFilterList = this.AccountTypeList.filter(
-        m => m.Type == this.Type
-      );
-
-      this.SelectedType = this.Type == 0 ? "shouru" : "yiban";
+      this.SelectedType = this.Type == 0 ? "shouru" : "yiban"; //"shour"为收入的一般,"yiban"为支出的一般
       this.SelectedTypeName = "一般";
     },
     selectType(type, name) {
@@ -72,6 +71,7 @@ export default {
       this.SelectedTypeName = name;
     },
     showAmount(val) {
+      //接收子组件数据
       this.Amount = val;
     }
   },

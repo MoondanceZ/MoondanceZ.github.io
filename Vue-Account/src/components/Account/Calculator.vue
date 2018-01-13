@@ -39,6 +39,7 @@ export default {
     return {
       Integer: "", //记录整数部分
       Decimal: "", //记录小数部分
+      CalcAmount: this.Amount, //统计的金额
       SumAmount: "0.00", //计算后的金额
       OperatorType: "", //操作
       OkOperatorType: "", //点击Ok时候的操作
@@ -49,7 +50,7 @@ export default {
   methods: {
     clickCalcNumber(number) {
       if (this.OperatorType != "") {
-        this.Amount.Value = "0.00";
+        this.CalcAmount = "0.00";
         this.Integer = "";
         this.Decimal = "";
       }
@@ -64,7 +65,7 @@ export default {
       } else {
         this.Integer += number;
       }
-      var amountSplit = this.Amount.Value.split(".");
+      var amountSplit = this.CalcAmount.split(".");
       amountSplit[0] = this.Integer;
       if (this.Decimal.length == 1) {
         amountSplit[1] = this.Decimal + "0";
@@ -73,57 +74,65 @@ export default {
       } else {
         amountSplit[1] = "00";
       }
-      this.Amount.Value = amountSplit[0] + "." + amountSplit[1];
-
+      this.CalcAmount = amountSplit[0] + "." + amountSplit[1];
       this.OperatorType = "";
+
+      this.emitAmount();
     },
     clickCalcDot() {
       this.HasDot = true;
     },
     clickCalcClear() {
-      this.Amount.Value = "0.00";
+      this.CalcAmount = "0.00";
       this.Integer = "";
       this.Decimal = "";
       this.SumAmount = "0.00";
       this.OperatorType = "";
       this.OkOperatorType = "";
       this.HasDot = false;
+
+      this.emitAmount();
     },
     clickCalcOperate(type) {
       this.OkOperatorType = type;
       if (this.OperatorType == "") {
         if (type == "+") {
           this.OperatorType = "+";
-          this.SumAmount = (parseFloat(this.SumAmount) + parseFloat(this.Amount.Value)
+          this.SumAmount = (parseFloat(this.SumAmount) +
+            parseFloat(this.CalcAmount)
           ).toFixed(2);
-          this.Amount.Value = this.SumAmount;
+          this.CalcAmount = this.SumAmount;
         } else if (type == "-") {
           this.OperatorType = "-";
           if (parseFloat(this.SumAmount) != 0) {
             this.SumAmount = (parseFloat(this.SumAmount) -
-              parseFloat(this.Amount.Value)
+              parseFloat(this.CalcAmount)
             ).toFixed(2);
-            this.Amount.Value = this.SumAmount;
+            this.CalcAmount = this.SumAmount;
           } else {
-            this.SumAmount = this.Amount.Value;
+            this.SumAmount = this.CalcAmount;
           }
         } else {
           this.OperatorType = "";
         }
         this.HasDot = false;
       }
+
+      this.emitAmount();
     },
     clickCalcOk() {
       if (this.OperatorType != "") return;
 
       if (this.OkOperatorType != "") {
         if (this.OkOperatorType == "+") {
-          this.Amount.Value = (parseFloat(this.SumAmount) + parseFloat(this.Amount.Value)
+          this.CalcAmount = (parseFloat(this.SumAmount) +
+            parseFloat(this.CalcAmount)
           ).toFixed(2);
           this.SumAmount = "0.00";
         } else if (this.OkOperatorType == "-") {
           if (parseFloat(this.SumAmount) != 0) {
-            this.Amount.Value = (parseFloat(this.SumAmount) - parseFloat(this.Amount.Value)
+            this.CalcAmount = (parseFloat(this.SumAmount) -
+              parseFloat(this.CalcAmount)
             ).toFixed(2);
           }
           this.SumAmount = "0.00";
@@ -134,6 +143,11 @@ export default {
         this.HasDot = false;
         this.OperatorType = "";
       }
+
+      this.emitAmount();
+    },
+    emitAmount() {
+      this.$emit("showAmount", this.CalcAmount);
     }
   }
 };
