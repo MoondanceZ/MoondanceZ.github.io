@@ -6,6 +6,7 @@ import App from './App'
 import router from './router'
 import axios from 'axios'
 import VueAxios from 'vue-axios'
+import FastClick from 'fastclick'
 
 import '@/assets/css/iconfont.css'
 import '@/assets/css/style.css'
@@ -13,6 +14,8 @@ import '@/assets/css/style.css'
 Vue.use(VueAxios, axios)
 Vue.use(Vuex)
 Vue.config.productionTip = false
+
+FastClick.attach(document.body);
 
 /* eslint-disable no-new */
 new Vue({
