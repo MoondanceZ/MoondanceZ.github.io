@@ -640,3 +640,80 @@ table {
 .icon-touzi {
   color: #f11569;
 }
+
+.close {
+  position: absolute;
+  display: inline-block;
+  width: 24px;
+  height: 24px;
+  overflow: hidden;
+  top: 8px;
+  left: 12px;
+  z-index: 99;
+}
+
+.close::after,
+.close::before {
+  content: "";
+  width: 100%;
+  height: 2px;
+  position: absolute;
+  background-color: #a1a2a5;
+  top: 50%;
+  left: 0;
+  margin-top: -1px;
+}
+
+.close::after {
+  transform: rotate(45deg);
+}
+
+.close::before {
+  transform: rotate(-45deg);
+}
+
+.add-header {
+  padding-top: 8px 0;
+  margin-bottom: 4px;
+  height: 36px;
+}
+
+.btn {
+  border-radius: 4px;
+  border: 0;
+  box-sizing: border-box;
+  color: inherit;
+  font-size: 16px;
+  height: 32px;
+  padding: 0 10px;
+  outline: 0;
+  overflow: hidden;
+  position: relative;
+  text-align: center;
+  box-shadow: 0 0 1px #b8bbbf;
+}
+
+.btn:active:after {
+  opacity: .4;
+}
+.btn:after {
+  background-color: #000;
+  content: " ";
+  opacity: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  position: absolute;
+}
+
+.btn-default {
+  color: #656b79;
+  background-color: #f6f8fa;
+}
+
+.btn-primary {
+  color: #fff;
+  background-color: #62dfed;
+}
+

@@ -6,7 +6,8 @@
                     <p class="calc-date">1月30日</p>
                 </div>
                 <div class="col-6">
-                    <p class="calc-remark">备注</p>
+                  <!-- <router-link class="fix-add" to="/Account/Remark"><p class="calc-remark">备注</p></router-link> -->
+                  <p class="calc-remark" @click="clickRemark">备注</p>
                 </div>
             </div>
             <div class="row">
@@ -145,6 +146,9 @@ export default {
       }
 
       this.emitAmount();
+    },
+    clickRemark() {
+      this.$emit("openRemark", false);
     },
     emitAmount() {
       this.$emit("showAmount", this.CalcAmount);
