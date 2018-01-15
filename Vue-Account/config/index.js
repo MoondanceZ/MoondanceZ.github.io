@@ -11,11 +11,9 @@ module.exports = {
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
     proxyTable: {
-      '*': {
-        target: 'http://localhost:3000/',
-        filter: function(pathname, req){
-          return pathname.match('^/api')
-        },
+      '/api': {
+        target: 'https://api.round-king.com',
+        changeOrigin: true,
         pathRewrite: {
           '^/api': ''
         }

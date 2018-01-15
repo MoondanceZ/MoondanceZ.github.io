@@ -36,6 +36,7 @@
 <script>
 import Calculator from "@/components/account/Calculator";
 import Remark from "@/components/account/Remark";
+import { getAccountTypes } from "@/api/rk-api";
 let _self;
 export default {
   data() {
@@ -57,11 +58,11 @@ export default {
   },
   methods: {
     getAccountTypeList() {
-      _self.axios
-        .get("http://localhost:3000/AccountType")
+      getAccountTypes()
         .then(response => {
-          this.AccountIncomeTypeList = response.data.filter(m => m.Type == 0);
-          this.AccountExpendTypeList = response.data.filter(m => m.Type == 1);
+          var res = response.data;
+          this.AccountIncomeTypeList = res.Data.filter(m => m.Type == 0);
+          this.AccountExpendTypeList = res.Data.filter(m => m.Type == 1);
         })
         .catch(error => {
           console.error(error);
@@ -80,13 +81,13 @@ export default {
       //接收子组件数据
       this.Amount = val;
     },
-    showRemark(val){
+    showRemark(val) {
       this.RemarkNotOpen = val;
     },
-    closeRemark(val){
+    closeRemark(val) {
       this.RemarkNotOpen = val;
     },
-    getRemarkInfo(val){
+    getRemarkInfo(val) {
       this.RemarkInfo = val;
     }
   },
