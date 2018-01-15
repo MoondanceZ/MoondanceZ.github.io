@@ -150,42 +150,6 @@
       "TypeCode": "lingshi",
       "Amount": 100,
       "Type": 1
-    },{
-      "Id": 1,
-      "TypeName": "酒水",
-      "TypeCode": "jiushui",
-      "Amount": 10110,
-      "Type": 1
-    },{
-      "Id": 1,
-      "TypeName": "零食",
-      "TypeCode": "lingshi",
-      "Amount": 100,
-      "Type": 1
-    },{
-      "Id": 1,
-      "TypeName": "酒水",
-      "TypeCode": "jiushui",
-      "Amount": 10110,
-      "Type": 1
-    },{
-      "Id": 1,
-      "TypeName": "用餐",
-      "TypeCode": "yongcan",
-      "Amount": 124,
-      "Type": 1
-    },{
-      "Id": 1,
-      "TypeName": "零食",
-      "TypeCode": "lingshi",
-      "Amount": 100,
-      "Type": 1
-    },{
-      "Id": 1,
-      "TypeName": "酒水",
-      "TypeCode": "jiushui",
-      "Amount": 10110,
-      "Type": 1
     }
   ]
 }

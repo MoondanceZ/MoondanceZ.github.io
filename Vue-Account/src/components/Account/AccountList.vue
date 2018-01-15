@@ -16,7 +16,7 @@
     <div class="container">
       <ul
         v-infinite-scroll="loadMore"
-        infinite-scroll-disabled="loading"
+        infinite-scroll-disabled="Loading"
         infinite-scroll-distance="10">
         <li v-for="item in AccountList">
           <div class="row">
@@ -32,7 +32,7 @@
           </div>
         </li>
       </ul>
-      <div v-show="loading" class="row">
+      <div v-show="Loading" class="row">
         <div class="col-6 day-left">
           <span class="day">18日</span>
         </div>
@@ -48,23 +48,22 @@
   </div>
 </template>
 <script>
-
 let _self;
 export default {
   data() {
-    return{
+    return {
       AccountList: [],
-      loading: false
-    }
-  }, 
-  created() {
-      _self = this;
-      // _self.loadMore();
+      Loading: false
+    };
   },
-  methods:{
-    loadMore(){
-      if(this.loading==true) return;
-      this.loading = true;
+  created() {
+    _self = this;
+    // _self.loadMore();
+  },
+  methods: {
+    loadMore() {
+      if (this.Loading == true) return;
+      this.Loading = true;
       _self.axios
         .get("http://localhost:3000/AccountList")
         .then(response => {
@@ -72,11 +71,11 @@ export default {
           data.forEach(m => {
             this.AccountList.push(m);
           });
+          this.Loading = false;
         })
         .catch(error => {
           console.error(error);
         });
-      this.loading = false;
     }
   }
 };
