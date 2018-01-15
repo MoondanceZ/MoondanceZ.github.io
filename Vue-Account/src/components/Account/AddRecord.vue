@@ -36,7 +36,7 @@
 <script>
 import Calculator from "@/components/account/Calculator";
 import Remark from "@/components/account/Remark";
-import { getAccountTypes } from "@/api/rk-api";
+import Rk from "@/api/rk-api";
 let _self;
 export default {
   data() {
@@ -59,7 +59,7 @@ export default {
   },
   methods: {
     getAccountTypeList() {
-      getAccountTypes({ userId: this.userId })
+      Rk.account.getAccountTypes({ userId: this.userId })
         .then(response => {
           var res = response.data;
           this.AccountIncomeTypeList = res.Data.filter(m => m.Type == 0);
