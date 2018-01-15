@@ -1,6 +1,11 @@
 import axios from 'axios';
 
-let base = 'http://core-rk.local.cn'
+const dev = process.env.NODE_ENV === 'production' ? false : true
+let baseUrl = dev ? '/api' : 'https://api.round-king.com'
 
 
-export const getAccountTypes = params => { return axios.get(`/api/Account/Types`, { params: params }); };
+export const getAccountTypes = params => {
+  return axios.get(`${baseUrl}/Account/Types`, {
+    params: params
+  });
+};

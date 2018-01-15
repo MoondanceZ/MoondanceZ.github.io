@@ -41,6 +41,7 @@ let _self;
 export default {
   data() {
     return {
+      userId: 0,
       AccountTypeList: [],
       AccountIncomeTypeList: [],
       AccountExpendTypeList: [],
@@ -58,7 +59,7 @@ export default {
   },
   methods: {
     getAccountTypeList() {
-      getAccountTypes()
+      getAccountTypes({ userId: this.userId })
         .then(response => {
           var res = response.data;
           this.AccountIncomeTypeList = res.Data.filter(m => m.Type == 0);
