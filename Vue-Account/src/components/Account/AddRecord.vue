@@ -2,7 +2,7 @@
   <div>
     <div v-show="RemarkNotOpen" class="container">
       <div class="row add-header">
-        <router-link class="close" to="/Account/List"></router-link>
+        <i class="close" @click="clickClose"></i>
         <div :class="'col-6 add-income'+ IsIncome" @click="selectAccountType(0)">收入</div>
         <div :class="'col-6 add-expend'+ IsExpend" @click="selectAccountType(1)">支出</div>
       </div>
@@ -18,11 +18,11 @@
         </div>
       </div>
       <div class="row">
-        <div v-show="Type==0" v-for="item in AccountIncomeTypeList" :key="item.Code" class="col-2 type-icon-list-icon" @click="selectType(item.Code, item.Name)">
+        <div v-show="Type==0" v-for="item in AccountIncomeTypeList" :key="item.Code" class="col-2 type-icon-list-icon" @click="selectType(item.Id, item.Code, item.Name)">
           <i :class="'icon iconfont icon-' + item.Code"></i>
           <p>{{item.Name}}</p>
         </div>
-        <div v-show="Type==1" v-for="item in AccountExpendTypeList" :key="item.Code" class="col-2 type-icon-list-icon" @click="selectType(item.Code, item.Name)">
+        <div v-show="Type==1" v-for="item in AccountExpendTypeList" :key="item.Code" class="col-2 type-icon-list-icon" @click="selectType(item.Id, item.Code, item.Name)">
           <i :class="'icon iconfont icon-' + item.Code"></i>
           <p>{{item.Name}}</p>
         </div>
@@ -41,10 +41,12 @@ let _self;
 export default {
   data() {
     return {
-      userId: 0,
+      Id: 0,
+      UserId: 0,
       AccountTypeList: [],
       AccountIncomeTypeList: [],
       AccountExpendTypeList: [],
+      SelectedId: 1,
       SelectedType: "yiban",
       SelectedTypeName: "一般",
       Type: 1, //0:收入，1：支出
@@ -58,8 +60,28 @@ export default {
     _self.getAccountTypeList();
   },
   methods: {
+    clickClose() {
+      if (this.Amount === "0.00") {
+        this.$router.push("/Account/List");
+      }
+      var recordData = {
+        UserId: this.UserId,
+        Type: this.Type,
+        AccountTypeId: this.SelectedId,
+        Amount: this.Amount,
+        Remark: this.RemarkInfo,
+        AccountDate: "2018-01-12"
+      };
+      if (this.UserId === 0) {
+        Rk.Account.createAccountRecord(recordData);
+      }else{
+        Rk.Account.updateAccountRecord(this.UserId, recordData);
+      }
+      // this.$router.push("/Account/List");
+    },
     getAccountTypeList() {
-      Rk.account.getAccountTypes({ userId: this.userId })
+      Rk.Account
+        .getAccountTypes({ userId: this.UserId })
         .then(response => {
           var res = response.data;
           this.AccountIncomeTypeList = res.Data.filter(m => m.Type == 0);
@@ -72,9 +94,11 @@ export default {
     selectAccountType(type) {
       this.Type = type;
       this.SelectedType = this.Type == 0 ? "shouru" : "yiban"; //"shour"为收入的一般,"yiban"为支出的一般
+      this.SelectedId = this.Type == 0 ? 1 : 4; //默认
       this.SelectedTypeName = "一般";
     },
-    selectType(type, name) {
+    selectType(id, type, name) {
+      this.SelectedId = id;
       this.SelectedType = type;
       this.SelectedTypeName = name;
     },
