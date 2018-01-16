@@ -5,22 +5,22 @@ let baseUrl = dev ? '/api' : 'https://api.round-king.com'
 
 export default {
   account: {
-    getAccountTypes(params) {
+    getAccountTypes: params => {
       return axios.get(`${baseUrl}/Account/Types`, {
         params: params
       });
     },
-    createAccountRecord(params) {
+    createAccountRecord: params => {
       return axios.post(`${baseUrl}/Account`, {
         params: params
       });
     },
-    updateAccountRecord(id, params) {
+    updateAccountRecord: (id, params) => {
       return axios.put(`${baseUrl}/Account${id}`, {
         params: params
       });
     },
-    deleteAccountRecord(id) {
+    deleteAccountRecor: id => {
       return axios.delete(`${baseUrl}/Account${id}`);
     }
   }
