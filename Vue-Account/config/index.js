@@ -12,7 +12,7 @@ module.exports = {
     assetsPublicPath: '/',
     proxyTable: {
       '/api': {
-        target: 'http://localhost:53776',
+        target: 'https://api.round-king.com/',
         changeOrigin: true,
         pathRewrite: {
           '^/api': ''

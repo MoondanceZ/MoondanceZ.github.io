@@ -4,15 +4,12 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import App from './App'
 import router from './router'
-import axios from 'axios'
-import VueAxios from 'vue-axios'
 import FastClick from 'fastclick'
 import { InfiniteScroll } from "mint-ui";
 
 import '@/assets/css/iconfont.css'
 import '@/assets/css/style.css'
 
-Vue.use(VueAxios, axios)
 Vue.use(Vuex)
 Vue.use(InfiniteScroll)
 

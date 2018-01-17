@@ -180,13 +180,6 @@ table {
   margin-left: auto;
 }
 
-.container-fluid {
-  padding-right: 15px;
-  padding-left: 15px;
-  margin-right: auto;
-  margin-left: auto;
-}
-
 
 /* @media (min-width: 768px) {
     .container {
@@ -535,6 +528,10 @@ table {
   clear: both;
 }
 
+.hidden {
+  display: none;
+}
+
 .mid {
   position: absolute;
   top: 50%;
@@ -570,7 +567,7 @@ table {
 }
 
 .icon-zhufang {
-  color: #60b2e2;
+  color: #285ff5;
 }
 
 .icon-yiliao {
@@ -598,7 +595,7 @@ table {
 }
 
 .icon-gouwu {
-  color: #5795b3;
+  color: #f05348;
 }
 
 .icon-shicai {
@@ -696,6 +693,7 @@ table {
 .btn:active:after {
   opacity: .4;
 }
+
 .btn:after {
   background-color: #000;
   content: " ";
@@ -716,4 +714,3 @@ table {
   color: #fff;
   background-color: #62dfed;
 }
-
