@@ -18,7 +18,7 @@
         v-infinite-scroll="loadMore"
         infinite-scroll-disabled="Loading"
         infinite-scroll-distance="10">
-        <li v-for="item in AccountList">
+        <li v-for="item in AccountList" :key="item.Id">
           <div class="row">
             <div class="col-6 left">
             <!-- <span class="amount">78.00</span>
