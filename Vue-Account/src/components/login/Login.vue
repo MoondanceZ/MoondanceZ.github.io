@@ -4,11 +4,11 @@
       <div class="signIn" v-show="IsSignUp">
         <div class="form-group">
           <label for="account">帐号：</label>
-          <input type="text" name="account" id="account">
+          <input type="text" name="account" id="account" v-model="SignInInfo.Account" required>
         </div>
         <div class="form-group">
           <label for="password">密码：</label>
-          <input type="password" name="password" id="password">
+          <input type="password" name="password" id="password" v-model="SignInInfo.Password" required>
         </div>
         <div class="setting-group">
           <span class="remember">
@@ -20,10 +20,10 @@
         <div class="btn-group">
           <div class="row">
             <div class="col-6">
-              <button type="button" class="btn btnSignUp" @click="clickSignUp(false)">注册</button>
+              <button type="button" class="btn btnSignUp" @click="switchSignUp(false)">注册</button>
             </div>
             <div class="col-6">
-              <button type="button" class="btn btnSignIn">登录</button>
+              <button type="button" class="btn btnSignIn" @click="signInAccount">登录</button>
             </div>
           </div>
         </div>
@@ -31,15 +31,15 @@
       <div class="signUp" v-show="!IsSignUp">
         <div class="form-group">
           <label for="signUp-account">帐号：</label>
-          <input type="text" name="account" id="signUp-account">
+          <input type="text" name="account" id="signUp-account" v-model="SignUpInfo.Account" min-length="4" maxlength="12">
         </div>
         <div class="form-group">
           <label for="signUp-password">密码：</label>
-          <input type="password" name="signUp-password" id="signUp-password">
+          <input type="password" name="signUp-password" id="signUp-password" v-model="SignUpInfo.Password" minlength="6" maxlength="12">
         </div>
         <div class="form-group">
           <label for="confirm-password">确认密码：</label>
-          <input type="password" name="confirm-password" id="confirm-password">
+          <input type="password" name="confirm-password" id="confirm-password" v-model="SignUpInfo.ConfirmPassword" minlength="6" maxlength="12">
         </div>
         <div class="btn-group">
           <div class="row">
@@ -47,7 +47,7 @@
               <button type="button" class="btn btnSignUp" @click="signUpAccount">注册</button>
             </div>
             <div class="col-6">
-              <button type="button" class="btn btnSignIn" @click="clickSignUp(true)">返回</button>
+              <button type="button" class="btn btnSignIn" @click="switchSignUp(true)">返回</button>
             </div>
           </div>
         </div>
@@ -58,12 +58,14 @@
 
 <script>
 import Trianglify from "trianglify";
+import Rk from "@/api/rk-api";
 export default {
   data() {
     return {
       IsSignUp: true,
       IsRmeberUser: false,
       SignInInfo: {
+        UserId: "",
         Account: "",
         Password: ""
       },
@@ -71,7 +73,8 @@ export default {
         Account: "",
         Password: "",
         ConfirmPassword: ""
-      }
+      },
+      Token: {}
     };
   },
   beforeCreate() {
@@ -82,21 +85,76 @@ export default {
     document.body.appendChild(pattern.canvas());
   },
   methods: {
-    clickSignUp(val) {
+    switchSignUp(val) {
       this.IsSignUp = val;
     },
-    signUpAccount() {}
+    signUpAccount() {
+      if (this.SignUpInfo.Password != this.SignUpInfo.ConfirmPassword) {
+        alert("请输入相同密码")
+        return;
+      }
+      Rk.User.signUp({
+        Account: this.SignUpInfo.Account,
+        Password: this.SignUpInfo.Password
+      })
+        .then(response => {
+          var res = response.data;
+          if (res.IsSuccess) {
+            this.SignInInfo.Account = this.SignUpInfo.Account;
+            this.SignInInfo.Password = this.SignUpInfo.Password;
+            this.switchSignUp(false);
+            this.signInAccount();
+          } else {
+            alert(res.Message);
+          }
+        })
+        .catch(error => {
+          console.log(error);
+          alert("操作异常");
+        });
+    },
+    signInAccount() {
+      this.getToken();
+      Rk.User.signIn(1).then(response => {
+          console.log(response);
+        })
+        .catch(error => {
+          console.log(error);
+          alert("操作异常");
+        });
+    },
+    getToken() {
+      var data = {
+        grant_type: "password",
+        client_id: "pwd_client",
+        client_secret: "pwd_secret",
+        scope: "rk offline_access",
+        username: this.SignInInfo.Account,
+        password: this.SignInInfo.Password
+      };
+      Rk.User.getToken(data)
+        .then(response => {
+          this.Token = response.data;
+          sessionStorage.setItem("access_token", this.Token.access_token);
+          sessionStorage.setItem("refresh_token", this.Token.refresh_token);
+          sessionStorage.setItem("token_type", this.Token.token_type);
+          console.log(this.Token);
+        })
+        .catch(error => {
+          console.log(error);
+          alert("操作异常");
+        });
+    }
   }
 };
 </script>
 
 <style scoped>
 .wrapper {
-  /* background-color: #bafce6; */
   border-radius: 6px;
   width: 380px;
   height: 280px;
-  border: 2px solid #62dfed;
+  border: 2px solid rgba(43, 65, 69, 0.219);
 }
 
 .form-group,
