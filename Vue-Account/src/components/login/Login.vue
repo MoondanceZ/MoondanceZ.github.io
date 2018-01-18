@@ -90,7 +90,7 @@ export default {
     },
     signUpAccount() {
       if (this.SignUpInfo.Password != this.SignUpInfo.ConfirmPassword) {
-        alert("请输入相同密码")
+        this.$layer.msg("请输入相同密码");
         return;
       }
       Rk.User.signUp({
@@ -105,22 +105,24 @@ export default {
             this.switchSignUp(false);
             this.signInAccount();
           } else {
-            alert(res.Message);
+            this.$layer.msg(res.Message);
           }
         })
         .catch(error => {
           console.log(error);
-          alert("操作异常");
+          this.$layer.msg("操作异常");
         });
     },
     signInAccount() {
-      this.getToken();
-      Rk.User.signIn(1).then(response => {
+      this.getToken(this.Token);
+      console.log()
+      Rk.User.signIn(1)
+        .then(response => {
           console.log(response);
         })
         .catch(error => {
           console.log(error);
-          alert("操作异常");
+          this.$layer.msg("操作异常111");
         });
     },
     getToken() {
@@ -142,7 +144,8 @@ export default {
         })
         .catch(error => {
           console.log(error);
-          alert("操作异常");
+          this.$layer.msg("操作异常");
+          return false;
         });
     }
   }
@@ -221,7 +224,7 @@ button:focus {
 .btn {
   width: 6rem;
   height: 40px;
-  line-height: 40px;
+  /* line-height: 40px; */
   border: 1px solid #303439;
   border-radius: 8px;
   text-align: center;

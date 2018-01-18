@@ -6,12 +6,14 @@ import App from './App'
 import router from './router'
 import FastClick from 'fastclick'
 import { InfiniteScroll } from "mint-ui";
+import layer from 'vue-layer'
 
 import '@/assets/css/iconfont.css'
 import '@/assets/css/style.css'
 
 Vue.use(Vuex)
 Vue.use(InfiniteScroll)
+Vue.prototype.$layer = layer(Vue);
 
 Vue.config.productionTip = false
 
