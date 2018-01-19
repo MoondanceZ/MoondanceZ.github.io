@@ -16,6 +16,9 @@ export default {
     getAccountTypes: params => {
       return axios.get(`${baseUrl}/Account/Types`, params);
     },
+    getAccountRecords: params =>{
+      return axios.get(`${baseUrl}/Account/List`, params);
+    },
     createAccountRecord: params => {
       return axios.post(`${baseUrl}/Account`, params);
     },
@@ -33,8 +36,8 @@ export default {
     signUp: params => {
       return axios.post(`${baseUrl}/UserInfo`, params);
     },
-    signIn: id => {
-      return axios.get(`${baseUrl}/UserInfo/${id}`, authConfig);
+    signIn: params => {
+      return axios.get(`${baseUrl}/UserInfo/${params}`, authConfig);
     }
   }
 }

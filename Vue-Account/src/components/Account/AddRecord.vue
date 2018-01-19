@@ -73,11 +73,14 @@ export default {
         AccountDate: "2018-01-12"
       };
       if (this.UserId === 0) {
-        Rk.Account.createAccountRecord(recordData);
+        Rk.Account.createAccountRecord(recordData).then(response=>{
+          this.$router.push("/Account/List");
+        });
       }else{
-        Rk.Account.updateAccountRecord(this.UserId, recordData);
+        Rk.Account.updateAccountRecord(this.UserId, recordData).then(response=>{
+          this.$router.push("/Account/List");
+        });
       }
-      // this.$router.push("/Account/List");
     },
     getAccountTypeList() {
       Rk.Account

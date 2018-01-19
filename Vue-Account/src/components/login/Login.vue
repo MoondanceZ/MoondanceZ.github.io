@@ -1,7 +1,7 @@
 <template>
   <div class="wrapper mid">
     <div class="container">
-      <div class="signIn" v-show="IsSignUp">
+      <div class="signIn" v-show="!IsSignUp">
         <div class="form-group">
           <label for="account">帐号：</label>
           <input type="text" name="account" id="account" v-model="SignInInfo.Account" required>
@@ -20,7 +20,7 @@
         <div class="btn-group">
           <div class="row">
             <div class="col-6">
-              <button type="button" class="btn btnSignUp" @click="switchSignUp(false)">注册</button>
+              <button type="button" class="btn btnSignUp" @click="switchSignUp(true)">注册</button>
             </div>
             <div class="col-6">
               <button type="button" class="btn btnSignIn" @click="signInAccount">登录</button>
@@ -28,7 +28,7 @@
           </div>
         </div>
       </div>
-      <div class="signUp" v-show="!IsSignUp">
+      <div class="signUp" v-show="IsSignUp">
         <div class="form-group">
           <label for="signUp-account">帐号：</label>
           <input type="text" name="account" id="signUp-account" v-model="SignUpInfo.Account" min-length="4" maxlength="12">
@@ -47,7 +47,7 @@
               <button type="button" class="btn btnSignUp" @click="signUpAccount">注册</button>
             </div>
             <div class="col-6">
-              <button type="button" class="btn btnSignIn" @click="switchSignUp(true)">返回</button>
+              <button type="button" class="btn btnSignIn" @click="switchSignUp(false)">返回</button>
             </div>
           </div>
         </div>
@@ -62,7 +62,7 @@ import Rk from "@/api/rk-api";
 export default {
   data() {
     return {
-      IsSignUp: true,
+      IsSignUp: false,
       IsRmeberUser: false,
       SignInInfo: {
         UserId: "",
@@ -73,8 +73,7 @@ export default {
         Account: "",
         Password: "",
         ConfirmPassword: ""
-      },
-      Token: {}
+      }
     };
   },
   beforeCreate() {
@@ -82,15 +81,29 @@ export default {
       width: window.innerWidth,
       height: window.innerHeight
     });
-    document.body.appendChild(pattern.canvas());
+    // document.body.appendChild(pattern.canvas()); 会有跟body高度不一样的bug
+    document.body.style.background = "url(" + pattern.png() + ")";
+  },
+  beforeDestroy() {
+    document.body.style.background = "";
   },
   methods: {
     switchSignUp(val) {
       this.IsSignUp = val;
     },
     signUpAccount() {
+      if (!this.IsSignUp) return;
+
+      if (this.SignUpInfo.Account.length === 0) {
+        this.$layer.msg("请输入帐号");
+        return;
+      }
+      if (this.SignUpInfo.Password.length === 0) {
+        this.$layer.msg("请输入密码");
+        return;
+      }
       if (this.SignUpInfo.Password != this.SignUpInfo.ConfirmPassword) {
-        this.$layer.msg("请输入相同密码");
+        this.$layer.tips("请输入相同密码");
         return;
       }
       Rk.User.signUp({
@@ -114,18 +127,18 @@ export default {
         });
     },
     signInAccount() {
-      this.getToken(this.Token);
-      console.log()
-      Rk.User.signIn(1)
-        .then(response => {
-          console.log(response);
-        })
-        .catch(error => {
-          console.log(error);
-          this.$layer.msg("操作异常111");
-        });
-    },
-    getToken() {
+      console.log(this.IsSignUp);
+      if (this.IsSignUp) return;
+
+      if (this.SignInInfo.Account.length === 0) {
+        this.$layer.msg("请输入帐号");
+        return;
+      }
+      if (this.SignInInfo.Password.length === 0) {
+        this.$layer.msg("请输入密码");
+        return;
+      }
+
       var data = {
         grant_type: "password",
         client_id: "pwd_client",
@@ -136,16 +149,25 @@ export default {
       };
       Rk.User.getToken(data)
         .then(response => {
-          this.Token = response.data;
-          sessionStorage.setItem("access_token", this.Token.access_token);
-          sessionStorage.setItem("refresh_token", this.Token.refresh_token);
-          sessionStorage.setItem("token_type", this.Token.token_type);
-          console.log(this.Token);
+          console.log(response.data);
+          var res = response.data;
+          sessionStorage.setItem("access_token", res.access_token);
+          sessionStorage.setItem("refresh_token", res.refresh_token);
+          sessionStorage.setItem("token_type", res.token_type);
+
+          Rk.User.signIn(this.SignInInfo.Account) //重新去拉取用户信息
+            .then(response => {
+              //TODO:保存用户信息
+              this.$router.push("/Account/List");
+            })
+            .catch(error => {
+              console.log(error);
+              this.$layer.msg("登录异常");
+            });
         })
         .catch(error => {
-          console.log(error);
-          this.$layer.msg("操作异常");
-          return false;
+          console.log("getToken error: " + error);
+          this.$layer.msg("帐号或密码不正确");
         });
     }
   }

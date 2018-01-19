@@ -48,12 +48,15 @@
   </div>
 </template>
 <script>
+import Rk from "@/api/rk-api";
 let _self;
 export default {
   data() {
     return {
       AccountList: [],
-      Loading: false
+      Loading: false,
+      PageIndex: 1,
+      PageSize: 10
     };
   },
   created() {
@@ -64,14 +67,20 @@ export default {
     loadMore() {
       if (this.Loading == true) return;
       this.Loading = true;
-      _self.axios
-        .get("http://localhost:3000/AccountList")
+      Rk.Account.getAccountRecords({
+        pageIndx: this.PageIndex,
+        pageSise: this.pageSise,
+        userId: 1
+      })
         .then(response => {
           let data = response.data;
-          data.forEach(m => {
-            this.AccountList.push(m);
-          });
-          this.Loading = false;
+          if (data.IsSuccess) {
+            data.forEach(m => {
+              this.AccountList.push(m);
+            });
+            this.PageIndex = this.PageIndex + 1;
+            this.Loading = false;
+          }
         })
         .catch(error => {
           console.error(error);
