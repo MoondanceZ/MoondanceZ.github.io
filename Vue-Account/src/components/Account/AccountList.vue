@@ -76,7 +76,34 @@ export default {
           let res = response.data;
           if (res.IsSuccess) {
             res.Data.forEach(m => {
-              this.AccountList.push(m);
+              this.AccountList.unshift(m);
+              let dateIndex = this.AccountList.findIndex(item => {
+                return item.Id == m.AccountDate;
+              });
+              if (dateIndex != -1) {
+                this.AccountList.splice(dateIndex, 1);
+              }
+              //计算日期总额
+              let totalIncomeAmount = 0;
+              let totalExpendAmount = 0;
+              this.AccountList.forEach(item => {
+                if (item.AccountDate == m.AmmountDate && item.Type == 0) {
+                  totalIncomeAmount += item.Amount;
+                } else if (
+                  item.AccountDate == m.AmmountDate &&
+                  item.Type == 1
+                ) {
+                  totalExpendAmount += item.Amount;
+                }
+              });
+
+              this.AccountList.unshift({
+                Id: m.AccountDate,
+                IncomeAmount: totalIncomeAmount,
+                ExpendAmount: totalExpendAmount,
+                AccountDate: m.AccountDate,
+                Type: -1
+              });
             });
             this.PageIndex = this.PageIndex + 1;
             this.Loading = false;
