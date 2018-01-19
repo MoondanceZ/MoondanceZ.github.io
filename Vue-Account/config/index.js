@@ -12,7 +12,7 @@ module.exports = {
     assetsPublicPath: '/',
     proxyTable: {
       '/api': {
-        target: 'http://core-rk.local.cn/',
+        target: 'http://localhost:53776/',
         changeOrigin: true,
         pathRewrite: {
           '^/api': ''

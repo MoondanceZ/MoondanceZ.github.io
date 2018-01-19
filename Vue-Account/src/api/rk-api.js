@@ -17,7 +17,7 @@ export default {
       return axios.get(`${baseUrl}/Account/Types`, params);
     },
     getAccountRecords: params =>{
-      return axios.get(`${baseUrl}/Account/List`, params);
+      return axios.get(`${baseUrl}/Account/List`, {params});
     },
     createAccountRecord: params => {
       return axios.post(`${baseUrl}/Account`, params);

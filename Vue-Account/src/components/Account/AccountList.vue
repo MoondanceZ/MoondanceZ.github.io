@@ -27,7 +27,7 @@
             <i :class="'mid iconfont icon-'+item.TypeCode"></i>
           <div class="col-6 right">
           {{item.TypeName}}
-          <span class="amount">{{item.Amount}}</span>
+          <span class="amount">{{String(item.Amount)}}</span>
             </div>
           </div>
         </li>
@@ -68,14 +68,14 @@ export default {
       if (this.Loading == true) return;
       this.Loading = true;
       Rk.Account.getAccountRecords({
-        pageIndx: this.PageIndex,
-        pageSise: this.pageSise,
-        userId: 1
+        PageIndex: this.PageIndex,
+        PageSize: this.PageSize,
+        UserId: 1
       })
         .then(response => {
-          let data = response.data;
-          if (data.IsSuccess) {
-            data.forEach(m => {
+          let res = response.data;
+          if (res.IsSuccess) {
+            res.Data.forEach(m => {
               this.AccountList.push(m);
             });
             this.PageIndex = this.PageIndex + 1;
