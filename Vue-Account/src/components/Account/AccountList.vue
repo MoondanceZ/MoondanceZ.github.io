@@ -14,37 +14,42 @@
       </div>
     </div>
     <div class="container">
-      <ul
-        v-infinite-scroll="loadMore"
-        infinite-scroll-disabled="Loading"
-        infinite-scroll-distance="10">
-        <li v-for="item in AccountList" :key="item.Id">
+      <ul v-infinite-scroll="loadMore" infinite-scroll-disabled="Loading" infinite-scroll-distance="10">
+        <li v-for="item in AccountList" :key="item.Date">
           <div class="row">
-            <div class="col-6 left">
-            <!-- <span class="amount">78.00</span>
-                    左边 -->
+            <div class="col-6 day-left">
+              <span class="day">item.Date.substr(3)</span>
             </div>
-            <i :class="'mid iconfont icon-'+item.TypeCode"></i>
-          <div class="col-6 right">
-          {{item.TypeName}}
-          <span class="amount">{{String(item.Amount)}}</span>
+            <div class="mid-day-total"></div>
+            <div class="col-6 day-right">
+              <span class="day">190.00</span>
             </div>
           </div>
+          <ul>
+            <li v-for="record in item.AccountRecords" :key="record.Id">
+              <div v-if="record.Type == 0" class="row">
+                <div class="col-6 left">
+                  <span class="amount">{{item.Amount}}</span>
+                  {{item.TypeName}}
+                </div>
+                <i :class="'mid iconfont icon-'+item.TypeCode"></i>
+                <div class="col-6 right"></div>
+              </div>
+              <div v-if="record.Type == 1" class="row">
+                <div class="col-6"></div>
+                <i :class="'mid iconfont icon-'+item.TypeCode"></i>
+                <div class="col-6 right">
+                  {{item.TypeName}}
+                  <span class="amount">{{item.Amount}}</span>
+                </div>
+              </div>
+            </li>
+          </ul>
         </li>
       </ul>
-      <div v-show="Loading" class="row">
-        <div class="col-6 day-left">
-          <span class="day">18日</span>
-        </div>
-        <div class="mid-day-total"></div>
-        <div class="col-6 day-right">
-          <span class="day">190.00</span>
-        </div>
-      </div>
-      
+
     </div>
     <router-link class="fix-add" to="/Account/Add">+</router-link>
-    <!-- <a class="fix-add" href="add-record.html">+</a> -->
   </div>
 </template>
 <script>
@@ -76,50 +81,26 @@ export default {
           let res = response.data;
           if (res.IsSuccess) {
             res.Data.forEach(m => {
-              let lastIndexOfDateRecord = this.AccountList.reverse().findIndex(
-                item => item.AccountDate == m.AccountDate
+              let currentDateIndex = this.AccountList.findIndex(
+                item => item.Date == m.Date
               );
-
-              if (lastIndexOfDateRecord == -1) {
+              if (currentDateIndex == -1) {
                 this.AccountList.push(m);
-              } else {
-                this.AccountList.splice(
-                  this.AccountList.length - lastIndexOfDateRecord,
-                  0,
-                  m
+                let totalExpendAmount = 0;
+                this.AccountList[
+                  this.AccountList.length - 1
+                ].AccountRecords.filter(item => item.Type == 1).forEach(
+                  item => {
+                    totalExpendAmount += item.Amount;
+                  }
                 );
-              }
-
-              //查询最后出现的日期总和
-              let dateIndex = this.AccountList.findIndex(item => {
-                return item.Id == m.AccountDate;
-              });
-
-              //计算当前日期总额
-              let totalDateAmount = 0;
-              this.AccountList.forEach(item => {
-                if (item.AccountDate == m.AmmountDate && item.Type == 1) {
-                  totalDateAmount += item.Amount;
-                }
-              });
-              if (dateIndex == -1) {
-                // 计算最早一个记录的位置
-                let firstIndex = this.AccountList.findIndex(
-                  item => item.AccountDate == m.AccountDate
-                );
-                this.AccountList.splice(firstIndex + 1, 0, {
-                  Id: m.AccountDate,
-                  Amount: totalDateAmount,
-                  Date: m.AmountDate,
-                  Type: 1
-                });
+                this.AccountList[
+                  this.AccountList.length - 1
+                ].TotalExpendAmount = totalExpendAmount;
               } else {
-                this.AccountList.splice(dateIndex + 1, 1, {
-                  Id: m.AccountDate,
-                  Amount: totalDateAmount,
-                  Date: m.AmountDate,
-                  Type: 1
-                }); //替换该日期计算所得的总金额
+                this.AccountList[currentDateIndex].AccountRecords.push(
+                  m.AccountRecords
+                );
               }
             });
             this.PageIndex = this.PageIndex + 1;
