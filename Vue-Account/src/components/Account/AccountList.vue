@@ -76,34 +76,27 @@ export default {
           let res = response.data;
           if (res.IsSuccess) {
             res.Data.forEach(m => {
-              this.AccountList.unshift(m);
+              this.AccountList.push(m); //直接添加可能会存在BUG，应该存在该日期的最后，有空再优化
               let dateIndex = this.AccountList.findIndex(item => {
                 return item.Id == m.AccountDate;
               });
-              if (dateIndex != -1) {
-                this.AccountList.splice(dateIndex, 1);
-              }
-              //计算日期总额
-              let totalIncomeAmount = 0;
-              let totalExpendAmount = 0;
+
+              //计算当前日期总额
+              let totalDateAmount = 0;
               this.AccountList.forEach(item => {
-                if (item.AccountDate == m.AmmountDate && item.Type == 0) {
-                  totalIncomeAmount += item.Amount;
-                } else if (
-                  item.AccountDate == m.AmmountDate &&
-                  item.Type == 1
-                ) {
-                  totalExpendAmount += item.Amount;
+                if (item.AccountDate == m.AmmountDate && item.Type == 1) {
+                  totalDateAmount += item.Amount;
                 }
               });
 
-              this.AccountList.unshift({
-                Id: m.AccountDate,
-                IncomeAmount: totalIncomeAmount,
-                ExpendAmount: totalExpendAmount,
-                AccountDate: m.AccountDate,
-                Type: -1
-              });
+              if (dateIndex != -1) {
+                this.AccountList.splice(dateIndex, 1, {
+                  Id: m.AccountDate,
+                  Amount: totalDateAmount,
+                  Date: m.AmountDate,
+                  Type: 1
+                }); //替换该日期计算所得的总金额
+              }
             });
             this.PageIndex = this.PageIndex + 1;
             this.Loading = false;
