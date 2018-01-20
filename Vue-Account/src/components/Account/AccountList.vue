@@ -76,7 +76,21 @@ export default {
           let res = response.data;
           if (res.IsSuccess) {
             res.Data.forEach(m => {
-              this.AccountList.push(m); //直接添加可能会存在BUG，应该存在该日期的最后，有空再优化
+              let lastIndexOfDateRecord = this.AccountList.reverse().findIndex(
+                item => item.AccountDate == m.AccountDate
+              );
+
+              if (lastIndexOfDateRecord == -1) {
+                this.AccountList.push(m);
+              } else {
+                this.AccountList.splice(
+                  this.AccountList.length - lastIndexOfDateRecord,
+                  0,
+                  m
+                );
+              }
+
+              //查询最后出现的日期总和
               let dateIndex = this.AccountList.findIndex(item => {
                 return item.Id == m.AccountDate;
               });
@@ -88,9 +102,19 @@ export default {
                   totalDateAmount += item.Amount;
                 }
               });
-
-              if (dateIndex != -1) {
-                this.AccountList.splice(dateIndex, 1, {
+              if (dateIndex == -1) {
+                // 计算最早一个记录的位置
+                let firstIndex = this.AccountList.findIndex(
+                  item => item.AccountDate == m.AccountDate
+                );
+                this.AccountList.splice(firstIndex + 1, 0, {
+                  Id: m.AccountDate,
+                  Amount: totalDateAmount,
+                  Date: m.AmountDate,
+                  Type: 1
+                });
+              } else {
+                this.AccountList.splice(dateIndex + 1, 1, {
                   Id: m.AccountDate,
                   Amount: totalDateAmount,
                   Date: m.AmountDate,
