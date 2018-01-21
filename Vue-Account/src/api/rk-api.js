@@ -13,31 +13,31 @@ const authConfig = {
 
 export default {
   Account: {
-    getAccountTypes: params => {
-      return axios.get(`${baseUrl}/Account/Types`, params);
+    getAccountTypes: param => {
+      return axios.get(`${baseUrl}/Account/Types`, param);
     },
-    getAccountRecords: params =>{
-      return axios.get(`${baseUrl}/Account/List`, {params});
+    getAccountRecords: param =>{
+      return axios.get(`${baseUrl}/Account/List`, {param});
     },
-    createAccountRecord: params => {
-      return axios.post(`${baseUrl}/Account`, params);
+    createAccountRecord: param => {
+      return axios.post(`${baseUrl}/Account`, param);
     },
     updateAccountRecord: (id, request) => {
-      return axios.put(`${baseUrl}/Account/${id}`, params);
+      return axios.put(`${baseUrl}/Account/${id}`, param);
     },
     deleteAccountRecor: id => {
       return axios.delete(`${baseUrl}/Account/${id}`);
     }
   },
   User: {
-    getToken: params => {
-      return axios.post(`${identityserver4Url}/connect/token`, qs.stringify(params));
+    getToken: param => {
+      return axios.post(`${identityserver4Url}/connect/token`, qs.stringify(param));
     },
-    signUp: params => {
-      return axios.post(`${baseUrl}/UserInfo`, params);
+    signUp: param => {
+      return axios.post(`${baseUrl}/UserInfo`, param);
     },
-    signIn: params => {
-      return axios.get(`${baseUrl}/UserInfo/${params}`, authConfig);
+    signIn: param => {
+      return axios.get(`${baseUrl}/UserInfo/${param}`, authConfig);
     }
   }
 }
