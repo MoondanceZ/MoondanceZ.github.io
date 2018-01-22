@@ -12,7 +12,7 @@ const mutations = {
   'SET_CURRENT_USER' (state, user) {
     state.cuerentUser = user;
   },
-  'SET_isLogin' (state, isLogin) {
+  'SET_IS_LOGIN' (state, isLogin) {
     state.isLogin = isLogin;
   },
   'UPDATE_CURRENT_USER' (state, userInfo) {

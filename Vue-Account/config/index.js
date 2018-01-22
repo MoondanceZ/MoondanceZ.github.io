@@ -12,14 +12,14 @@ module.exports = {
     assetsPublicPath: '/',
     proxyTable: {
       '/api': {
-        target: 'http://localhost:53776/',
+        target: 'https://api.round-king.com/',
         changeOrigin: true,
         pathRewrite: {
           '^/api': ''
         }
       },
       '/identityserver4': {
-        target: 'http://identityserver4.local.cn/',
+        target: 'https://identityserver4.round-king.com/',
         changeOrigin: true,
         pathRewrite: {
           '^/identityserver4': ''

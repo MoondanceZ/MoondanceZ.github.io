@@ -36,7 +36,7 @@ export default {
     signUp: param => {
       return axios.post(`${baseUrl}/UserInfo`, param);
     },
-    signIn: param => {
+    getUser: param => {
       return axios.get(`${baseUrl}/UserInfo/${param}`, authConfig);
     }
   }
