@@ -21,30 +21,19 @@ const actions = {
       let res = response.data;
       if (res.IsSuccess) {
         //备份当前记录
-        const savedCoountList = [...state.accountList];
+        // const savedCoountList = [...state.accountList];
         res.Data.forEach(m => {
-          let currentDateIndex = savedCoountList.findIndex(
+          let currentDateIndex = state.accountList.findIndex(
             item => item.Date == m.Date
           );
           if (currentDateIndex == -1) {
-            savedCoountList.push(m);
-            let totalExpendAmount = 0;
-            savedCoountList[
-              savedCoountList.length - 1
-            ].AccountRecords.filter(item => item.Type == 1).forEach(
-              item => {
-                totalExpendAmount += item.Amount;
-              }
-            );
-            savedCoountList[
-              savedCoountList.length - 1
-            ].TotalExpendAmount = totalExpendAmount;
+            commit('ADD_ACCOUNT_ITEM', m);
           } else {
-            savedCoountList[currentDateIndex].AccountRecords.push(
-              m.AccountRecords
-            );
+            commit('SET_ACCOUNT_LIST', {
+              index: currentDateIndex,
+              recordItems: m.AccountRecords
+            });
           }
-          commit('SET_ACCOUNT_LIST', savedCoountList);
           commit('SET_IS_LOADING', false);
         });
       } else {

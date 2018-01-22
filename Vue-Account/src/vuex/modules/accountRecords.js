@@ -8,8 +8,12 @@ const mutations = {
   'SET_IS_LOADING' (state, loading) {
     state.SET_IS_LOADING = loading;
   },
-  'SET_ACCOUNT_LIST' (state, list) {
-    state.accountList.push(list);
+  'ADD_ACCOUNT_ITEM' (state, item) {
+    state.accountList.push(item);
+  },
+  'SET_ACCOUNT_LIST' (state, param) {
+    state.accountList[param.index].DateAmount = param.dateAmount;
+    state.accountList[param.index].AccountRecords.push(param.recordItems);
   },
   'DELETE_ACCOUNT_RECORD' (state, records) {
 
