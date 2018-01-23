@@ -5,9 +5,17 @@ const dev = process.env.NODE_ENV === 'production' ? false : true
 let baseUrl = dev ? '/api' : 'https://api.round-king.com'
 let identityserver4Url = dev ? '/identityserver4' : 'https://identityserver4.round-king.com'
 
-const authConfig = {
-  headers: {
-    'Authorization': sessionStorage.getItem("token_type") + ' ' + sessionStorage.getItem("access_token")
+// var authConfig = {
+//   headers: {
+//     'Authorization': sessionStorage.getItem("token_type") + ' ' + sessionStorage.getItem("access_token")
+//   }
+// }
+
+function ApiConfig() {
+  return {
+    headers: {
+      'Authorization': sessionStorage.getItem("token_type") + ' ' + sessionStorage.getItem("access_token")
+    }
   }
 }
 
@@ -16,8 +24,10 @@ export default {
     getAccountTypes: param => {
       return axios.get(`${baseUrl}/Account/Types`, param);
     },
-    getAccountRecords: param =>{
-      return axios.get(`${baseUrl}/Account/List`, {param});
+    getAccountRecords: param => {
+      return axios.get(`${baseUrl}/Account/List`, {
+        param
+      });
     },
     createAccountRecord: param => {
       return axios.post(`${baseUrl}/Account`, param);
@@ -37,7 +47,7 @@ export default {
       return axios.post(`${baseUrl}/UserInfo`, param);
     },
     getUser: param => {
-      return axios.get(`${baseUrl}/UserInfo/${param}`, authConfig);
+      return axios.get(`${baseUrl}/UserInfo/${param}`, ApiConfig());
     }
   }
 }

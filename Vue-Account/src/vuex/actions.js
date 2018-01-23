@@ -1,11 +1,7 @@
 import Rk from "@/api/rk-api";
 
-export const getUserToken = function ({
-  commit,
-  state
-}, param) {
-  console.log(param);
-  Rk.User.getToken(param).then(response => {
+export const getUserToken = async function ({commit,state}, param) {
+  await Rk.User.getToken(param).then(response => {
     var res = response.data;
     console.log(res);
     sessionStorage.setItem("access_token", res.access_token);
@@ -16,15 +12,12 @@ export const getUserToken = function ({
     console.error(error);
   });
 };
-export const userSignIn = function ({
-    commit,
-    dispatch
-  },
-  param) {
-  dispatch('getUserToken', param.tokenRequest);
+export const userSignIn = async function ({commit,dispatch}, param) {
+  await dispatch('getUserToken', param.tokenRequest);
   Rk.User.getUser(param.account).then(response => {
-    var res = res.data;
+    var res = response.data;
     if (res.IsSuccess) {
+      console.log(res);
       commit('SET_CURRENT_USER', res.Data);
       commit('SET_IS_LOGIN', true);
     } else {
