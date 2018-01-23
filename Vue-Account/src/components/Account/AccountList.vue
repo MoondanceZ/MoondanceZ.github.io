@@ -54,6 +54,7 @@
 </template>
 <script>
 import Layout from "@/components/Layout";
+import { Indicator, Toast  } from "mint-ui";
 import Rk from "@/api/rk-api";
 let _self;
 export default {

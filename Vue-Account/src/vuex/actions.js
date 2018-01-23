@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Rk from "@/api/rk-api";
+import { Indicator, Toast } from 'mint-ui'
 
 export const userSignIn = async function ({
   commit,
@@ -13,7 +14,8 @@ export const userSignIn = async function ({
     sessionStorage.setItem("token_type", res.token_type);
     commit('SET_TOKEN', res);
   }).catch(error => {
-    console.error(error);
+    Indicator.close();
+    Toast("登录异常：获取 TOKEN 失败");
   });
   await Rk.User.getUser(param.account).then(response => {
     var res = response.data;
@@ -22,10 +24,12 @@ export const userSignIn = async function ({
       commit('SET_CURRENT_USER', res.Data);
       commit('SET_IS_LOGIN', true);
     } else {
-      console.error(res.Message)
+      Indicator.close();
+      Toast(res.Message)
     }
   }).catch(error => {
-    console.error(error);
+    Indicator.close();
+    Toast("登录异常：获取用户信息失败");
   });
 }
 export const getAccountRecords = function ({

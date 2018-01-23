@@ -22,12 +22,6 @@ const router = new Router({
 })
 
 router.beforeEach((to, from, next) => {
-  console.log(to);
-  console.log(from);
-  console.log(store.state.user.isLogin);
-  // 判断配置的路由中是否存在needLogin存在则做出对应的判断
-  // if (true) {
-  // 从状态管理器（vuex）中获取登录状态，如果未登录过的跳转至登录页
   if (from.path != '/' || from.path !== '/Login') {
     next();
   }
@@ -40,9 +34,6 @@ router.beforeEach((to, from, next) => {
     // 如果已经登录了的就可以访问该页面
     next();
   }
-  // } else {
-  //   next();
-  // }
 });
 
 export default router
