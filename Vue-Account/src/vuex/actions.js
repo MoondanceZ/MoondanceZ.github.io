@@ -1,8 +1,11 @@
 import Vue from 'vue'
 import Rk from "@/api/rk-api";
 
-export const getUserToken = async function ({commit,state}, param) {
-  await Rk.User.getToken(param).then(response => {
+export const userSignIn = async function ({
+  commit,
+  dispatch
+}, param) {
+  await Rk.User.getToken(param.tokenRequest).then(response => {
     var res = response.data;
     console.log(res);
     sessionStorage.setItem("access_token", res.access_token);
@@ -12,10 +15,7 @@ export const getUserToken = async function ({commit,state}, param) {
   }).catch(error => {
     console.error(error);
   });
-};
-export const userSignIn = async function ({commit,dispatch}, param) {
-  await dispatch('getUserToken', param.tokenRequest);
-  Rk.User.getUser(param.account).then(response => {
+  await Rk.User.getUser(param.account).then(response => {
     var res = response.data;
     if (res.IsSuccess) {
       console.log(res);
@@ -26,7 +26,7 @@ export const userSignIn = async function ({commit,dispatch}, param) {
     }
   }).catch(error => {
     console.error(error);
-  })
+  });
 }
 export const getAccountRecords = function ({
   commit,

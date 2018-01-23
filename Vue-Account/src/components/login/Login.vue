@@ -127,7 +127,7 @@ export default {
           this.$layer.msg("操作异常");
         });
     },
-    signInAccount() {
+    async signInAccount() {
       if (this.IsSignUp) return;
 
       if (this.SignInInfo.Account.length === 0) {
@@ -147,15 +147,22 @@ export default {
         username: this.SignInInfo.Account,
         password: this.SignInInfo.Password
       };
-      this.sigin({
+      await this.sigin({
         tokenRequest: data,
         account: this.SignInInfo.Account
-      }).then(() => {
-        console.log(this.IsSignUp);
-
-        console.log(sessionStorage.getItem("access_token"));
-        this.$router.push("/Account/List");
       });
+      this.$router.push("/Account/List");
+      // this.$store
+      //   .dispatch("userSignIn", {
+      //     tokenRequest: data,
+      //     account: this.SignInInfo.Account
+      //   })
+      //   .then(response => {
+      //     console.log(response);
+      //     console.log(this.$store.state.user.isLogin);
+      //     console.log(sessionStorage.getItem("access_token"));
+      //     this.$router.push("/Account/List");
+      //   });
       // console.log(this.IsSignUp);
 
       // console.log(sessionStorage.getItem("access_token"));
