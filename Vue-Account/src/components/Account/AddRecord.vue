@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <Layout>
     <div v-show="RemarkNotOpen" class="container">
       <div class="row add-header">
         <i class="close" @click="clickClose"></i>
@@ -30,10 +30,11 @@
       <Calculator :Amount="Amount" @showAmount="showAmount" @openRemark="showRemark"></Calculator>
     </div>
     <Remark v-show="!RemarkNotOpen" @closeRemark="closeRemark" @setRemarkInfo="getRemarkInfo"></Remark>
-  </div>
+  </Layout>
 </template>
 
 <script>
+import Layout from "@/components/Layout";
 import Calculator from "@/components/account/Calculator";
 import Remark from "@/components/account/Remark";
 import Rk from "@/api/rk-api";
@@ -128,6 +129,7 @@ export default {
     }
   },
   components: {
+    Layout,
     Calculator,
     Remark
   }

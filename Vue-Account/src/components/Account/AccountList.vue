@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <Layout>
     <div class="header">
       <img class="avatar" src="../../assets/image/avatar.jpg" alt="avatar" srcset="">
     </div>
@@ -50,9 +50,10 @@
 
     </div>
     <router-link class="fix-add" to="/Account/Add">+</router-link>
-  </div>
+  </Layout>
 </template>
 <script>
+import Layout from "@/components/Layout";
 import Rk from "@/api/rk-api";
 let _self;
 export default {
@@ -111,6 +112,9 @@ export default {
           console.error(error);
         });
     }
+  },
+  components: {
+    Layout
   }
 };
 </script>

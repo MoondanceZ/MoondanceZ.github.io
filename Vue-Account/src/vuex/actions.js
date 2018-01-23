@@ -1,3 +1,4 @@
+import Vue from 'vue'
 import Rk from "@/api/rk-api";
 
 export const getUserToken = async function ({commit,state}, param) {
