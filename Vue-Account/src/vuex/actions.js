@@ -24,7 +24,7 @@ export const userSignUp = async function ({
     Indicator.close();
     Toast("注册失败");
   });
-  if (state.user.Account) {
+  if (state.user.cuerentUser.Account) {
     var tokenRequest = {
       grant_type: "password",
       client_id: "pwd_client",
