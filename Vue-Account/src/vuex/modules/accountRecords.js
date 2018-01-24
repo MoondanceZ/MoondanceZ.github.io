@@ -16,7 +16,6 @@ const mutations = {
     state.accountList[param.index].AccountRecords.push(param.recordItems);
   },
   'DELETE_ACCOUNT_RECORD' (state, records) {
-
   }
 }
 

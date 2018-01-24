@@ -85,12 +85,12 @@ export const userSignIn = async function ({
     });
   }
 }
-export const getAccountRecords = async function ({
+export const getAccountRecords = function ({
   commit,
   state
 }, param) {
   commit('SET_IS_LOADING', true);
-  await Rk.Account.getAccountRecords(param).then(response => {
+  Rk.Account.getAccountRecords(param).then(response => {
     let res = response.data;
     if (res.IsSuccess) {
       //备份当前记录
@@ -104,10 +104,10 @@ export const getAccountRecords = async function ({
         } else {
           commit('SET_ACCOUNT_LIST', {
             index: currentDateIndex,
+            dateAmount: m.DateAmount,
             recordItems: m.AccountRecords
           });
         }
-        commit('SET_IS_LOADING', false);
       });
     } else {
       console.error(res.Message);
@@ -115,4 +115,5 @@ export const getAccountRecords = async function ({
   }).catch(error => {
     console.error(error);
   });
+  commit('SET_IS_LOADING', false);
 }
