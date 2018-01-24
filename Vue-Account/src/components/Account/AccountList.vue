@@ -22,7 +22,7 @@
             </div>
             <div class="mid-day-total"></div>
             <div class="col-6 day-right">
-              <span class="day">{{item.TotalExpendAmount}}</span>
+              <span class="day">{{item.DateAmount}}</span>
             </div>
           </div>
           <template v-for="record in item.AccountRecords">
@@ -54,12 +54,13 @@
 import Layout from "@/components/Layout";
 import { Indicator, Toast } from "mint-ui";
 import Rk from "@/api/rk-api";
+import { mapActions, mapState } from "vuex";
 let _self;
 export default {
   data() {
     return {
-      AccountList: [],
-      Loading: false,
+      // AccountList: [],
+      // Loading: false,
       PageIndex: 1,
       PageSize: 10
     };
@@ -68,51 +69,84 @@ export default {
     _self = this;
     // _self.loadMore();
   },
+  computed: {
+    ...mapState({
+      AccountList: state => state.accountRecords.accountList,
+      Loading: state => state.accountRecords.isLoading
+    })
+  },
+  mounted() {
+    console.log(this.AccountList);
+    console.log(this.Loading);
+  },
   methods: {
-    loadMore() {
-      if (this.Loading == true) return;
-      this.Loading = true;
-      Rk.Account.getAccountRecords({
+    async loadMore() {
+      console.log(this.AccountList);
+      console.log(this.Loading);
+      // if (this.Loading == true) return;
+      // if (this.PageIndex > 3) {
+      //   return false;
+      // }
+      // this.Loading = true;
+      // this.$store
+      //   .dispatch("getAccountRecords", {
+      //     PageIndex: this.PageIndex,
+      //     PageSize: this.PageSize,
+      //     UserId: this.$store.state.user.cuerentUser.Id
+      //   })
+      //   .then(() => {
+      //     this.PageIndex = this.PageIndex + 1;
+      //     this.Loading = false;
+      //   });
+      await this.getAccountRecords({
         PageIndex: this.PageIndex,
         PageSize: this.PageSize,
         UserId: this.$store.state.user.cuerentUser.Id
-      })
-        .then(response => {
-          let res = response.data;
-          if (res.IsSuccess) {
-            res.Data.forEach(m => {
-              let currentDateIndex = this.AccountList.findIndex(
-                item => item.Date == m.Date
-              );
-              if (currentDateIndex == -1) {
-                this.AccountList.push(m);
-                let totalExpendAmount = 0.0;
-                this.AccountList[
-                  this.AccountList.length - 1
-                ].AccountRecords.filter(item => item.Type == 1).forEach(
-                  item => {
-                    totalExpendAmount = (
-                      totalExpendAmount + parseFloat(item.Amount)
-                    ).toFixed(2);
-                  }
-                );
-                this.AccountList[
-                  this.AccountList.length - 1
-                ].TotalExpendAmount = totalExpendAmount;
-              } else {
-                this.AccountList[currentDateIndex].AccountRecords.push(
-                  m.AccountRecords
-                );
-              }
-            });
-            this.PageIndex = this.PageIndex + 1;
-            this.Loading = false;
-          }
-        })
-        .catch(error => {
-          console.error(error);
-        });
-    }
+      });
+      // Rk.Account.getAccountRecords({
+      //   PageIndex: this.PageIndex,
+      //   PageSize: this.PageSize,
+      //   UserId: this.$store.state.user.cuerentUser.Id
+      // })
+      //   .then(response => {
+      //     let res = response.data;
+      //     if (res.IsSuccess) {
+      //       res.Data.forEach(m => {
+      //         let currentDateIndex = this.AccountList.findIndex(
+      //           item => item.Date == m.Date
+      //         );
+      //         if (currentDateIndex == -1) {
+      //           this.AccountList.push(m);
+      //           let totalExpendAmount = 0.0;
+      //           this.AccountList[
+      //             this.AccountList.length - 1
+      //           ].AccountRecords.filter(item => item.Type == 1).forEach(
+      //             item => {
+      //               totalExpendAmount = (
+      //                 totalExpendAmount + parseFloat(item.Amount)
+      //               ).toFixed(2);
+      //             }
+      //           );
+      //           this.AccountList[
+      //             this.AccountList.length - 1
+      //           ].TotalExpendAmount = totalExpendAmount;
+      //         } else {
+      //           this.AccountList[currentDateIndex].AccountRecords.push(
+      //             m.AccountRecords
+      //           );
+      //         }
+      //       });
+      //       this.PageIndex = this.PageIndex + 1;
+      //       this.Loading = false;
+      //     }
+      //   })
+      //   .catch(error => {
+      //     console.error(error);
+      //   });
+    },
+    ...mapActions({
+      getAccountRecords: "getAccountRecords"
+    })
   },
   components: {
     Layout

@@ -85,18 +85,21 @@ export const userSignIn = async function ({
     });
   }
 }
-export const getAccountRecords = function ({
+export const getAccountRecords = async function ({
   commit,
   state
 }, param) {
   commit('SET_IS_LOADING', true);
-  Rk.Account.getAccountRecords(param).then(response => {
+  await Rk.Account.getAccountRecords(param).then(response => {
+    debugger;
     let res = response.data;
     if (res.IsSuccess) {
       //备份当前记录
       // const savedCoountList = [...state.accountList];
+      debugger;
       res.Data.forEach(m => {
-        let currentDateIndex = state.accountList.findIndex(
+        debugger;
+        let currentDateIndex = state.accountRecords.accountList.findIndex(
           item => item.Date == m.Date
         );
         if (currentDateIndex == -1) {
