@@ -58,6 +58,7 @@ export default {
   },
   created() {
     _self = this;
+    _self.UserId = _self.$store.state.user.cuerentUser.Id;
     _self.getAccountTypeList();
   },
   methods: {
@@ -85,7 +86,7 @@ export default {
     },
     getAccountTypeList() {
       Rk.Account
-        .getAccountTypes({ userId: this.UserId })
+        .getAccountTypes(this.UserId)
         .then(response => {
           var res = response.data;
           this.AccountIncomeTypeList = res.Data.filter(m => m.Type == 0);

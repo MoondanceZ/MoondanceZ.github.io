@@ -54,7 +54,7 @@
 </template>
 <script>
 import Layout from "@/components/Layout";
-import { Indicator, Toast  } from "mint-ui";
+import { Indicator, Toast } from "mint-ui";
 import Rk from "@/api/rk-api";
 let _self;
 export default {
@@ -77,7 +77,7 @@ export default {
       Rk.Account.getAccountRecords({
         PageIndex: this.PageIndex,
         PageSize: this.PageSize,
-        UserId: 1
+        UserId: this.$store.state.user.cuerentUser.Id
       })
         .then(response => {
           let res = response.data;

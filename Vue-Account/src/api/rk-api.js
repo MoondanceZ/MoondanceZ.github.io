@@ -22,21 +22,19 @@ function ApiConfig() {
 export default {
   Account: {
     getAccountTypes: param => {
-      return axios.get(`${baseUrl}/Account/Types`, param);
+      return axios.get(`${baseUrl}/Account/Types/${param}`, ApiConfig());
     },
     getAccountRecords: param => {
-      return axios.get(`${baseUrl}/Account/List`, {
-        param
-      });
+      return axios.get(`${baseUrl}/Account/List?${qs.stringify(param)}`, ApiConfig());
     },
     createAccountRecord: param => {
-      return axios.post(`${baseUrl}/Account`, param);
+      return axios.post(`${baseUrl}/Account`, param, ApiConfig());
     },
     updateAccountRecord: (id, request) => {
-      return axios.put(`${baseUrl}/Account/${id}`, param);
+      return axios.put(`${baseUrl}/Account/${id}`, param, ApiConfig());
     },
     deleteAccountRecor: id => {
-      return axios.delete(`${baseUrl}/Account/${id}`);
+      return axios.delete(`${baseUrl}/Account/${id}`, ApiConfig());
     }
   },
   User: {
