@@ -89,7 +89,7 @@ export const getAccountRecords = function ({
   commit,
   state
 }, param) {
-  commit('SET_IS_LOADING', true);
+  // commit('SET_IS_LOADING', true);
   Rk.Account.getAccountRecords(param).then(response => {
     let res = response.data;
     if (res.IsSuccess) {
@@ -115,5 +115,5 @@ export const getAccountRecords = function ({
   }).catch(error => {
     console.error(error);
   });
-  commit('SET_IS_LOADING', false);
+  // commit('SET_IS_LOADING', false);
 }

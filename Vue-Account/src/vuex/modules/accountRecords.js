@@ -13,10 +13,11 @@ const mutations = {
   },
   'SET_ACCOUNT_LIST' (state, param) {
     state.accountList[param.index].DateAmount = param.dateAmount;
-    state.accountList[param.index].AccountRecords.push(param.recordItems);
+    param.recordItems.forEach(element => {
+      state.accountList[param.index].AccountRecords.push(element);
+    });
   },
-  'DELETE_ACCOUNT_RECORD' (state, records) {
-  }
+  'DELETE_ACCOUNT_RECORD' (state, records) {}
 }
 
 export default {
