@@ -91,14 +91,11 @@ export const getAccountRecords = async function ({
 }, param) {
   commit('SET_IS_LOADING', true);
   await Rk.Account.getAccountRecords(param).then(response => {
-    debugger;
     let res = response.data;
     if (res.IsSuccess) {
       //备份当前记录
       // const savedCoountList = [...state.accountList];
-      debugger;
       res.Data.forEach(m => {
-        debugger;
         let currentDateIndex = state.accountRecords.accountList.findIndex(
           item => item.Date == m.Date
         );

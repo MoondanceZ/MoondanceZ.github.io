@@ -81,8 +81,9 @@ export default {
   },
   methods: {
     async loadMore() {
-      console.log(this.AccountList);
-      console.log(this.Loading);
+      if (this.Loading) {
+        return;
+      }
       // if (this.Loading == true) return;
       // if (this.PageIndex > 3) {
       //   return false;
