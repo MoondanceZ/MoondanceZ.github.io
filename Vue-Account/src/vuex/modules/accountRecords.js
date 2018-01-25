@@ -18,7 +18,14 @@ const mutations = {
   'SET_IS_LOADING' (state, loading) {
     state.isLoading = loading;
   },
-  'ADD_ACCOUNT_ITEM' (state, item) {
+  'ADD_ACCOUNT_RECORD'(state, param){
+    state.accountList[param.index].DateAmount = param.dateAmount;
+    state.accountList[param.index].AccountRecords.unshift(param.recordItem);
+  },
+  'UNSHIFT_ACCOUNT_ITEM'(state, item){
+    state.accountList.unshift(item);
+  },
+  'PUSH_ACCOUNT_ITEM' (state, item) {
     state.accountList.push(item);
   },
   'SET_ACCOUNT_LIST' (state, param) {

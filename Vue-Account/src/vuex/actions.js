@@ -85,6 +85,23 @@ export const userSignIn = async function ({
     });
   }
 }
+
+export const addAccountRecord = function({commit, state}, param){
+  let currentDateIndex = state.accountRecords.accountList.findIndex(
+    item => item.Date == param.AccountDate
+  );
+  if(currentDateIndex == -1){
+    commit('UNSHIFT_ACCOUNT_ITEM', param);
+  }else{
+    var dateAmount = parseFloat(state.accountRecords.accountList[currentDateIndex].DateAmount + param.Account).toFixed(2);
+    commit('ADD_ACCOUNT_RECORD', {
+      index: currentDateIndex,
+      dateAmount: dateAmount,
+      recordItem: param
+    });
+  }
+}
+
 export const getAccountRecords = function ({
   commit,
   state
@@ -110,7 +127,7 @@ export const getAccountRecords = function ({
             item => item.Date == m.Date
           );
           if (currentDateIndex == -1) {
-            commit('ADD_ACCOUNT_ITEM', m);
+            commit('PUSH_ACCOUNT_ITEM', m);
           } else {
             commit('SET_ACCOUNT_LIST', {
               index: currentDateIndex,
