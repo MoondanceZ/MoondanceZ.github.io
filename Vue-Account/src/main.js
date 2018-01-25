@@ -5,7 +5,7 @@ import App from './App'
 import router from './router'
 import store from './vuex/store'
 import FastClick from 'fastclick'
-import { InfiniteScroll } from "mint-ui";
+import { InfiniteScroll,Spinner } from "mint-ui";
 // import MintUI from 'mint-ui'
 import 'mint-ui/lib/style.css'
 // import layer from 'vue-layer'
@@ -14,6 +14,7 @@ import '@/assets/css/iconfont.css'
 import '@/assets/css/style.css'
 
 Vue.use(InfiniteScroll)
+Vue.component(Spinner.name, Spinner);
 // Vue.use(Indicator)
 // Vue.use(Toast);
 // Vue.use(MintUI)

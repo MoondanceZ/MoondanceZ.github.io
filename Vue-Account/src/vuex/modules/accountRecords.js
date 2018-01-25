@@ -1,12 +1,18 @@
 const state = {
+  pageIndex: 1,
+  pageSize: 10,
   isLoading: false,
   accountList: []
 }
 
 //mutations
 const mutations = {
+  'SET_PAGE_INFO'(state, pageInfo){
+    state.pageIndex = pageInfo.pageIndex;
+    state.pageSize = pageInfo.pageSize;
+  },
   'SET_IS_LOADING' (state, loading) {
-    state.SET_IS_LOADING = loading;
+    state.isLoading = loading;
   },
   'ADD_ACCOUNT_ITEM' (state, item) {
     state.accountList.push(item);

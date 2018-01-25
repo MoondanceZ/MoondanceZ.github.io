@@ -26,6 +26,24 @@ module.exports = {
         }
       }
     },
+    // assetsSubDirectory: 'static',
+    // assetsPublicPath: '/',
+    // proxyTable: {
+    //   '/api': {
+    //     target: 'http://localhost:53776/',
+    //     changeOrigin: true,
+    //     pathRewrite: {
+    //       '^/api': ''
+    //     }
+    //   },
+    //   '/identityserver4': {
+    //     target: 'http://localhost:13381/',
+    //     changeOrigin: true,
+    //     pathRewrite: {
+    //       '^/identityserver4': ''
+    //     }
+    //   }
+    // },
 
     // Various Dev Server settings
     host: 'localhost', // can be overwritten by process.env.HOST

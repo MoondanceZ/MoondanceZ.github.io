@@ -88,8 +88,14 @@ export const userSignIn = async function ({
 export const getAccountRecords = function ({
   commit,
   state
-}, param) {
-  // commit('SET_IS_LOADING', true);
+}) {
+  if (state.accountRecords.isLoading) return;
+  var param = {
+    PageIndex: state.accountRecords.pageIndex,
+    PageSize: state.accountRecords.pageSize,
+    UserId: state.user.cuerentUser.Id
+  }
+  commit('SET_IS_LOADING', true);
   Rk.Account.getAccountRecords(param).then(response => {
     let res = response.data;
     if (res.IsSuccess) {
@@ -109,11 +115,20 @@ export const getAccountRecords = function ({
           });
         }
       });
+      commit('SET_PAGE_INFO', {
+        pageIndex: state.accountRecords.pageIndex + 1,
+        pageSize: state.accountRecords.pageSize
+      });
+      commit('SET_IS_LOADING', false);
     } else {
       console.error(res.Message);
+      Toast(res.Message);
+      setTimeout(() => {
+        commit('SET_IS_LOADING', false);
+      }, 6000);
     }
   }).catch(error => {
     console.error(error);
+    Toast("获取列表异常");
   });
-  // commit('SET_IS_LOADING', false);
 }
