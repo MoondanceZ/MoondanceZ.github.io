@@ -1,43 +1,48 @@
 <template>
-   <div class="container calc">
-            <div class="row calc-set">
-                <div class="col-6">
-                    <p class="calc-year">2017</p>
-                    <p class="calc-date">1月30日</p>
-                </div>
-                <div class="col-6">
-                  <!-- <router-link class="fix-add" to="/Account/Remark"><p class="calc-remark">备注</p></router-link> -->
-                  <p class="calc-remark" @click="clickRemark">备注</p>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-3" @click="clickCalcNumber(1)">1</div>
-                <div class="col-3" @click="clickCalcNumber(2)">2</div>
-                <div class="col-3" @click="clickCalcNumber(3)">3</div>
-                <div class="col-3" @click="clickCalcOperate('+')">+</div>
-                <div class="col-3" @click="clickCalcNumber(4)">4</div>
-                <div class="col-3" @click="clickCalcNumber(5)">5</div>
-                <div class="col-3" @click="clickCalcNumber(6)">6</div>
-                <div class="col-3" @click="clickCalcOperate('-')">-</div>
-                <div class="col-9">
-                    <div class="col-4" @click="clickCalcNumber(7)">7</div>
-                    <div class="col-4" @click="clickCalcNumber(8)">8</div>
-                    <div class="col-4" @click="clickCalcNumber(9)">9</div>
-                    <div class="col-4 calc-clear" @click="clickCalcClear">清零</div>
-                    <div class="col-4" @click="clickCalcNumber(0)">0</div>
-                    <div class="col-4" @click="clickCalcDot">.</div>
-                </div>
-                <div class="col-3 calc-ok" @click="clickCalcOk">
-                    OK
-                </div>
-            </div>
-        </div>
+  <div class="container calc">
+    <div class="row calc-set">
+      <div class="col-6" @click="openDatePicker('date-picker')">
+        <p class="calc-year">{{AmountYear}}</p>
+        <p class="calc-date">{{AmountMonth}}月{{AmountDate}}日</p>
+      </div>
+      <div class="col-6">
+        <!-- <router-link class="fix-add" to="/Account/Remark"><p class="calc-remark">备注</p></router-link> -->
+        <p class="calc-remark" @click="clickRemark">备注</p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-3" @click="clickCalcNumber(1)">1</div>
+      <div class="col-3" @click="clickCalcNumber(2)">2</div>
+      <div class="col-3" @click="clickCalcNumber(3)">3</div>
+      <div class="col-3" @click="clickCalcOperate('+')">+</div>
+      <div class="col-3" @click="clickCalcNumber(4)">4</div>
+      <div class="col-3" @click="clickCalcNumber(5)">5</div>
+      <div class="col-3" @click="clickCalcNumber(6)">6</div>
+      <div class="col-3" @click="clickCalcOperate('-')">-</div>
+      <div class="col-9">
+        <div class="col-4" @click="clickCalcNumber(7)">7</div>
+        <div class="col-4" @click="clickCalcNumber(8)">8</div>
+        <div class="col-4" @click="clickCalcNumber(9)">9</div>
+        <div class="col-4 calc-clear" @click="clickCalcClear">清零</div>
+        <div class="col-4" @click="clickCalcNumber(0)">0</div>
+        <div class="col-4" @click="clickCalcDot">.</div>
+      </div>
+      <div class="col-3 calc-ok" @click="clickCalcOk">
+        OK
+      </div>
+    </div>
+    <mt-datetime-picker ref="date-picker" type="date" v-model="AmountDateModel" @confirm="handleChange"></mt-datetime-picker>
+  </div>
 </template>
 
 <script>
 export default {
   data() {
     return {
+      AmountDateModel: "",
+      AmountYear: "",
+      AmountMonth: "",
+      AmountDate: "",
       Integer: "", //记录整数部分
       Decimal: "", //记录小数部分
       CalcAmount: this.Amount, //统计的金额
@@ -47,8 +52,30 @@ export default {
       HasDot: false //是否存在小数点
     };
   },
+  created() {
+    var date = new Date();
+    this.AmountYear = date.getFullYear();
+    this.AmountMonth = date.getMonth() + 1;
+    this.AmountDate = date.getDate();
+    this.AmountDateModel =
+      this.AmountYear + "-" + this.AmountMonth + "-" + this.AmountDate;
+    console.log(this.AmountDateModel);
+  },
   props: ["Amount"],
   methods: {
+    openDatePicker(picker) {
+      this.$refs[picker].open();
+    },
+    handleChange(val) {
+      var date = new Date(val);
+      this.AmountYear = date.getFullYear();
+      this.AmountMonth = date.getMonth() + 1;
+      this.AmountDate = date.getDate();
+      this.AmountDateModel =
+        this.AmountYear + "-" + this.AmountMonth + "-" + this.AmountDate;
+      this.emitAmountDate();
+      console.log(this.AmountDateModel);
+    },
     clickCalcNumber(number) {
       if (this.OperatorType != "") {
         this.CalcAmount = "0.00";
@@ -99,15 +126,15 @@ export default {
       if (this.OperatorType == "") {
         if (type == "+") {
           this.OperatorType = "+";
-          this.SumAmount = (parseFloat(this.SumAmount) +
-            parseFloat(this.CalcAmount)
+          this.SumAmount = (
+            parseFloat(this.SumAmount) + parseFloat(this.CalcAmount)
           ).toFixed(2);
           this.CalcAmount = this.SumAmount;
         } else if (type == "-") {
           this.OperatorType = "-";
           if (parseFloat(this.SumAmount) != 0) {
-            this.SumAmount = (parseFloat(this.SumAmount) -
-              parseFloat(this.CalcAmount)
+            this.SumAmount = (
+              parseFloat(this.SumAmount) - parseFloat(this.CalcAmount)
             ).toFixed(2);
             this.CalcAmount = this.SumAmount;
           } else {
@@ -126,14 +153,14 @@ export default {
 
       if (this.OkOperatorType != "") {
         if (this.OkOperatorType == "+") {
-          this.CalcAmount = (parseFloat(this.SumAmount) +
-            parseFloat(this.CalcAmount)
+          this.CalcAmount = (
+            parseFloat(this.SumAmount) + parseFloat(this.CalcAmount)
           ).toFixed(2);
           this.SumAmount = "0.00";
         } else if (this.OkOperatorType == "-") {
           if (parseFloat(this.SumAmount) != 0) {
-            this.CalcAmount = (parseFloat(this.SumAmount) -
-              parseFloat(this.CalcAmount)
+            this.CalcAmount = (
+              parseFloat(this.SumAmount) - parseFloat(this.CalcAmount)
             ).toFixed(2);
           }
           this.SumAmount = "0.00";
@@ -152,6 +179,9 @@ export default {
     },
     emitAmount() {
       this.$emit("showAmount", this.CalcAmount);
+    },
+    emitAmountDate() {
+      this.$emit("setAmountDate", this.AmountDateModel);
     }
   }
 };

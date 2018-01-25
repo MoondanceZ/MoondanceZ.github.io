@@ -29,7 +29,7 @@
             <div v-if="record.Type == 0" class="row" :key="record.Id">
               <div class="col-6 left">
                 <span class="amount">{{record.Amount}}</span>
-                <span class="type-name">{{record.Id+record.TypeName}}</span>
+                <span class="type-name">{{record.TypeName}}</span>
               </div>
               <i :class="'mid iconfont icon-'+record.TypeCode"></i>
               <div class="col-6 right"></div>
@@ -38,7 +38,7 @@
               <div class="col-6 left"></div>
               <i :class="'mid iconfont icon-'+record.TypeCode"></i>
               <div class="col-6 right">
-                <span class="type-name">{{record.Id+record.TypeName}}</span>
+                <span class="type-name">{{record.TypeName}}</span>
                 <span class="amount">{{record.Amount}}</span>
               </div>
             </div>
