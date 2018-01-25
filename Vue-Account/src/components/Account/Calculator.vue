@@ -2,8 +2,8 @@
   <div class="container calc">
     <div class="row calc-set">
       <div class="col-6" @click="openDatePicker('date-picker')">
-        <p class="calc-year">{{AmountYear}}</p>
-        <p class="calc-date">{{AmountMonth}}月{{AmountDate}}日</p>
+        <p class="calc-year">{{AccountYear}}</p>
+        <p class="calc-date">{{AccountMonth}}月{{AccountDate}}日</p>
       </div>
       <div class="col-6">
         <!-- <router-link class="fix-add" to="/Account/Remark"><p class="calc-remark">备注</p></router-link> -->
@@ -31,7 +31,7 @@
         OK
       </div>
     </div>
-    <mt-datetime-picker ref="date-picker" type="date" v-model="AmountDateModel" @confirm="handleChange"></mt-datetime-picker>
+    <mt-datetime-picker ref="date-picker" type="date" v-model="AccountDateModel" @confirm="handleChange"></mt-datetime-picker>
   </div>
 </template>
 
@@ -39,10 +39,10 @@
 export default {
   data() {
     return {
-      AmountDateModel: "",
-      AmountYear: "",
-      AmountMonth: "",
-      AmountDate: "",
+      AccountDateModel: "",
+      AccountYear: "",
+      AccountMonth: "",
+      AccountDate: "",
       Integer: "", //记录整数部分
       Decimal: "", //记录小数部分
       CalcAmount: this.Amount, //统计的金额
@@ -53,13 +53,13 @@ export default {
     };
   },
   created() {
-    var date = new Date();
-    this.AmountYear = date.getFullYear();
-    this.AmountMonth = date.getMonth() + 1;
-    this.AmountDate = date.getDate();
-    this.AmountDateModel =
-      this.AmountYear + "-" + this.AmountMonth + "-" + this.AmountDate;
-    console.log(this.AmountDateModel);
+    let date = new Date();
+    this.AccountYear = date.getFullYear();
+    this.AccountMonth = date.getMonth() + 1;
+    this.AccountDate = date.getDate();
+    this.AccountDateModel =
+      this.AccountYear + "-" + this.AccountMonth + "-" + this.AccountDate;
+    console.log(this.AccountDateModel);
   },
   props: ["Amount"],
   methods: {
@@ -68,13 +68,13 @@ export default {
     },
     handleChange(val) {
       var date = new Date(val);
-      this.AmountYear = date.getFullYear();
-      this.AmountMonth = date.getMonth() + 1;
-      this.AmountDate = date.getDate();
-      this.AmountDateModel =
-        this.AmountYear + "-" + this.AmountMonth + "-" + this.AmountDate;
-      this.emitAmountDate();
-      console.log(this.AmountDateModel);
+      this.AccountYear = date.getFullYear();
+      this.AccountMonth = date.getMonth() + 1;
+      this.AccountDate = date.getDate();
+      this.AccountDateModel =
+        this.AccountYear + "-" + this.AccountMonth + "-" + this.AccountDate;
+      this.emitAccountDate();
+      console.log(this.AccountDateModel);
     },
     clickCalcNumber(number) {
       if (this.OperatorType != "") {
@@ -180,8 +180,8 @@ export default {
     emitAmount() {
       this.$emit("showAmount", this.CalcAmount);
     },
-    emitAmountDate() {
-      this.$emit("setAmountDate", this.AmountDateModel);
+    emitAccountDate() {
+      this.$emit("setAccountDate", this.AccountDateModel);
     }
   }
 };

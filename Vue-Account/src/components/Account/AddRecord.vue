@@ -27,7 +27,7 @@
           <p>{{item.Name}}</p>
         </div>
       </div>
-      <Calculator :Amount="Amount" @showAmount="showAmount" @openRemark="showRemark" @setAmountDate="getAmountDate"></Calculator>
+      <Calculator :Amount="Amount" @showAmount="showAmount" @openRemark="showRemark" @setAccountDate="getAccountDate"></Calculator>
     </div>
     <Remark v-show="!RemarkNotOpen" @closeRemark="closeRemark" @setRemarkInfo="getRemarkInfo"></Remark>
   </Layout>
@@ -54,13 +54,15 @@ export default {
       Amount: "0.00", //传递到子组件
       RemarkNotOpen: true,
       RemarkInfo: "",
-      AmountDate:"",
+      AccountDate:"",
     };
   },
   created() {
     _self = this;
+    let date = new Date();
     _self.UserId = _self.$store.state.user.currentUser.Id;
     _self.getAccountTypeList();
+    _self.AccountDate = date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate();
   },
   methods: {
     clickClose() {
@@ -75,7 +77,7 @@ export default {
         AccountTypeId: this.SelectedId,
         Amount: this.Amount,
         Remark: this.RemarkInfo,
-        AccountDate: "2018-01-12"
+        AccountDate: this.AccountDate
       };
       if (this.Id === 0) {
         Rk.Account.createAccountRecord(recordData).then(response => {
@@ -112,7 +114,7 @@ export default {
       this.SelectedType = type;
       this.SelectedTypeName = name;
     },
-    getAmountDate(val){
+    getAccountDate(val){
       this.AmountDate = val;
     },
     showAmount(val) {
