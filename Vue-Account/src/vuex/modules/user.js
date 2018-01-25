@@ -1,7 +1,7 @@
 const state = {
   token: {},
   isLogin: false,
-  cuerentUser: {}
+  currentUser: {}
 }
 
 //mutations
@@ -10,7 +10,7 @@ const mutations = {
     state.token = token;
   },
   'SET_CURRENT_USER' (state, user) {
-    state.cuerentUser = user;
+    state.currentUser = user;
   },
   'SET_IS_LOGIN' (state, isLogin) {
     state.isLogin = isLogin;
@@ -18,7 +18,7 @@ const mutations = {
   'UPDATE_CURRENT_USER' (state, userInfo) {
     for (let key in userInfo) {
       if (user.hasOwnProperty(key)) {
-        state.cuerentUser[key] = userInfo[key];
+        state.currentUser[key] = userInfo[key];
 
       }
     }

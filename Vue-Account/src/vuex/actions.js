@@ -24,7 +24,7 @@ export const userSignUp = async function ({
     Indicator.close();
     Toast("注册失败");
   });
-  if (state.user.cuerentUser.Account) {
+  if (state.user.currentUser.Account) {
     var tokenRequest = {
       grant_type: "password",
       client_id: "pwd_client",
@@ -89,46 +89,49 @@ export const getAccountRecords = function ({
   commit,
   state
 }) {
-  if (state.accountRecords.isLoading) return;
+  if (state.accountRecords.isLoading || state.accountRecords.allLoaded) return;
   var param = {
     PageIndex: state.accountRecords.pageIndex,
     PageSize: state.accountRecords.pageSize,
-    UserId: state.user.cuerentUser.Id
+    UserId: state.user.currentUser.Id
   }
   commit('SET_IS_LOADING', true);
   Rk.Account.getAccountRecords(param).then(response => {
     let res = response.data;
     if (res.IsSuccess) {
-      //备份当前记录
-      // const savedCoountList = [...state.accountList];
-      res.Data.forEach(m => {
-        let currentDateIndex = state.accountRecords.accountList.findIndex(
-          item => item.Date == m.Date
-        );
-        if (currentDateIndex == -1) {
-          commit('ADD_ACCOUNT_ITEM', m);
-        } else {
-          commit('SET_ACCOUNT_LIST', {
-            index: currentDateIndex,
-            dateAmount: m.DateAmount,
-            recordItems: m.AccountRecords
-          });
-        }
-      });
-      commit('SET_PAGE_INFO', {
-        pageIndex: state.accountRecords.pageIndex + 1,
-        pageSize: state.accountRecords.pageSize
-      });
-      commit('SET_IS_LOADING', false);
+      if (res.Data.length == 0) {
+        commit('SET_ALL_LOADED', true);
+        Toast(res.Message);
+      } else {
+        //备份当前记录
+        // const savedCoountList = [...state.accountList];
+        res.Data.forEach(m => {
+          let currentDateIndex = state.accountRecords.accountList.findIndex(
+            item => item.Date == m.Date
+          );
+          if (currentDateIndex == -1) {
+            commit('ADD_ACCOUNT_ITEM', m);
+          } else {
+            commit('SET_ACCOUNT_LIST', {
+              index: currentDateIndex,
+              dateAmount: m.DateAmount,
+              recordItems: m.AccountRecords
+            });
+          }
+        });
+        commit('SET_PAGE_INFO', {
+          pageIndex: state.accountRecords.pageIndex + 1,
+          pageSize: state.accountRecords.pageSize
+        });
+      }
     } else {
       console.error(res.Message);
       Toast(res.Message);
-      setTimeout(() => {
-        commit('SET_IS_LOADING', false);
-      }, 6000);
     }
+    commit('SET_IS_LOADING', false);
   }).catch(error => {
     console.error(error);
     Toast("获取列表异常");
+    commit('SET_IS_LOADING', false);
   });
 }

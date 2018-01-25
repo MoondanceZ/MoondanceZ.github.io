@@ -2,6 +2,7 @@ const state = {
   pageIndex: 1,
   pageSize: 10,
   isLoading: false,
+  allLoaded: false,
   accountList: []
 }
 
@@ -10,6 +11,9 @@ const mutations = {
   'SET_PAGE_INFO'(state, pageInfo){
     state.pageIndex = pageInfo.pageIndex;
     state.pageSize = pageInfo.pageSize;
+  },
+  'SET_ALL_LOADED'(state, allLoaded){
+    state.allLoaded = allLoaded;
   },
   'SET_IS_LOADING' (state, loading) {
     state.isLoading = loading;

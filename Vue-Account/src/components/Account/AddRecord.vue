@@ -58,7 +58,7 @@
     },
     created() {
       _self = this;
-      _self.UserId = _self.$store.state.user.cuerentUser.Id;
+      _self.UserId = _self.$store.state.user.currentUser.Id;
       _self.getAccountTypeList();
     },
     methods: {
