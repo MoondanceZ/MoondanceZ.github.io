@@ -15,7 +15,7 @@
     </div>
     <div class="container">
       <ul v-infinite-scroll="getAccountRecords" infinite-scroll-disabled="IsLoading" infinite-scroll-distance="0">
-        <li v-for="item in AccountList" :key="item.Date">
+        <li v-for="(item, index1) in AccountList" :key="item.Date">
           <div class="row">
             <div class="col-6 day-left">
               <span class="day">{{item.Date}}</span>
@@ -25,23 +25,27 @@
               <span class="day">{{item.DateAmount}}</span>
             </div>
           </div>
-          <template v-for="record in item.AccountRecords">
-            <div v-if="record.Type == 0" class="row" :key="record.Id">
-              <div class="col-6 left">
-                <span class="amount">{{record.Amount}}</span>
-                <span class="type-name">{{record.TypeName}}</span>
+          <template v-for="(record, index2) in item.AccountRecords">
+              <div v-if="record.Type == 0" class="row" :key="record.Id">
+                <router-link :to="{ name: 'addAccount', params: {index1: index1, index2: index2} }">
+                  <div class="col-6 left">
+                    <span class="amount">{{record.Amount}}</span>
+                    <span class="type-name">{{record.TypeName}}</span>
+                  </div>
+                  <i :class="'mid iconfont icon-'+record.TypeCode"></i>
+                </router-link>
+                <div class="col-6 right"></div>
               </div>
-              <i :class="'mid iconfont icon-'+record.TypeCode"></i>
-              <div class="col-6 right"></div>
-            </div>
-            <div v-if="record.Type == 1" class="row" :key="record.Id">
-              <div class="col-6 left"></div>
-              <i :class="'mid iconfont icon-'+record.TypeCode"></i>
-              <div class="col-6 right">
-                <span class="type-name">{{record.TypeName}}</span>
-                <span class="amount">{{record.Amount}}</span>
+              <div v-if="record.Type == 1" class="row" :key="record.Id">
+                <div class="col-6 left"></div>
+                <router-link :to="{ name: 'addAccount', params: {index1: index1, index2: index2} }">
+                  <i :class="'mid iconfont icon-'+record.TypeCode"></i>
+                  <div class="col-6 right">
+                    <span class="type-name">{{record.TypeName}}</span>
+                    <span class="amount">{{record.Amount}}</span>
+                  </div>
+                </router-link>
               </div>
-            </div>
           </template>
         </li>
         <li>

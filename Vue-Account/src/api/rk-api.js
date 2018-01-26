@@ -30,7 +30,7 @@ export default {
     createAccountRecord: param => {
       return axios.post(`${baseUrl}/Account`, param, ApiConfig());
     },
-    updateAccountRecord: (id, request) => {
+    updateAccountRecord: (id, param) => {
       return axios.put(`${baseUrl}/Account/${id}`, param, ApiConfig());
     },
     deleteAccountRecor: id => {

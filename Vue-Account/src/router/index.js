@@ -14,12 +14,22 @@ const router = new Router({
     component: Login
   }, {
     path: '/Account/List',
+    name: 'accountList',
     component: AcountList
   }, {
     path: '/Account/Add',
+    name: 'addAccount',
     component: AddAccount
-  }]
+  }],
+  scrollBehavior (to, from, savedPosition) {
+    if (savedPosition) {
+      return savedPosition
+    } else {
+      return { x: 0, y: 0 }
+    }
+  }
 })
+
 
 router.beforeEach((to, from, next) => {
   if (from.path != '/' || from.path !== '/Login') {

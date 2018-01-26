@@ -53,15 +53,13 @@ export default {
     };
   },
   created() {
-    let date = new Date();
-    this.AccountYear = date.getFullYear();
-    this.AccountMonth = date.getMonth() + 1;
-    this.AccountDate = date.getDate();
-    this.AccountDateModel =
-      this.AccountYear + "-" + this.AccountMonth + "-" + this.AccountDate;
-    console.log(this.AccountDateModel);
+    this.AccountDateModel = this.RecordDate;
+    var splitDate = this.RecordDate.split("-");
+    this.AccountYear = splitDate[0];
+    this.AccountMonth = splitDate[1];
+    this.AccountDate = splitDate[2];
   },
-  props: ["Amount"],
+  props: ["Amount", "RecordDate"],
   methods: {
     openDatePicker(picker) {
       this.$refs[picker].open();
@@ -69,7 +67,7 @@ export default {
     handleChange(val) {
       var date = new Date(val);
       this.AccountYear = date.getFullYear();
-      this.AccountMonth = date.getMonth() + 1;
+      this.AccountMonth = ((date.getMonth() + 1) >= 10 ? (date.getMonth() + 1) : ("0" + (date.getMonth() + 1)));
       this.AccountDate = date.getDate();
       this.AccountDateModel =
         this.AccountYear + "-" + this.AccountMonth + "-" + this.AccountDate;
