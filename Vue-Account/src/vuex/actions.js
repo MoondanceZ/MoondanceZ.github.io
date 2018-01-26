@@ -90,23 +90,78 @@ export const addAccountRecord = function ({
   commit,
   state
 }, param) {
+  debugger;
   let currentDateIndex = state.accountRecords.accountList.findIndex(
     item => item.Date == param.AccountDate
   );
   if (currentDateIndex == -1) {
-    commit('UNSHIFT_ACCOUNT_ITEM', param);
+    let gtDateIndex = state.accountRecords.accountList.findIndex(
+      item => new Date(param.AccountDate) > new Date(item.Date)
+    );
+    commit('SPLICE_ACCOUNT_ITEM', {
+      index: gtDateIndex,
+      record: {
+        Date: param.AccountDate,
+        DateAmount: param.Amount,
+        AccountRecords: [param],
+        MonthExpend: "",
+        MonthIncome: ""
+      }
+    });
   } else {
-    var dateAmount = (parseFloat(state.accountRecords.accountList[currentDateIndex].DateAmount) + parseFloat(param.Amount)).toFixed(2);
-    commit('ADD_ACCOUNT_RECORD', {
+    let dateAmount = 0;
+    if (param.Type == 1) {
+      dateAmount = (parseFloat(state.accountRecords.accountList[currentDateIndex].DateAmount) + parseFloat(param.Amount)).toFixed(2);
+    } else {
+      dateAmount = state.accountRecords.accountList[currentDateIndex].DateAmount;
+    }
+    commit('CREATE_ACCOUNT_RECORD', {
       index: currentDateIndex,
       dateAmount: dateAmount,
       recordItem: param
     });
   }
-  commit('SET_MONTH_AMOUNT', {
-    monthIncome: (parseFloat(state.accountRecords.monthIncome) + parseFloat(param.Amount)).toFixed(2),
-    monthExpend: (parseFloat(state.accountRecords.monthExpend) + parseFloat(param.Amount)).toFixed(2)
-  })
+  let paramDate = new Date(param.AccountDate);
+  let nowDate = new Date();
+  if (paramDate.getFullYear() == nowDate.getFullYear() && paramDate.getMonth() == nowDate.getMonth()) {
+    if (param.Type == 0) {
+      commit('SET_MONTH_AMOUNT', {
+        monthIncome: (parseFloat(state.accountRecords.monthIncome) + parseFloat(param.Amount)).toFixed(2),
+        monthExpend: state.accountRecords.monthExpend
+      })
+    } else {
+      commit('SET_MONTH_AMOUNT', {
+        monthIncome: state.accountRecords.monthIncome,
+        monthExpend: (parseFloat(state.accountRecords.monthExpend) + parseFloat(param.Amount)).toFixed(2)
+      })
+    }
+  }
+}
+
+export const updateAccountRecord = function ({
+  commit,
+  state
+}, param) {
+  if (param.updateInfo.hasUpdateDate) { //表示时间被修改了, 则先删除
+    commit('DELETE_ACCOUNT_RECORD', param.updateInfo);
+    addAccountRecord({commit, state}, param.record); //重新添加
+  } else {
+    //计算 dateAmount
+    if (param.record.Type == 0) {
+      param.dateAmount = state.accountRecords.accountList[param.updateInfo.index1].DateAmount;
+      commit('SET_MONTH_AMOUNT', {
+        monthIncome: (parseFloat(state.accountRecords.monthIncome) + parseFloat(param.updateInfo.updateAmount)).toFixed(2),
+        monthExpend: state.accountRecords.monthExpend
+      });
+    } else {
+      param.dateAmount = (parseFloat(state.accountRecords.accountList[param.updateInfo.index1].DateAmount) + parseFloat(param.updateInfo.updateAmount)).toFixed(2);
+      commit('SET_MONTH_AMOUNT', {
+        monthIncome: state.accountRecords.monthIncome,
+        monthExpend: (parseFloat(state.accountRecords.monthExpend) + parseFloat(param.updateInfo.updateAmount)).toFixed(2)
+      })
+    }
+    commit('UPDATE_ACCOUNT_ITEM', param);
+  }
 }
 
 export const getAccountRecords = function ({

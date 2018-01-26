@@ -56,7 +56,9 @@ export default {
       Amount: "0.00", //传递到子组件
       RemarkNotOpen: true,
       RemarkInfo: "",
-      AccountDate: ""
+      AccountDate: "",
+      AccountDateBack: "", //备份一个时间, 判断是否修改了时间
+      AmountBack: ""
     };
   },
   created() {
@@ -65,12 +67,21 @@ export default {
     _self.UserId = _self.$store.state.user.currentUser.Id;
     _self.getAccountTypeList();
     _self.AccountDate =
-      date.getFullYear() + "-" + ((date.getMonth() + 1) >= 10 ? (date.getMonth() + 1) : ("0" + (date.getMonth() + 1))) + "-" + date.getDate();
+      date.getFullYear() +
+      "-" +
+      (date.getMonth() + 1 >= 10
+        ? date.getMonth() + 1
+        : "0" + (date.getMonth() + 1)) +
+      "-" +
+      (date.getDate() + 1 >= 10
+        ? date.getDate() + 1
+        : "0" + (date.getDate() + 1));
     console.log(this.$route.params);
     let index1 = this.$route.params.index1;
     let index2 = this.$route.params.index2;
     if (index2 !== undefined && index2 !== undefined) {
-      let currentRecord = this.$store.state.accountRecords.accountList[index1].AccountRecords[index2];
+      let currentRecord = this.$store.state.accountRecords.accountList[index1]
+        .AccountRecords[index2];
       this.Id = currentRecord.Id;
       this.SelectedId = currentRecord.AccountTypeId;
       this.SelectedType = currentRecord.TypeCode;
@@ -79,6 +90,8 @@ export default {
       this.Amount = currentRecord.Amount;
       this.RemarkInfo = currentRecord.Remark;
       this.AccountDate = currentRecord.AccountDate;
+      this.AccountDateBack = currentRecord.AccountDate;
+      this.AmountBack = currentRecord.Amount;
     }
   },
   beforeDestroy() {
@@ -107,10 +120,10 @@ export default {
             if (res.IsSuccess) {
               res.Data.TypeCode = this.SelectedType;
               res.Data.TypeName = this.SelectedTypeName;
-              // this.addAccountRecord(res.Data).then(() => {
-              //   this.$router.go(-1);
-              // })
-              this.$router.push("/Account/List");
+              this.addAccountRecord(res.Data).then(() => {
+                this.$router.go(-1);
+              });
+              // this.$router.push("/Account/List");
             } else {
               Indicator.close();
               Toast(res.Message);
@@ -122,11 +135,32 @@ export default {
             Toast("操作异常");
           });
       } else {
-        Rk.Account.updateAccountRecord(this.Id, recordData).then(
-          response => {
-            this.$router.push("/Account/List");
+        Rk.Account.updateAccountRecord(this.Id, recordData).then(response => {
+          let res = response.data;
+          if (res.IsSuccess) {
+            recordData.Id = this.Id;
+            recordData.TypeCode = this.SelectedType;
+            recordData.TypeName = this.SelectedTypeName;
+            let updateInfo = {
+              hasUpdateDate: this.AccountDateBack !== this.AccountDate,
+              index1: this.$route.params.index1,
+              index2: this.$route.params.index2,
+              updateAmount: (
+                parseFloat(this.Amount) - parseFloat(this.AmountBack)
+              ).toFixed(2)
+            };
+            this.updateAccountRecord({
+              updateInfo: updateInfo,
+              record: recordData
+            }).then(() => {
+              this.$router.go(-1);
+            });
+            // this.$router.push("/Account/List");
+          } else {
+            Indicator.close();
+            Toast(res.Message);
           }
-        );
+        });
       }
     },
     getAccountTypeList() {
@@ -169,7 +203,8 @@ export default {
       this.RemarkInfo = val;
     },
     ...mapActions({
-      addAccountRecord: "addAccountRecord"
+      addAccountRecord: "addAccountRecord",
+      updateAccountRecord: "updateAccountRecord"
     })
   },
   computed: {
