@@ -86,20 +86,27 @@ export const userSignIn = async function ({
   }
 }
 
-export const addAccountRecord = function({commit, state}, param){
+export const addAccountRecord = function ({
+  commit,
+  state
+}, param) {
   let currentDateIndex = state.accountRecords.accountList.findIndex(
     item => item.Date == param.AccountDate
   );
-  if(currentDateIndex == -1){
+  if (currentDateIndex == -1) {
     commit('UNSHIFT_ACCOUNT_ITEM', param);
-  }else{
-    var dateAmount = parseFloat(state.accountRecords.accountList[currentDateIndex].DateAmount + param.Account).toFixed(2);
+  } else {
+    var dateAmount = (parseFloat(state.accountRecords.accountList[currentDateIndex].DateAmount) + parseFloat(param.Amount)).toFixed(2);
     commit('ADD_ACCOUNT_RECORD', {
       index: currentDateIndex,
       dateAmount: dateAmount,
       recordItem: param
     });
   }
+  commit('SET_MONTH_AMOUNT', {
+    monthIncome: (parseFloat(state.accountRecords.monthIncome) + parseFloat(param.Amount)).toFixed(2),
+    monthExpend: (parseFloat(state.accountRecords.monthExpend) + parseFloat(param.Amount)).toFixed(2)
+  })
 }
 
 export const getAccountRecords = function ({
@@ -135,6 +142,10 @@ export const getAccountRecords = function ({
               recordItems: m.AccountRecords
             });
           }
+          commit('SET_MONTH_AMOUNT', {
+            monthIncome: m.MonthIncome,
+            monthExpend: m.MonthExpend
+          })
         });
         commit('SET_PAGE_INFO', {
           pageIndex: state.accountRecords.pageIndex + 1,

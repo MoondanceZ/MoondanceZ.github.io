@@ -5,20 +5,20 @@
     </div>
     <div class="total">
       <div class="col-6 income">
-        <p>当月收入</p>
-        <p>2345</p>
+        <p>本月收入</p>
+        <p>{{MonthIncome}}</p>
       </div>
       <div class="col-6 expend">
-        <p>当月支出</p>
-        <p>5678</p>
+        <p>本月支出</p>
+        <p>{{MonthExpend}}</p>
       </div>
     </div>
     <div class="container">
-      <ul v-infinite-scroll="getAccountRecords" infinite-scroll-disabled="IsLoading" infinite-scroll-distance="18">
+      <ul v-infinite-scroll="getAccountRecords" infinite-scroll-disabled="IsLoading" infinite-scroll-distance="0">
         <li v-for="item in AccountList" :key="item.Date">
           <div class="row">
             <div class="col-6 day-left">
-              <span class="day">{{item.Date.substr(5)}}</span>
+              <span class="day">{{item.Date}}</span>
             </div>
             <div class="mid-day-total"></div>
             <div class="col-6 day-right">
@@ -66,7 +66,9 @@ export default {
   computed: {
     ...mapState({
       AccountList: state => state.accountRecords.accountList,
-      IsLoading: state => state.accountRecords.isLoading
+      IsLoading: state => state.accountRecords.isLoading,
+      MonthIncome: state => state.accountRecords.monthIncome,
+      MonthExpend: state => state.accountRecords.monthExpend
     })
   },
   methods: {
