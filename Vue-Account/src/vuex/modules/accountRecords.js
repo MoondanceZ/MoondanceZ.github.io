@@ -20,7 +20,7 @@ const mutations = {
   'SET_IS_LOADING' (state, loading) {
     state.isLoading = loading;
   },
-  'ADD_ACCOUNT_RECORD' (state, param) {
+  'CREATE_ACCOUNT_RECORD' (state, param) {
     state.accountList[param.index].DateAmount = param.dateAmount;
     state.accountList[param.index].AccountRecords.unshift(param.recordItem);
   },
@@ -45,10 +45,11 @@ const mutations = {
     state.monthExpend = param.monthExpend;
   },
   'DELETE_ACCOUNT_RECORD' (state, param) {
-    if (state.accountList[param.index1].length == 1 && state.accountList[param.index1].AccountRecords.length == 1) { //将整个删除
+    if (state.accountList[param.index1].AccountRecords.length == 1) { //将整个删除
       state.accountList.splice(param.index1, 1);
+    }else{
+      state.accountList[param.index1].AccountRecords.splice(param.index2, 1);
     }
-    state.accountList[param.index1].AccountRecords.splice(param.index2, 1);
   }
 }
 

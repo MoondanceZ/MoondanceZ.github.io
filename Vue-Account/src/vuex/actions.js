@@ -90,7 +90,6 @@ export const addAccountRecord = function ({
   commit,
   state
 }, param) {
-  debugger;
   let currentDateIndex = state.accountRecords.accountList.findIndex(
     item => item.Date == param.AccountDate
   );

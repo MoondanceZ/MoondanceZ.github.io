@@ -68,11 +68,10 @@ export default {
       var date = new Date(val);
       this.AccountYear = date.getFullYear();
       this.AccountMonth = ((date.getMonth() + 1) >= 10 ? (date.getMonth() + 1) : ("0" + (date.getMonth() + 1)));
-      this.AccountDate = ((date.getDate() + 1) >= 10 ? (date.getDate() + 1) : ("0" + (date.getDate() + 1)));
+      this.AccountDate = date.getDate() >= 10 ? date.getDate() : ("0" + date.getDate());
       this.AccountDateModel =
         this.AccountYear + "-" + this.AccountMonth + "-" + this.AccountDate;
       this.emitAccountDate();
-      console.log(this.AccountDateModel);
     },
     clickCalcNumber(number) {
       if (this.OperatorType != "") {
