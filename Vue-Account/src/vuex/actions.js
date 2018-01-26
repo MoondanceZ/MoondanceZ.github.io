@@ -97,6 +97,9 @@ export const addAccountRecord = function ({
     let gtDateIndex = state.accountRecords.accountList.findIndex(
       item => new Date(param.AccountDate) > new Date(item.Date)
     );
+    if(gtDateIndex == -1){
+      gtDateIndex = state.accountRecords.accountList.length;
+    }
     commit('SPLICE_ACCOUNT_ITEM', {
       index: gtDateIndex,
       record: {
@@ -143,7 +146,10 @@ export const updateAccountRecord = function ({
 }, param) {
   if (param.updateInfo.hasUpdateDate) { //表示时间被修改了, 则先删除
     commit('DELETE_ACCOUNT_RECORD', param.updateInfo);
-    addAccountRecord({commit, state}, param.record); //重新添加
+    addAccountRecord({
+      commit,
+      state
+    }, param.record); //重新添加
   } else {
     //计算 dateAmount
     if (param.record.Type == 0) {

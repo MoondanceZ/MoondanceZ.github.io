@@ -27,7 +27,7 @@
           <p>{{item.Name}}</p>
         </div>
       </div>
-      <Calculator :Amount="Amount" :RecordDate="AccountDate" @showAmount="showAmount" @openRemark="showRemark" @setAccountDate="getAccountDate"></Calculator>
+      <Calculator :Amount="Amount" :RecordDate="AccountDate" @showAmount="showAmount" @openRemark="showRemark" @clickOk="saveRecord" @setAccountDate="getAccountDate"></Calculator>
     </div>
     <Remark v-show="!RemarkNotOpen" @closeRemark="closeRemark" @setRemarkInfo="getRemarkInfo"></Remark>
   </Layout>
@@ -94,9 +94,12 @@
       Indicator.close();
     },
     methods: {
-      clickClose() {
+      clickClose(){
+        this.$router.go(-1);
+      },
+      saveRecord() {
         if (this.Amount === "0.00") {
-          this.$router.push("/Account/List");
+          Toast("请输入金额");
           return;
         }
 

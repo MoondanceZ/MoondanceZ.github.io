@@ -146,30 +146,31 @@ export default {
       this.emitAmount();
     },
     clickCalcOk() {
-      if (this.OperatorType != "") return;
+      // if (this.OperatorType != "") return;
 
-      if (this.OkOperatorType != "") {
-        if (this.OkOperatorType == "+") {
-          this.CalcAmount = (
-            parseFloat(this.SumAmount) + parseFloat(this.CalcAmount)
-          ).toFixed(2);
-          this.SumAmount = "0.00";
-        } else if (this.OkOperatorType == "-") {
-          if (parseFloat(this.SumAmount) != 0) {
-            this.CalcAmount = (
-              parseFloat(this.SumAmount) - parseFloat(this.CalcAmount)
-            ).toFixed(2);
-          }
-          this.SumAmount = "0.00";
-        }
-        this.OkOperatorType = "";
-        this.Integer = "";
-        this.Decimal = "";
-        this.HasDot = false;
-        this.OperatorType = "";
-      }
+      // if (this.OkOperatorType != "") {
+      //   if (this.OkOperatorType == "+") {
+      //     this.CalcAmount = (
+      //       parseFloat(this.SumAmount) + parseFloat(this.CalcAmount)
+      //     ).toFixed(2);
+      //     this.SumAmount = "0.00";
+      //   } else if (this.OkOperatorType == "-") {
+      //     if (parseFloat(this.SumAmount) != 0) {
+      //       this.CalcAmount = (
+      //         parseFloat(this.SumAmount) - parseFloat(this.CalcAmount)
+      //       ).toFixed(2);
+      //     }
+      //     this.SumAmount = "0.00";
+      //   }
+      //   this.OkOperatorType = "";
+      //   this.Integer = "";
+      //   this.Decimal = "";
+      //   this.HasDot = false;
+      //   this.OperatorType = "";
+      // }
 
-      this.emitAmount();
+      // this.emitAmount();
+      this.$emit("clickOk");
     },
     clickRemark() {
       this.$emit("openRemark", false);

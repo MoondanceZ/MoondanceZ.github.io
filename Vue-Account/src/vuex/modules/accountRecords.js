@@ -30,14 +30,16 @@ const mutations = {
   'PUSH_ACCOUNT_ITEM' (state, item) {
     state.accountList.push(item);
   },
-  'UPDATE_ACCOUNT_ITEM'(state, param){
-    state.accountList[param.updateInfo.index1].DateAmount =  param.dateAmount;
+  'UPDATE_ACCOUNT_ITEM' (state, param) {
+    state.accountList[param.updateInfo.index1].DateAmount = param.dateAmount;
     state.accountList[param.updateInfo.index1].AccountRecords[param.updateInfo.index2] = param.record;
   },
   'SET_ACCOUNT_LIST' (state, param) {
     state.accountList[param.index].DateAmount = param.dateAmount;
     param.recordItems.forEach(element => {
-      state.accountList[param.index].AccountRecords.push(element);
+      if (!(state.accountList[param.index].AccountRecords.some(m => m.Id == element.Id))) {
+        state.accountList[param.index].AccountRecords.push(element);
+      }
     });
   },
   'SET_MONTH_AMOUNT' (state, param) {
@@ -47,7 +49,7 @@ const mutations = {
   'DELETE_ACCOUNT_RECORD' (state, param) {
     if (state.accountList[param.index1].AccountRecords.length == 1) { //将整个删除
       state.accountList.splice(param.index1, 1);
-    }else{
+    } else {
       state.accountList[param.index1].AccountRecords.splice(param.index2, 1);
     }
   }
