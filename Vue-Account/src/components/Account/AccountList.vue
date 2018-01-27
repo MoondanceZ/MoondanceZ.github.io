@@ -32,14 +32,14 @@
                     <span class="amount">{{record.Amount}}</span>
                     <span class="type-name">{{record.TypeName}}</span>
                   </div>
-                  <i :class="'mid iconfont icon-'+record.TypeCode"></i>
+                  <i :class="'mid icon iconfont icon-'+record.TypeCode"></i>
                 </router-link>
                 <div class="col-6 right"></div>
               </div>
               <div v-if="record.Type == 1" class="row" :key="record.Id">
                 <div class="col-6 left"></div>
                 <router-link :to="{ name: 'addAccount', params: {index1: index1, index2: index2} }">
-                  <i :class="'mid iconfont icon-'+record.TypeCode"></i>
+                  <i :class="'mid icon iconfont icon-'+record.TypeCode"></i>
                   <div class="col-6 right">
                     <span class="type-name">{{record.TypeName}}</span>
                     <span class="amount">{{record.Amount}}</span>
@@ -125,9 +125,9 @@ export default {
 }
 
 .left {
-  height: 3em;
+  height: 4em;
   /* background-color: #caf7cd; */
-  line-height: 3em;
+  line-height: 4em;
   border-right: 1px solid #a1a2a5;
   padding-right: 26px;
   text-align: right;
@@ -135,22 +135,23 @@ export default {
 }
 
 .right {
-  height: 3em;
+  height: 4em;
   /* background-color: #738de2; */
   border-left: 1px solid #a1a2a5;
-  line-height: 3em;
+  line-height: 4em;
   padding-left: 26px;
   color: #596161;
 }
 
 .type-name {
-  font-size: 16px;
+  font-size: 1.6em;
   color: #8b8989;
 }
 
 .amount {
-  font-size: 14px;
+  font-size: 1.2em;
   color: #8b8989;
+  padding-left: 10px;
 }
 
 .day-left,
@@ -198,8 +199,8 @@ export default {
   right: 20px;
   bottom: 20px;
   background-color: #62dfed;
-  width: 1.8em;
-  height: 1.8em;
+  width: 2em;
+  height: 2em;
   border-radius: 50%;
   color: #ffffff;
   text-align: center;

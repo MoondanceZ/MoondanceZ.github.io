@@ -254,7 +254,7 @@
   .type-amount {
     color: #77787a;
     line-height: 46px;
-    font-size: 1.6em;
+    font-size: 1.2em;
   }
 
   .type-amount {
