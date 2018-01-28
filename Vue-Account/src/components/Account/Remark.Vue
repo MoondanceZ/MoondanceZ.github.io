@@ -1,7 +1,7 @@
 <template>
   <div class="container">
 <div class="row add-header">
-      <i class="close" @click="closeRemark"></i>
+      <i class="title-back icon iconfont icon-fanhui" @click="closeRemark"></i>
       <div class="col-12 title">备注</div>
       <div class="col-12">
         <span class="txt-count">{{InputCount}}/200</span>
@@ -41,7 +41,7 @@ export default {
 .title {
   margin: 8px 0;
   font-size: 18px;
-  height: 18px;
+  height: 26px;
   line-height: 18px;
   text-align: center;
   color: #a1a2a5;

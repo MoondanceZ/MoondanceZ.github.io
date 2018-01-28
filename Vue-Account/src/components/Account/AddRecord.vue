@@ -2,7 +2,8 @@
   <Layout>
     <div v-show="RemarkNotOpen" class="container">
       <div class="row add-header">
-        <i class="close" @click="clickClose"></i>
+          <i class="title-back icon iconfont icon-fanhui" @click="clickClose"></i>
+          <i class="title-delete icon iconfont icon-guanbi" @click="clickDelete"></i>
         <div :class="'col-6 add-income'+ IsIncome" @click="selectAccountType(0)">收入</div>
         <div :class="'col-6 add-expend'+ IsExpend" @click="selectAccountType(1)">支出</div>
       </div>
@@ -27,7 +28,8 @@
           <p>{{item.Name}}</p>
         </div>
       </div>
-      <Calculator :Amount="Amount" :RecordDate="AccountDate" @showAmount="showAmount" @openRemark="showRemark" @clickOk="saveRecord" @setAccountDate="getAccountDate"></Calculator>
+      <Calculator :Amount="Amount" :RecordDate="AccountDate" @showAmount="showAmount" @openRemark="showRemark" @clickOk="saveRecord"
+        @setAccountDate="getAccountDate"></Calculator>
     </div>
     <Remark v-show="!RemarkNotOpen" @closeRemark="closeRemark" @setRemarkInfo="getRemarkInfo"></Remark>
   </Layout>
@@ -71,7 +73,8 @@
       let date = new Date();
       _self.UserId = _self.$store.state.user.currentUser.Id;
       _self.getAccountTypeList();
-      _self.AccountDate = date.getFullYear() + "-" + (date.getMonth() + 1 >= 10 ? date.getMonth() + 1 : "0" + (date.getMonth() + 1))+ "-" + (date.getDate() >= 10 ? date.getDate() : ("0" + date.getDate()));
+      _self.AccountDate = date.getFullYear() + "-" + (date.getMonth() + 1 >= 10 ? date.getMonth() + 1 : "0" + (date.getMonth() +
+        1)) + "-" + (date.getDate() >= 10 ? date.getDate() : ("0" + date.getDate()));
       console.log(this.$route.params);
       let index1 = this.$route.params.index1;
       let index2 = this.$route.params.index2;
@@ -94,8 +97,11 @@
       Indicator.close();
     },
     methods: {
-      clickClose(){
+      clickClose() {
         this.$router.go(-1);
+      },
+      clickDelete() {
+        Indicator.open("删除中...");
       },
       saveRecord() {
         if (this.Amount === "0.00") {
@@ -113,7 +119,7 @@
         };
         Indicator.open("保存中...");
         if (this.Id === 0) {
-          Rk.Account.createAccountRecord(recordData)
+          Rk.Account.createAccountRecord(recordData)  //需要转移到 vuex 中
             .then(response => {
               var res = response.data;
               if (res.IsSuccess) {

@@ -638,6 +638,22 @@ table {
   color: #f11569;
 }
 
+.title-back {
+  background-color: #ffffff !important;
+  font-size: 24px !important;
+  position: absolute;
+  top: 2px;
+  left: 10px;
+}
+
+.title-delete {
+  background-color: #ffffff !important;
+  font-size: 24px !important;
+  position: absolute;
+  top: 2px;
+  left: 48px;
+}
+
 .close {
   position: absolute;
   display: inline-block;
