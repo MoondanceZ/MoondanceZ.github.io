@@ -5,7 +5,6 @@ import App from './App'
 import router from './router'
 import store from './vuex/store'
 import FastClick from 'fastclick'
-import VueTouch from "vue-touch";
 import {
   InfiniteScroll,
   Spinner,
@@ -20,13 +19,6 @@ import '@/assets/css/style.css'
 Vue.use(InfiniteScroll);
 Vue.component(Spinner.name, Spinner);
 Vue.component(DatetimePicker.name, DatetimePicker);
-Vue.use(VueTouch, {
-  name: 'v-touch'
-})
-VueTouch.config.swipe = { //配置滑动区域为左滑动，解决和滚动事件的冲突
-  direction: 'horizontal',
-  threshold: 200
-}
 
 // Vue.use(Indicator)
 // Vue.use(Toast);
