@@ -3,7 +3,7 @@
     <div v-show="RemarkNotOpen" class="container">
       <div class="row add-header">
           <i class="title-back icon iconfont icon-fanhui" @click="clickClose"></i>
-          <i class="title-delete icon iconfont icon-guanbi" @click="clickDelete"></i>
+          <i v-if="$route.params.index1 !== undefined && $route.params.index2 !== undefined" class="title-delete icon iconfont icon-guanbi" @click="clickDelete"></i>
         <div :class="'col-6 add-income'+ IsIncome" @click="selectAccountType(0)">收入</div>
         <div :class="'col-6 add-expend'+ IsExpend" @click="selectAccountType(1)">支出</div>
       </div>
