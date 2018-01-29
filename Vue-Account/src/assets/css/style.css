@@ -730,3 +730,28 @@ table {
   color: #fff;
   background-color: #62dfed;
 }
+
+
+.slide-go-enter-active,
+.slide-go-leave-active {
+    transition: all 1.5s;
+    opacity: .8;
+}
+
+.slide-go-enter,
+.slide-go-leave-to {
+    transition: all 1.5s;
+    transform: translateX(100%);
+    opacity: .8;
+}
+
+/* .slide-back-enter-active,
+.slide-back-leave-active {
+    transition: all .5s;
+}
+
+.slide-back-enter,
+.slide-back-leave-to {
+    transition: all .5s;
+    transform: translateX(-100%);
+} */

@@ -1,4 +1,5 @@
 <template>
+  <transition :name="SlideName">
   <Layout>
     <div class="header">
       <img class="avatar" src="../../assets/image/avatar.jpg" alt="avatar" srcset="">
@@ -59,6 +60,7 @@
     </div>
     <router-link class="fix-add" to="/Account/Add">+</router-link>
   </Layout>
+  </transition>
 </template>
 <script>
 import Layout from "@/components/Layout";
@@ -73,7 +75,13 @@ export default {
       IsLoading: state => state.accountRecords.isLoading,
       MonthIncome: state => state.accountRecords.monthIncome,
       MonthExpend: state => state.accountRecords.monthExpend
-    })
+    }),
+    SlideName(){
+      // if(){
+
+      // }
+      return "";
+    }
   },
   methods: {
     ...mapActions({

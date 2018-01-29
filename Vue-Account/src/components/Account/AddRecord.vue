@@ -1,4 +1,5 @@
 <template>
+  <transition name="slide-go">
   <Layout>
     <div v-show="RemarkNotOpen" class="container">
       <div class="row add-header">
@@ -33,6 +34,7 @@
     </div>
     <Remark v-show="!RemarkNotOpen" @closeRemark="closeRemark" @setRemarkInfo="getRemarkInfo"></Remark>
   </Layout>
+  </transition>
 </template>
 
 <script>
@@ -60,7 +62,8 @@ export default {
       RemarkInfo: "",
       AccountDate: "",
       AccountDateBack: "", //备份一个时间, 判断是否修改了时间
-      AmountBack: ""
+      AmountBack: "",
+      SlideName: ""
     };
   },
   created() {
@@ -93,6 +96,9 @@ export default {
       this.AccountDateBack = currentRecord.AccountDate;
       this.AmountBack = currentRecord.Amount;
     }
+  },
+  mounted() {
+    this.SlideName = "slide-go";
   },
   beforeDestroy() {
     Indicator.close();
