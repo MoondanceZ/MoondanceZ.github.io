@@ -1,7 +1,8 @@
 const state = {
   token: {},
   isLogin: false,
-  currentUser: {}
+  currentUser: {},
+  routerLog: {}
 }
 
 //mutations
@@ -22,6 +23,10 @@ const mutations = {
 
       }
     }
+  },
+  'SET_ROUTER_LOG'(state, param){
+    state.routerLog.prev = param.prev;
+    state.routerLog.next = param.next;
   }
 }
 

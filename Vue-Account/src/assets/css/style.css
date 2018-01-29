@@ -4,7 +4,6 @@
   list-style: none;
 }
 
-
 /** 清除内外边距 **/
 
 body,
@@ -17,7 +16,6 @@ h6,
 hr,
 p,
 blockquote,
-
 /* structural elements 结构元素 */
 
 dl,
@@ -26,11 +24,9 @@ dd,
 ul,
 ol,
 li,
-
 /* list elements 列表元素 */
 
 pre,
-
 /* text formatting elements 文本格式元素 */
 
 form,
@@ -39,18 +35,16 @@ legend,
 button,
 input,
 textarea,
-
 /* form elements 表单元素 */
 
 th,
 td
 /* table elements 表格元素 */
 
-{
+  {
   margin: 0;
   padding: 0;
 }
-
 
 /** 设置默认字体 **/
 
@@ -61,7 +55,7 @@ select,
 textarea
 /* for ie */
 
-{
+  {
   font: 12px/1.5 tahoma, arial, \5b8b\4f53, sans-serif;
 }
 
@@ -82,7 +76,6 @@ var {
   font-style: normal;
 }
 
-
 /* 将斜体扶正 */
 
 code,
@@ -92,16 +85,13 @@ samp {
   font-family: courier new, courier, monospace;
 }
 
-
 /* 统一等宽字体 */
 
 small {
   font-size: 12px;
 }
 
-
 /* 小于 12px 的中文很难阅读，让 small 正常化 */
-
 
 /** 重置列表元素 **/
 
@@ -109,7 +99,6 @@ ul,
 ol {
   list-style: none;
 }
-
 
 /** 重置文本格式元素 **/
 
@@ -121,13 +110,11 @@ a:hover {
   text-decoration: underline;
 }
 
-
 /** 重置表单元素 **/
 
 legend {
   color: #000;
 }
-
 
 /* for ie6 */
 
@@ -135,7 +122,6 @@ fieldset,
 img {
   border: 0;
 }
-
 
 /* img 搭车：让链接里的 img 无边框 */
 
@@ -146,12 +132,9 @@ textarea {
   font-size: 100%;
 }
 
-
 /* 使得表单元素在 ie 下能继承字体大小 */
 
-
 /* 注：optgroup 无法扶正 */
-
 
 /** 重置表格元素 **/
 
@@ -173,13 +156,19 @@ table {
   box-sizing: border-box;
 }
 
+html,
+body,
+div#app {
+  height: 100%;
+}
+
 .container {
   padding-right: 15px;
   padding-left: 15px;
   margin-right: auto;
   margin-left: auto;
+  /* height: 100vh; */
 }
-
 
 /* @media (min-width: 768px) {
     .container {
@@ -639,7 +628,7 @@ table {
 }
 
 .title-back {
-  background-color: #ffffff !important;
+  background-color: transparent !important;
   font-size: 24px !important;
   position: absolute;
   top: 2px;
@@ -647,7 +636,7 @@ table {
 }
 
 .title-delete {
-  background-color: #ffffff !important;
+  background-color: transparent !important;
   font-size: 24px !important;
   position: absolute;
   top: 2px;
@@ -732,20 +721,31 @@ table {
 }
 
 
+.slide-up-enter-active,
+.slide-up-leave-active {
+    transition: all .5s
+}
+
+.slide-up-enter,
+.slide-up-leave-to {
+    opacity: 0;
+    transform: translate3d(0, 100%, 0);
+}
+
 .slide-go-enter-active,
 .slide-go-leave-active {
-    transition: all 1.5s;
+    transition: all .5s;
     opacity: .8;
 }
 
 .slide-go-enter,
 .slide-go-leave-to {
-    transition: all 1.5s;
-    transform: translateX(100%);
+    transition: all .5s;
+    transform: translate3d(100%, 0, 0);
     opacity: .8;
 }
 
-/* .slide-back-enter-active,
+.slide-back-enter-active,
 .slide-back-leave-active {
     transition: all .5s;
 }
@@ -753,5 +753,5 @@ table {
 .slide-back-enter,
 .slide-back-leave-to {
     transition: all .5s;
-    transform: translateX(-100%);
-} */
+    transform: translate3d(-100%, 0, 0);
+}

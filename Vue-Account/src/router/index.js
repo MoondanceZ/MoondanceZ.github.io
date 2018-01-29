@@ -21,17 +21,24 @@ const router = new Router({
     name: 'addAccount',
     component: AddAccount
   }],
-  scrollBehavior (to, from, savedPosition) {
+  scrollBehavior(to, from, savedPosition) {
     if (savedPosition) {
       return savedPosition
     } else {
-      return { x: 0, y: 0 }
+      return {
+        x: 0,
+        y: 0
+      }
     }
   }
 })
 
 
 router.beforeEach((to, from, next) => {
+  store.commit('SET_ROUTER_LOG', {
+    prev: from.path.toLowerCase(),
+    next: to.path.toLowerCase()
+  });
   if (from.path != '/' || from.path !== '/Login') {
     next();
   }

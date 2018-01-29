@@ -1,5 +1,5 @@
 <template>
-  <transition :name="SlideName">
+  <transition name="slide-back">
   <Layout>
     <div class="header">
       <img class="avatar" src="../../assets/image/avatar.jpg" alt="avatar" srcset="">
@@ -75,13 +75,7 @@ export default {
       IsLoading: state => state.accountRecords.isLoading,
       MonthIncome: state => state.accountRecords.monthIncome,
       MonthExpend: state => state.accountRecords.monthExpend
-    }),
-    SlideName(){
-      // if(){
-
-      // }
-      return "";
-    }
+    })
   },
   methods: {
     ...mapActions({
