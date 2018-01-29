@@ -117,26 +117,6 @@ export default {
         Password: this.SignUpInfo.Password
       });
       this.$router.push("/Account/List");
-
-      // Rk.User.signUp({
-      //     Account: this.SignUpInfo.Account,
-      //     Password: this.SignUpInfo.Password
-      //   })
-      //   .then(response => {
-      //     var res = response.data;
-      //     if (res.IsSuccess) {
-      //       this.SignInInfo.Account = this.SignUpInfo.Account;
-      //       this.SignInInfo.Password = this.SignUpInfo.Password;
-      //       this.switchSignUp(false);
-      //       this.signInAccount();
-      //     } else {
-      //       Toast(res.Message);
-      //     }
-      //   })
-      //   .catch(error => {
-      //     console.log(error);
-      //     Toast("操作异常");
-      //   });
     },
     async signInAccount() {
       if (this.IsSignUp) return;
@@ -166,44 +146,6 @@ export default {
         account: this.SignInInfo.Account
       });
       this.$router.push("/Account/List");
-      // this.$store
-      //   .dispatch("userSignIn", {
-      //     tokenRequest: data,
-      //     account: this.SignInInfo.Account
-      //   })
-      //   .then(response => {
-      //     console.log(response);
-      //     console.log(this.$store.state.user.isLogin);
-      //     console.log(sessionStorage.getItem("access_token"));
-      //     this.$router.push("/Account/List");
-      //   });
-      // console.log(this.IsSignUp);
-
-      // console.log(sessionStorage.getItem("access_token"));
-      // this.$router.push("/Account/List");
-
-      // Rk.User.getToken(data)
-      //   .then(response => {
-      //     console.log(response.data);
-      //     var res = response.data;
-      //     sessionStorage.setItem("access_token", res.access_token);
-      //     sessionStorage.setItem("refresh_token", res.refresh_token);
-      //     sessionStorage.setItem("token_type", res.token_type);
-
-      //     Rk.User.signIn(this.SignInInfo.Account) //重新去拉取用户信息
-      //       .then(response => {
-      //         //TODO:保存用户信息
-      //         this.$router.push("/Account/List");
-      //       })
-      //       .catch(error => {
-      //         console.log(error);
-      //         Toast("登录异常");
-      //       });
-      //   })
-      //   .catch(error => {
-      //     console.log("getToken error: " + error);
-      //     Toast("帐号或密码不正确");
-      //   });
     },
     ...mapActions({
       signIn: "userSignIn",
@@ -215,7 +157,7 @@ export default {
 
 <style scoped>
 .wrapper {
-  border-radius: 6px;
+  /* border-radius: 6px; */
   width: 380px;
   height: 280px;
   border: 2px solid rgba(43, 65, 69, 0.219);
@@ -246,9 +188,10 @@ div.form-group > label {
   width: 100%;
   height: 40px;
   border: 1px solid #bfbfbf;
-  border-radius: 5px;
+  /* border-radius: 5px; */
   padding-left: 50px;
   box-sizing: border-box;
+  background-color: transparent;
 }
 
 #confirm-password {
@@ -287,7 +230,7 @@ button:focus {
   height: 40px;
   /* line-height: 40px; */
   border: 1px solid #303439;
-  border-radius: 8px;
+  border-radius: 1px;
   text-align: center;
 }
 
