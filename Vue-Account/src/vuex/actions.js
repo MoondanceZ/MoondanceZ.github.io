@@ -97,7 +97,7 @@ export const addAccountRecord = function ({
     let gtDateIndex = state.accountRecords.accountList.findIndex(
       item => new Date(param.AccountDate) > new Date(item.Date)
     );
-    if(gtDateIndex == -1){
+    if (gtDateIndex == -1) {
       gtDateIndex = state.accountRecords.accountList.length;
     }
     commit('SPLICE_ACCOUNT_ITEM', {
@@ -222,4 +222,11 @@ export const getAccountRecords = function ({
     Toast("获取列表异常");
     commit('SET_IS_LOADING', false);
   });
+}
+
+export const deleteAccountRecord = function ({
+  commit,
+  state
+}, param) {
+  commit('DELETE_ACCOUNT_RECORD', param);
 }

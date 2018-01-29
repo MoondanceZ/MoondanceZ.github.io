@@ -33,7 +33,7 @@ export default {
     updateAccountRecord: (id, param) => {
       return axios.put(`${baseUrl}/Account/${id}`, param, ApiConfig());
     },
-    deleteAccountRecor: id => {
+    deleteAccountRecord: id => {
       return axios.delete(`${baseUrl}/Account/${id}`, ApiConfig());
     }
   },

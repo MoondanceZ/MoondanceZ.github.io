@@ -36,128 +36,116 @@
 </template>
 
 <script>
-  import {
-    Indicator,
-    Toast
-  } from "mint-ui";
-  import Layout from "@/components/Layout";
-  import Calculator from "@/components/account/Calculator";
-  import Remark from "@/components/account/Remark";
-  import Rk from "@/api/rk-api";
-  import {
-    mapActions
-  } from "vuex";
-  let _self;
-  export default {
-    data() {
-      return {
-        Id: 0,
-        UserId: 0,
-        AccountTypeList: [],
-        AccountIncomeTypeList: [],
-        AccountExpendTypeList: [],
-        SelectedId: 4,
-        SelectedType: "yiban",
-        SelectedTypeName: "一般",
-        Type: 1, //0:收入，1：支出
-        Amount: "0.00", //传递到子组件
-        RemarkNotOpen: true,
-        RemarkInfo: "",
-        AccountDate: "",
-        AccountDateBack: "", //备份一个时间, 判断是否修改了时间
-        AmountBack: ""
-      };
+import { Indicator, Toast } from "mint-ui";
+import Layout from "@/components/Layout";
+import Calculator from "@/components/account/Calculator";
+import Remark from "@/components/account/Remark";
+import Rk from "@/api/rk-api";
+import { mapActions } from "vuex";
+let _self;
+export default {
+  data() {
+    return {
+      Id: 0,
+      UserId: 0,
+      AccountTypeList: [],
+      AccountIncomeTypeList: [],
+      AccountExpendTypeList: [],
+      SelectedId: 4,
+      SelectedType: "yiban",
+      SelectedTypeName: "一般",
+      Type: 1, //0:收入，1：支出
+      Amount: "0.00", //传递到子组件
+      RemarkNotOpen: true,
+      RemarkInfo: "",
+      AccountDate: "",
+      AccountDateBack: "", //备份一个时间, 判断是否修改了时间
+      AmountBack: ""
+    };
+  },
+  created() {
+    _self = this;
+    let date = new Date();
+    _self.UserId = _self.$store.state.user.currentUser.Id;
+    _self.getAccountTypeList();
+    _self.AccountDate =
+      date.getFullYear() +
+      "-" +
+      (date.getMonth() + 1 >= 10
+        ? date.getMonth() + 1
+        : "0" + (date.getMonth() + 1)) +
+      "-" +
+      (date.getDate() >= 10 ? date.getDate() : "0" + date.getDate());
+    console.log(this.$route.params);
+    let index1 = this.$route.params.index1;
+    let index2 = this.$route.params.index2;
+    if (index2 !== undefined && index2 !== undefined) {
+      let currentRecord = this.$store.state.accountRecords.accountList[index1]
+        .AccountRecords[index2];
+      this.Id = currentRecord.Id;
+      this.SelectedId = currentRecord.AccountTypeId;
+      this.SelectedType = currentRecord.TypeCode;
+      this.SelectedTypeName = currentRecord.TypeName;
+      this.Type = currentRecord.Type;
+      this.Amount = currentRecord.Amount;
+      this.RemarkInfo = currentRecord.Remark;
+      this.AccountDate = currentRecord.AccountDate;
+      this.AccountDateBack = currentRecord.AccountDate;
+      this.AmountBack = currentRecord.Amount;
+    }
+  },
+  beforeDestroy() {
+    Indicator.close();
+  },
+  methods: {
+    clickClose() {
+      this.$router.go(-1);
     },
-    created() {
-      _self = this;
-      let date = new Date();
-      _self.UserId = _self.$store.state.user.currentUser.Id;
-      _self.getAccountTypeList();
-      _self.AccountDate = date.getFullYear() + "-" + (date.getMonth() + 1 >= 10 ? date.getMonth() + 1 : "0" + (date.getMonth() +
-        1)) + "-" + (date.getDate() >= 10 ? date.getDate() : ("0" + date.getDate()));
-      console.log(this.$route.params);
-      let index1 = this.$route.params.index1;
-      let index2 = this.$route.params.index2;
-      if (index2 !== undefined && index2 !== undefined) {
-        let currentRecord = this.$store.state.accountRecords.accountList[index1]
-          .AccountRecords[index2];
-        this.Id = currentRecord.Id;
-        this.SelectedId = currentRecord.AccountTypeId;
-        this.SelectedType = currentRecord.TypeCode;
-        this.SelectedTypeName = currentRecord.TypeName;
-        this.Type = currentRecord.Type;
-        this.Amount = currentRecord.Amount;
-        this.RemarkInfo = currentRecord.Remark;
-        this.AccountDate = currentRecord.AccountDate;
-        this.AccountDateBack = currentRecord.AccountDate;
-        this.AmountBack = currentRecord.Amount;
-      }
-    },
-    beforeDestroy() {
-      Indicator.close();
-    },
-    methods: {
-      clickClose() {
-        this.$router.go(-1);
-      },
-      clickDelete() {
-        Indicator.open("删除中...");
-      },
-      saveRecord() {
-        if (this.Amount === "0.00") {
-          Toast("请输入金额");
-          return;
-        }
-
-        var recordData = {
-          UserId: this.UserId,
-          Type: this.Type,
-          AccountTypeId: this.SelectedId,
-          Amount: this.Amount,
-          Remark: this.RemarkInfo,
-          AccountDate: this.AccountDate
-        };
-        Indicator.open("保存中...");
-        if (this.Id === 0) {
-          Rk.Account.createAccountRecord(recordData)  //需要转移到 vuex 中
-            .then(response => {
-              var res = response.data;
-              if (res.IsSuccess) {
-                res.Data.TypeCode = this.SelectedType;
-                res.Data.TypeName = this.SelectedTypeName;
-                this.addAccountRecord(res.Data).then(() => {
-                  this.$router.go(-1);
-                });
-                // this.$router.push("/Account/List");
-              } else {
-                Indicator.close();
-                Toast(res.Message);
-              }
-            })
-            .catch(error => {
-              console.log(error);
-              Indicator.close();
-              Toast("操作异常");
+    clickDelete() {
+      Indicator.open("删除中...");
+      Rk.Account.deleteAccountRecord(this.Id)
+        .then(response => {
+          var res = response.data;
+          if (res.IsSuccess) {
+            this.deleteAccountRecord({
+              index1: this.$route.params.index1,
+              index2: this.$route.params.index2
+            }).then(() => {
+              this.$router.go(-1);
             });
-        } else {
-          Rk.Account.updateAccountRecord(this.Id, recordData).then(response => {
-            let res = response.data;
+          } else {
+            Indicator.close();
+            Toast(res.Message);
+          }
+        })
+        .catch(() => {
+          Indicator.close();
+          Toast("删除失败");
+        });
+    },
+    saveRecord() {
+      if (this.Amount === "0.00") {
+        Toast("请输入金额");
+        return;
+      }
+
+      var recordData = {
+        UserId: this.UserId,
+        Type: this.Type,
+        AccountTypeId: this.SelectedId,
+        Amount: this.Amount,
+        Remark: this.RemarkInfo,
+        AccountDate: this.AccountDate
+      };
+      Indicator.open("保存中...");
+      if (this.Id === 0) {
+        Rk.Account.createAccountRecord(recordData) //需要转移到 vuex 中
+          .then(response => {
+            var res = response.data;
             if (res.IsSuccess) {
-              recordData.Id = this.Id;
-              recordData.TypeCode = this.SelectedType;
-              recordData.TypeName = this.SelectedTypeName;
-              let updateInfo = {
-                hasUpdateDate: this.AccountDateBack !== this.AccountDate,
-                index1: this.$route.params.index1,
-                index2: this.$route.params.index2,
-                updateAmount: (
-                  parseFloat(this.Amount) - parseFloat(this.AmountBack)
-                ).toFixed(2)
-              };
-              this.updateAccountRecord({
-                updateInfo: updateInfo,
-                record: recordData
-              }).then(() => {
+              res.Data.TypeCode = this.SelectedType;
+              res.Data.TypeName = this.SelectedTypeName;
+              this.addAccountRecord(res.Data).then(() => {
                 this.$router.go(-1);
               });
               // this.$router.push("/Account/List");
@@ -165,128 +153,159 @@
               Indicator.close();
               Toast(res.Message);
             }
-          });
-        }
-      },
-      getAccountTypeList() {
-        Rk.Account.getAccountTypes(this.UserId)
-          .then(response => {
-            var res = response.data;
-            this.AccountIncomeTypeList = res.Data.filter(m => m.Type == 0);
-            this.AccountExpendTypeList = res.Data.filter(m => m.Type == 1);
           })
           .catch(error => {
-            console.error(error);
+            console.log(error);
+            Indicator.close();
+            Toast("操作异常");
           });
-      },
-      selectAccountType(type) {
-        this.Type = type;
-        this.SelectedType = this.Type == 0 ? "shouru" : "yiban"; //"shour"为收入的一般,"yiban"为支出的一般
-        this.SelectedId = this.Type == 0 ? 1 : 4; //默认
-        this.SelectedTypeName = "一般";
-      },
-      selectType(id, type, name) {
-        this.SelectedId = id;
-        this.SelectedType = type;
-        this.SelectedTypeName = name;
-      },
-      getAccountDate(val) {
-        console.log(val);
-        this.AccountDate = val;
-      },
-      showAmount(val) {
-        //接收子组件数据
-        this.Amount = val;
-      },
-      showRemark(val) {
-        this.RemarkNotOpen = val;
-      },
-      closeRemark(val) {
-        this.RemarkNotOpen = val;
-      },
-      getRemarkInfo(val) {
-        this.RemarkInfo = val;
-      },
-      ...mapActions({
-        addAccountRecord: "addAccountRecord",
-        updateAccountRecord: "updateAccountRecord"
-      })
-    },
-    computed: {
-      IsIncome: function () {
-        return this.Type == 0 ? " active" : "";
-      },
-      IsExpend: function () {
-        return this.Type == 1 ? " active" : "";
+      } else {
+        Rk.Account.updateAccountRecord(this.Id, recordData).then(response => {
+          let res = response.data;
+          if (res.IsSuccess) {
+            recordData.Id = this.Id;
+            recordData.TypeCode = this.SelectedType;
+            recordData.TypeName = this.SelectedTypeName;
+            let updateInfo = {
+              hasUpdateDate: this.AccountDateBack !== this.AccountDate,
+              index1: this.$route.params.index1,
+              index2: this.$route.params.index2,
+              updateAmount: (
+                parseFloat(this.Amount) - parseFloat(this.AmountBack)
+              ).toFixed(2)
+            };
+            this.updateAccountRecord({
+              updateInfo: updateInfo,
+              record: recordData
+            }).then(() => {
+              this.$router.go(-1);
+            });
+            // this.$router.push("/Account/List");
+          } else {
+            Indicator.close();
+            Toast(res.Message);
+          }
+        });
       }
     },
-    components: {
-      Layout,
-      Calculator,
-      Remark
+    getAccountTypeList() {
+      Rk.Account.getAccountTypes(this.UserId)
+        .then(response => {
+          var res = response.data;
+          this.AccountIncomeTypeList = res.Data.filter(m => m.Type == 0);
+          this.AccountExpendTypeList = res.Data.filter(m => m.Type == 1);
+        })
+        .catch(error => {
+          console.error(error);
+        });
+    },
+    selectAccountType(type) {
+      this.Type = type;
+      this.SelectedType = this.Type == 0 ? "shouru" : "yiban"; //"shour"为收入的一般,"yiban"为支出的一般
+      this.SelectedId = this.Type == 0 ? 1 : 4; //默认
+      this.SelectedTypeName = "一般";
+    },
+    selectType(id, type, name) {
+      this.SelectedId = id;
+      this.SelectedType = type;
+      this.SelectedTypeName = name;
+    },
+    getAccountDate(val) {
+      console.log(val);
+      this.AccountDate = val;
+    },
+    showAmount(val) {
+      //接收子组件数据
+      this.Amount = val;
+    },
+    showRemark(val) {
+      this.RemarkNotOpen = val;
+    },
+    closeRemark(val) {
+      this.RemarkNotOpen = val;
+    },
+    getRemarkInfo(val) {
+      this.RemarkInfo = val;
+    },
+    ...mapActions({
+      addAccountRecord: "addAccountRecord",
+      updateAccountRecord: "updateAccountRecord",
+      deleteAccountRecord: "deleteAccountRecord"
+    })
+  },
+  computed: {
+    IsIncome: function() {
+      return this.Type == 0 ? " active" : "";
+    },
+    IsExpend: function() {
+      return this.Type == 1 ? " active" : "";
     }
-  };
-
+  },
+  components: {
+    Layout,
+    Calculator,
+    Remark
+  }
+};
 </script>
 
 <style scoped>
-  .add-income,
-  .add-expend {
-    margin: 8px 0;
-    font-size: 24px;
-    height: 24px;
-    line-height: 24px;
-  }
+.add-income,
+.add-expend {
+  margin: 8px 0;
+  font-size: 24px;
+  height: 24px;
+  line-height: 24px;
+}
 
-  .add-income {
-    text-align: right;
-  }
+.add-income {
+  text-align: right;
+}
 
-  .active {
-    color: #62dfed;
-  }
+.active {
+  color: #62dfed;
+}
 
-  .add-type {
-    text-align: center;
-    height: 4em;
-    background-color: #e5e5e5;
-  }
+.add-type {
+  text-align: center;
+  height: 4em;
+  background-color: #e5e5e5;
+}
 
-  .selectedType {
-    line-height: 1.4em;
-  }
+.selectedType {
+  line-height: 1.4em;
+}
 
-  .type-info,
-  .type-amount {
-    color: #77787a;
-    line-height: 46px;
-    font-size: 1.2em;
-  }
+.type-info,
+.type-amount {
+  color: #77787a;
+  line-height: 46px;
+  font-size: 1.2em;
+}
 
-  .type-amount {
-    text-align: right;
-    padding-right: 30px;
-    font-size: 2em;
-  }
+.type-amount {
+  text-align: right;
+  padding-right: 30px;
+  font-size: 2em;
+}
 
-  .type-icon-list-icon {
-    padding-top: 10px;
-    text-align: center;
-  }
+.type-icon-list-icon {
+  padding-top: 10px;
+  text-align: center;
+}
 
-  .iconfont {
-    background-color: #e5e5e5;
-  }
+.iconfont {
+  background-color: #e5e5e5;
+}
 
-  .type-icon-list-icon .icon {
-    margin: 0 auto;
-    border-radius: 50%;
-  }
+.type-icon-list-icon .icon {
+  margin: 0 auto;
+  border-radius: 50%;
+}
 
-  .type-icon-list-icon p {
-    margin: 0;
-    font-size: 1em;
-    color: #77787a;
-  }
-
+.type-icon-list-icon p {
+  margin: 0;
+  font-size: 1em;
+  color: #77787a;
+}
 </style>
