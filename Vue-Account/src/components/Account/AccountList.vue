@@ -175,10 +175,9 @@ export default {
 }
 
 .mid {
-  font-size: 24px;
   z-index: 99;
   background-color: #ffffff;
-  line-height: 20px;
+  line-height: 1em;
 }
 
 .mid-day-total {
