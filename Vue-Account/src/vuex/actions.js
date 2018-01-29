@@ -40,9 +40,9 @@ export const userSignUp = async function ({
     await Rk.User.getToken(tokenRequest).then(response => {
       var res = response.data;
       console.log(res);
-      sessionStorage.setItem("access_token", res.access_token);
-      sessionStorage.setItem("refresh_token", res.refresh_token);
-      sessionStorage.setItem("token_type", res.token_type);
+      // sessionStorage.setItem("access_token", res.access_token);
+      // sessionStorage.setItem("refresh_token", res.refresh_token);
+      // sessionStorage.setItem("token_type", res.token_type);
       commit('SET_TOKEN', res);
       commit('SET_IS_LOGIN', true);
     }).catch(error => {
