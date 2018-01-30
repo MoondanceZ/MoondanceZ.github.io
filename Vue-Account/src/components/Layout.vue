@@ -28,9 +28,7 @@ export default {
 </script>
 
 <style scoped>
-.layout {
-  /* height: 100%; */
-}
+
 .child-view {  
   position: absolute;  
   /* left: 0;  

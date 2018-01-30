@@ -1,4 +1,5 @@
 <template>
+<div>
   <div class="wrapper mid">
     <div class="container">
       <div class="signIn" v-show="!IsSignUp">
@@ -53,6 +54,7 @@
         </div>
       </div>
     </div>
+  </div>
   </div>
 </template>
 
