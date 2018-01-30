@@ -157,15 +157,13 @@ export default {
 
 <style scoped>
 .wrapper {
-  /* border-radius: 6px; */
   width: 380px;
-  height: 280px;
+  height: 280px !important;
   border: 2px solid #bfbfbf;
-  background-color: transparent;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  background-color: transparent !important;
+  top: 50% !important;
+  left: 50% !important;
+  transform: translate(-50%, -50%) !important;
 }
 
 .form-group,
