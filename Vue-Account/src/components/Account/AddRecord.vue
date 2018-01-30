@@ -248,6 +248,9 @@ export default {
 </script>
 
 <style scoped>
+.container {
+  height: 100vh;
+}
 .add-income,
 .add-expend {
   margin: 8px 0;

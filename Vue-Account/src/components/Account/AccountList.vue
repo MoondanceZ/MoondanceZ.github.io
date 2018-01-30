@@ -194,13 +194,13 @@ export default {
   right: 20px;
   bottom: 20px;
   background-color: #62dfed;
-  width: 2em;
-  height: 2em;
+  width: 36px;
+  height: 36px;
   border-radius: 50%;
   color: #ffffff;
   text-align: center;
-  font-size: 1.8em;
-  line-height: 1.8em;
+  font-size: 32px;
+  line-height: 32px;
   text-decoration: none;
   z-index: 99;
 }

@@ -14,45 +14,42 @@ export default {
       transitionName: "slide-left"
     };
   },
-  beforeRouteUpdate(to, from, next) {
-    let isBack = this.$router.isBack;
-    if (isBack) {
-      this.transitionName = "slide-right";
-    } else {
-      this.transitionName = "slide-left";
-    }
-    this.$router.isBack = false;
-    console.log(this.transitionName);
-    next();
-  }
+  //监听路由的路径，可以通过不同的路径去选择不同的切换效果  
+  watch: {  
+    '$route' (to, from) {  
+      if(to.path == '/'){  
+        this.transitionName = 'slide-right';  
+      }else{  
+        this.transitionName = 'slide-left';  
+      }  
+    }  
+  }  
 };
 </script>
 
 <style scoped>
 .layout {
-  height: 100%;
+  /* height: 100%; */
 }
-.child-view {
-  position: absolute;
-  transition: all 0.4s cubic-bezier(0.55, 0, 0.1, 1);
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background: #fff;
-}
+.child-view {  
+  position: absolute;  
+  /* left: 0;  
+  top: 0;   */
+  width: 100%;  
+  height: 100%;  
+  transition: all .5s cubic-bezier(.55,0,.1,1);  
+}  
 .slide-left-enter,
 .slide-right-leave-active {
-  opacity: 1;
-  -webkit-transform: translate3d(100%, 0, 0);;
+  opacity: 0;
+  -webkit-transform: translate3d(100%, 0, 0);
   transform: translate3d(100%, 0, 0);;
-  z-index: 1;
+  z-index: 0;
 }
 .slide-left-leave-active,
 .slide-right-enter {
-  opacity: 0.8;
+  opacity: 0;
   -webkit-transform: translate3d(-100%, 0, 0);
   transform: translate3d(-100%, 0, 0);
-  background: #ccc;
 }
 </style>
