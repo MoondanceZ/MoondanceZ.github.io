@@ -160,7 +160,12 @@ export default {
   /* border-radius: 6px; */
   width: 380px;
   height: 280px;
-  border: 2px solid rgba(43, 65, 69, 0.219);
+  border: 2px solid #bfbfbf;
+  background-color: transparent;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 .form-group,

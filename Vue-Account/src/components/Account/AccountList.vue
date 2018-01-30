@@ -1,7 +1,6 @@
 <template>
-  <transition name="slide-back">
-  <Layout>
-    <div class="header">
+    <div class="account-list">
+      <div class="header">
       <img class="avatar" src="../../assets/image/avatar.jpg" alt="avatar" srcset="">
     </div>
     <div class="total">
@@ -59,11 +58,9 @@
       </ul>
     </div>
     <router-link class="fix-add" to="/Account/Add">+</router-link>
-  </Layout>
-  </transition>
+    </div>
 </template>
 <script>
-import Layout from "@/components/Layout";
 import { Indicator, Toast } from "mint-ui";
 import Rk from "@/api/rk-api";
 import { mapActions, mapState } from "vuex";
@@ -81,9 +78,6 @@ export default {
     ...mapActions({
       getAccountRecords: "getAccountRecords"
     })
-  },
-  components: {
-    Layout
   }
 };
 </script>

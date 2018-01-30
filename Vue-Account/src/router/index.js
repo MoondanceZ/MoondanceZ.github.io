@@ -4,22 +4,39 @@ import store from '@/vuex/store'
 import AcountList from '@/components/account/AccountList'
 import AddAccount from '@/components/account/AddRecord'
 import Login from '@/components/login/Login'
+import Layout from '@/components/Layout'
+
+// 增强原方法，好处是旧的业务模块不需要任何变动
+Router.prototype.go = function () {
+  this.isBack = true
+  window.history.go(-1)
+}
+
+// 或者你可以新建一个方法
+Router.prototype.goBack = function () {
+  this.isBack = true
+  this.go(-1)
+}
 
 Vue.use(Router)
 
 const router = new Router({
   routes: [{
-    path: '/',
-    alias: '/Login',
-    component: Login
-  }, {
-    path: '/Account/List',
-    name: 'accountList',
-    component: AcountList
-  }, {
-    path: '/Account/Add',
-    name: 'addAccount',
-    component: AddAccount
+    path:'/',
+    component: Layout,
+    children:[{
+      path: '',
+      alias: '/Login',
+      component: Login
+    }, {
+      path: '/Account/List',
+      name: 'accountList',
+      component: AcountList
+    }, {
+      path: '/Account/Add',
+      name: 'addAccount',
+      component: AddAccount
+    }]
   }],
   scrollBehavior(to, from, savedPosition) {
     if (savedPosition) {

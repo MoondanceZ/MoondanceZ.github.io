@@ -1,6 +1,5 @@
 <template>
-  <transition name="slide-go">
-  <Layout>
+  <div>
     <div v-show="RemarkNotOpen" class="container">
       <div class="row add-header">
           <i class="title-back icon iconfont icon-fanhui" @click="clickClose"></i>
@@ -33,13 +32,11 @@
         @setAccountDate="getAccountDate"></Calculator>
     </div>
     <Remark v-show="!RemarkNotOpen" @closeRemark="closeRemark" @setRemarkInfo="getRemarkInfo"></Remark>
-  </Layout>
-  </transition>
+  </div>
 </template>
 
 <script>
 import { Indicator, Toast } from "mint-ui";
-import Layout from "@/components/Layout";
 import Calculator from "@/components/account/Calculator";
 import Remark from "@/components/account/Remark";
 import Rk from "@/api/rk-api";
@@ -79,7 +76,6 @@ export default {
         : "0" + (date.getMonth() + 1)) +
       "-" +
       (date.getDate() >= 10 ? date.getDate() : "0" + date.getDate());
-    console.log(this.$route.params);
     let index1 = this.$route.params.index1;
     let index2 = this.$route.params.index2;
     if (index2 !== undefined && index2 !== undefined) {
@@ -96,9 +92,6 @@ export default {
       this.AccountDateBack = currentRecord.AccountDate;
       this.AmountBack = currentRecord.Amount;
     }
-  },
-  mounted() {
-    this.SlideName = "slide-go";
   },
   beforeDestroy() {
     Indicator.close();
@@ -248,7 +241,6 @@ export default {
     }
   },
   components: {
-    Layout,
     Calculator,
     Remark
   }
