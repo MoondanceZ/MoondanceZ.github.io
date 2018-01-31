@@ -17,6 +17,7 @@
     </div>
     <div class="container">
       <ul v-infinite-scroll="getAccountRecords" infinite-scroll-disabled="IsLoading" infinite-scroll-distance="0">
+        <transition-group name="records">
         <li v-for="(item, index1) in AccountList" :key="item.Date">
           <div class="row">
             <div class="col-6 day-left">
@@ -50,8 +51,9 @@
             </div>
           </template>
         </li>
+        </transition-group>
         <li>
-          <div v-show="IsLoading" class="row loading-mid">
+          <div class="row loading-mid">
             <div class="col-12">
               <mt-spinner class="mid" type="double-bounce"></mt-spinner>
             </div>
@@ -96,7 +98,7 @@ export default {
 .header {
   /* background-image:  */
   background-color: #62dfed;
-  height: 3em;
+  height: 36px;
   /* margin-bottom: 23px; */
   position: relative;
 }
@@ -104,6 +106,13 @@ export default {
 .total {
   height: 36px;
   background-color: #ffffff;
+}
+
+.container {
+  position: absolute;
+  top: 68px;
+  left: 0;
+  width: 100%;
 }
 
 .income > p,
@@ -231,5 +240,18 @@ export default {
 .loading-mid {
   height: 28px;
   padding-top: 10px;
+}
+.loading-mid .mid {
+  border-radius: 50%;
+  background-color: transparent;
+}
+.records-enter-active,
+.records-leave-active {
+  transition: all 2s;
+}
+.records-enter,
+.records-leave-to {
+  opacity: 0;
+  transform: translateY(30px);
 }
 </style>

@@ -17,8 +17,8 @@ export default {
   position: absolute;
   width: 100%;
   height: 100%;
-  /* overflow-y: auto;
-  overflow-x: hidden; */
+  /* overflow-y: auto; */
+  /* overflow-x: hidden; */
   -webkit-overflow-scrolling: touch;
 }
 .slide-fade-enter-active {
