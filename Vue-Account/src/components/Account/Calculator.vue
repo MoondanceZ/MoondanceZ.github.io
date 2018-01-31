@@ -187,7 +187,7 @@ export default {
 
 <style scoped>
 .calc {
-  position: fixed;
+  position: absolute;
   left: 0;
   bottom: 0;
   height: 190px;
