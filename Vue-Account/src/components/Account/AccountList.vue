@@ -59,7 +59,9 @@
         </li>
       </ul>
     </div>
-    <router-link class="fix-add" to="/Account/Add">+</router-link>
+    <div class="fix-add">
+      <router-link class="fix-add-link" to="/Account/Add">+</router-link>
+    </div>
   </div>
 </template>
 <script>
@@ -208,11 +210,22 @@ export default {
   height: 36px;
   border-radius: 50%;
   color: #ffffff;
+  z-index: 99;
+  margin: 0 auto;
+}
+
+.fix-add-link {
+  display: block;
+  position: absolute;
   text-align: center;
   font-size: 32px;
   line-height: 32px;
   text-decoration: none;
-  z-index: 99;
+  color: #ffffff;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
 }
 
 .loading-mid {
