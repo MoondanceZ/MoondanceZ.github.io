@@ -188,15 +188,30 @@ export default {
       }
     },
     getAccountTypeList() {
-      Rk.Account.getAccountTypes(this.UserId)
-        .then(response => {
-          var res = response.data;
-          this.AccountIncomeTypeList = res.Data.filter(m => m.Type == 0);
-          this.AccountExpendTypeList = res.Data.filter(m => m.Type == 1);
-        })
-        .catch(error => {
-          console.error(error);
-        });
+      let expendTypes = JSON.parse(sessionStorage.getItem("account-types-expend"));
+      let incomeTypes = JSON.parse(sessionStorage.getItem("account-types-income"));
+      if (expendTypes && incomeTypes) {
+        this.AccountIncomeTypeList = incomeTypes;
+        this.AccountExpendTypeList = expendTypes;
+      } else {
+        Rk.Account.getAccountTypes(this.UserId)
+          .then(response => {
+            var res = response.data;
+            this.AccountIncomeTypeList = res.Data.filter(m => m.Type == 0);
+            this.AccountExpendTypeList = res.Data.filter(m => m.Type == 1);
+            sessionStorage.setItem(
+              "account-types-expend",
+              JSON.stringify(this.AccountExpendTypeList)
+            );
+            sessionStorage.setItem(
+              "account-types-income",
+              JSON.stringify(this.AccountIncomeTypeList)
+            );
+          })
+          .catch(error => {
+            console.error(error);
+          });
+      }
     },
     selectAccountType(type) {
       this.Type = type;
