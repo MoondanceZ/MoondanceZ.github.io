@@ -331,17 +331,24 @@ export default {
   font-size: 1em;
   color: #77787a;
 }
-.slide-left-enter,
-.slide-right-leave-active {
-  opacity: 1;
-  -webkit-transform: translate3d(100%, 0, 0);
-  transform: translate3d(100%, 0, 0);
-  z-index: 1;
+
+.slide-left-enter-active {
+  transition: all .8s ease;
 }
-.slide-left-leave-active,
-.slide-right-enter {
-  opacity: 0.8;
-  -webkit-transform: translate3d(-100%, 0, 0);
+.slide-left-leave-active {
+  transition: all .8s cubic-bezier(2, 0.5, 0.8, 1);
+}
+.slide-left-enter{
+  /* left:0;right: 0; */
   transform: translate3d(-100%, 0, 0);
+  /* left: 100%; */
+  opacity: .5;
+}
+
+.slide-left-leave-to {
+  /* left:0;right: 0; */
+  transform: translate3d(100%, 0, 0);
+  /* left: 100%; */
+  opacity: .5;
 }
 </style>
