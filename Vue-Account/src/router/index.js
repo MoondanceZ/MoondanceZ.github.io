@@ -9,22 +9,35 @@ import Layout from '@/components/Layout'
 Vue.use(Router)
 
 const router = new Router({
+  // routes: [{
+  //   path:'/',
+  //   component: Layout,
+  //   children:[{
+  //     path: '',
+  //     alias: '/Login',
+  //     component: Login
+  //   }, {
+  //     path: '/Account/List',
+  //     name: 'accountList',
+  //     component: AcountList
+  //   }, {
+  //     path: '/Account/Add',
+  //     name: 'addAccount',
+  //     component: AddAccount
+  //   }]
+  // }],
   routes: [{
-    path:'/',
-    component: Layout,
-    children:[{
-      path: '',
-      alias: '/Login',
-      component: Login
-    }, {
-      path: '/Account/List',
-      name: 'accountList',
-      component: AcountList
-    }, {
-      path: '/Account/Add',
-      name: 'addAccount',
-      component: AddAccount
-    }]
+    path: '',
+    alias: '/Login',
+    component: Login
+  }, {
+    path: '/Account/List',
+    name: 'accountList',
+    component: AcountList
+  }, {
+    path: '/Account/Add',
+    name: 'addAccount',
+    component: AddAccount
   }],
   scrollBehavior(to, from, savedPosition) {
     if (savedPosition) {

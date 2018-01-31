@@ -1,5 +1,6 @@
 <template>
-  <div>
+<transition name="slide-left">
+  <Layout>
     <div v-show="RemarkNotOpen" class="container">
       <div class="row add-header">
           <i class="title-back icon iconfont icon-fanhui" @click="clickClose"></i>
@@ -32,13 +33,15 @@
         @setAccountDate="getAccountDate"></Calculator>
     </div>
     <Remark v-show="!RemarkNotOpen" @closeRemark="closeRemark" @setRemarkInfo="getRemarkInfo"></Remark>
-  </div>
+  </Layout>
+</transition>
 </template>
 
 <script>
 import { Indicator, Toast } from "mint-ui";
 import Calculator from "@/components/account/Calculator";
 import Remark from "@/components/account/Remark";
+import Layout from "@/components/Layout";
 import Rk from "@/api/rk-api";
 import { mapActions } from "vuex";
 let _self;
@@ -188,8 +191,12 @@ export default {
       }
     },
     getAccountTypeList() {
-      let expendTypes = JSON.parse(sessionStorage.getItem("account-types-expend"));
-      let incomeTypes = JSON.parse(sessionStorage.getItem("account-types-income"));
+      let expendTypes = JSON.parse(
+        sessionStorage.getItem("account-types-expend")
+      );
+      let incomeTypes = JSON.parse(
+        sessionStorage.getItem("account-types-income")
+      );
       if (expendTypes && incomeTypes) {
         this.AccountIncomeTypeList = incomeTypes;
         this.AccountExpendTypeList = expendTypes;
@@ -256,7 +263,8 @@ export default {
   },
   components: {
     Calculator,
-    Remark
+    Remark,
+    Layout
   }
 };
 </script>
@@ -322,5 +330,18 @@ export default {
   margin: 0;
   font-size: 1em;
   color: #77787a;
+}
+.slide-left-enter,
+.slide-right-leave-active {
+  opacity: 1;
+  -webkit-transform: translate3d(100%, 0, 0);
+  transform: translate3d(100%, 0, 0);
+  z-index: 1;
+}
+.slide-left-leave-active,
+.slide-right-enter {
+  opacity: 0.8;
+  -webkit-transform: translate3d(-100%, 0, 0);
+  transform: translate3d(-100%, 0, 0);
 }
 </style>

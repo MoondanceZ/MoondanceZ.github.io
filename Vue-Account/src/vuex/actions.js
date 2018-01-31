@@ -185,6 +185,7 @@ export const getAccountRecords = function ({
     if (res.IsSuccess) {
       if (res.Data.length == 0) {
         commit('SET_ALL_LOADED', true);
+        commit('SET_IS_LOADING', false);
         Toast(res.Message);
       } else {
         //备份当前记录

@@ -1,4 +1,5 @@
 <template>
+<transition name="slide-fade">
   <div class="account-list">
     <div class="top">
       <div class="header">
@@ -65,8 +66,11 @@
       <router-link class="fix-add-link" to="/Account/Add">+</router-link>
     </div>
   </div>
+  </transition>
 </template>
 <script>
+
+import Layout from "@/components/Layout";
 import { Indicator, Toast } from "mint-ui";
 import Rk from "@/api/rk-api";
 import { mapActions, mapState } from "vuex";
@@ -84,6 +88,9 @@ export default {
     ...mapActions({
       getAccountRecords: "getAccountRecords"
     })
+  },
+  components: {
+    Layout
   }
 };
 </script>
@@ -253,5 +260,19 @@ export default {
 .records-leave-to {
   opacity: 0;
   transform: translateY(30px);
+}
+
+.slide-fade-enter-active {
+  transition: all 1.8s ease;
+}
+.slide-fade-leave-active {
+  transition: all 1.8s cubic-bezier(2, 0.5, 0.8, 1);
+}
+.slide-fade-enter,
+.slide-fade-leave-to {
+  /* left:0;right: 0; */
+  /* transform: translate3d(100%, 0, 0); */
+  /* left: 100%; */
+  opacity: 0.5;
 }
 </style>
