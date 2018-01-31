@@ -225,7 +225,6 @@ export default {
       this.SelectedTypeName = name;
     },
     getAccountDate(val) {
-      console.log(val);
       this.AccountDate = val;
     },
     showAmount(val) {

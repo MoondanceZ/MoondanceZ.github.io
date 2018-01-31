@@ -50,6 +50,14 @@ const mutations = {
     if (state.accountList[param.index1].AccountRecords.length == 1) { //将整个删除
       state.accountList.splice(param.index1, 1);
     } else {
+      var curParentObj = state.accountList[param.index1];
+      var record = curParentObj.AccountRecords[param.index2];
+      if(record.Type == 1){
+        state.accountList[param.index1].DateAmount = (parseFloat(curParentObj.DateAmount) - parseFloat(record.Amount)).toFixed(2);
+        state.accountList[param.index1].MonthExpend = (parseFloat(curParentObj.MonthExpend) - parseFloat(record.Amount)).toFixed(2);
+      }else{
+        state.accountList[param.index1].MonthIncome = (parseFloat(curParentObj.MonthIncome) - parseFloat(record.Amount)).toFixed(2);
+      }
       state.accountList[param.index1].AccountRecords.splice(param.index2, 1);
     }
   }

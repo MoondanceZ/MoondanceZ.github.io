@@ -228,5 +228,22 @@ export const deleteAccountRecord = function ({
   commit,
   state
 }, param) {
+  let record = state.accountRecords.accountList[param.index1].AccountRecords[param.index2];
+  //计算 dateAmount
+  let paramDate = new Date(record.AccountDate);
+  let nowDate = new Date();
+  if (paramDate.getFullYear() == nowDate.getFullYear() && paramDate.getMonth() == nowDate.getMonth()) {
+    if (record.Type == 0) {
+      commit('SET_MONTH_AMOUNT', {
+        monthIncome: (parseFloat(state.accountRecords.monthIncome) + parseFloat(record.Amount)).toFixed(2),
+        monthExpend: state.accountRecords.monthExpend
+      })
+    } else {
+      commit('SET_MONTH_AMOUNT', {
+        monthIncome: state.accountRecords.monthIncome,
+        monthExpend: (parseFloat(state.accountRecords.monthExpend) + parseFloat(record.Amount)).toFixed(2)
+      })
+    }
+  }
   commit('DELETE_ACCOUNT_RECORD', param);
 }

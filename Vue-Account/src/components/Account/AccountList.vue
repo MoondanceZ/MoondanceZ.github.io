@@ -1,16 +1,18 @@
 <template>
-    <div class="account-list">
+  <div class="account-list">
+    <div class="top">
       <div class="header">
-      <img class="avatar" src="../../assets/image/avatar.jpg" alt="avatar" srcset="">
-    </div>
-    <div class="total">
-      <div class="col-6 income">
-        <p>本月收入</p>
-        <p>{{MonthIncome}}</p>
+        <img class="avatar" src="../../assets/image/avatar.jpg" alt="avatar" srcset="">
       </div>
-      <div class="col-6 expend">
-        <p>本月支出</p>
-        <p>{{MonthExpend}}</p>
+      <div class="total">
+        <div class="col-6 income">
+          <p>本月收入</p>
+          <p>{{MonthIncome}}</p>
+        </div>
+        <div class="col-6 expend">
+          <p>本月支出</p>
+          <p>{{MonthExpend}}</p>
+        </div>
       </div>
     </div>
     <div class="container">
@@ -26,26 +28,26 @@
             </div>
           </div>
           <template v-for="(record, index2) in item.AccountRecords">
-              <div v-if="record.Type == 0" class="row" :key="record.Id">
-                <router-link :to="{ name: 'addAccount', params: {index1: index1, index2: index2} }">
-                  <div class="col-6 left">
-                    <span class="amount">{{record.Amount}}</span>
-                    <span class="type-name">{{record.TypeName}}</span>
-                  </div>
-                  <i :class="'mid icon iconfont icon-'+record.TypeCode"></i>
-                </router-link>
-                <div class="col-6 right"></div>
-              </div>
-              <div v-if="record.Type == 1" class="row" :key="record.Id">
-                <div class="col-6 left"></div>
-                <router-link :to="{ name: 'addAccount', params: {index1: index1, index2: index2} }">
-                  <i :class="'mid icon iconfont icon-'+record.TypeCode"></i>
-                  <div class="col-6 right">
-                    <span class="type-name">{{record.TypeName}}</span>
-                    <span class="amount">{{record.Amount}}</span>
-                  </div>
-                </router-link>
-              </div>
+            <div v-if="record.Type == 0" class="row" :key="record.Id">
+              <router-link :to="{ name: 'addAccount', params: {index1: index1, index2: index2} }">
+                <div class="col-6 left">
+                  <span class="amount">{{record.Amount}}</span>
+                  <span class="type-name">{{record.TypeName}}</span>
+                </div>
+                <i :class="'mid icon iconfont icon-'+record.TypeCode"></i>
+              </router-link>
+              <div class="col-6 right"></div>
+            </div>
+            <div v-if="record.Type == 1" class="row" :key="record.Id">
+              <div class="col-6 left"></div>
+              <router-link :to="{ name: 'addAccount', params: {index1: index1, index2: index2} }">
+                <i :class="'mid icon iconfont icon-'+record.TypeCode"></i>
+                <div class="col-6 right">
+                  <span class="type-name">{{record.TypeName}}</span>
+                  <span class="amount">{{record.Amount}}</span>
+                </div>
+              </router-link>
+            </div>
           </template>
         </li>
         <li>
@@ -58,7 +60,7 @@
       </ul>
     </div>
     <router-link class="fix-add" to="/Account/Add">+</router-link>
-    </div>
+  </div>
 </template>
 <script>
 import { Indicator, Toast } from "mint-ui";
@@ -82,6 +84,13 @@ export default {
 };
 </script>
 <style scoped>
+.top {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 999;
+}
 .header {
   /* background-image:  */
   background-color: #62dfed;
@@ -92,6 +101,7 @@ export default {
 
 .total {
   height: 36px;
+  background-color: #ffffff;
 }
 
 .income > p,
