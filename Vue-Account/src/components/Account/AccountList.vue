@@ -53,7 +53,7 @@
           </template>
         </li>
         </transition-group>
-        <li>
+        <li v-show="IsLoading">
           <div class="row loading-mid">
             <div class="col-12">
               <mt-spinner class="mid" type="double-bounce"></mt-spinner>
@@ -246,7 +246,7 @@ export default {
 
 .loading-mid {
   height: 28px;
-  padding-top: 10px;
+  padding: 20px 0;
 }
 .loading-mid .mid {
   border-radius: 50%;
