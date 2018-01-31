@@ -91,7 +91,7 @@ export default {
 }
 
 .total {
-  height: 23px;
+  height: 36px;
 }
 
 .income > p,
