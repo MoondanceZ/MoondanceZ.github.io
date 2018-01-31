@@ -640,7 +640,7 @@ div#app {
   font-size: 24px !important;
   position: absolute;
   top: 2px;
-  left: 48px;
+  right: 10px;
 }
 
 .close {
