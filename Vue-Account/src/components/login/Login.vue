@@ -14,7 +14,7 @@
         </div>
         <div class="setting-group">
           <span class="remember">
-            <input type="checkbox" name="remeberUser" id="remeberUser">
+            <input type="checkbox" name="remeberUser" id="remeberUser" v-model="IsRmeberUser">
             <label for="remeberUser" class="remeberUser">记住账号</label>
           </span>
           <span class="forgetPwd">忘记密码?</span>
@@ -72,8 +72,8 @@ export default {
       IsRmeberUser: false,
       SignInInfo: {
         UserId: "",
-        Account: "qqq",
-        Password: "5392"
+        Account: "",
+        Password: ""
       },
       SignUpInfo: {
         Account: "",
@@ -89,6 +89,13 @@ export default {
     });
     // document.body.appendChild(pattern.canvas()); 会有跟body高度不一样的bug
     document.body.style.background = "url(" + pattern.png() + ")";
+  },
+  created() {
+    this.SignInInfo.Account = localStorage.getItem("rk-account");
+    this.SignInInfo.Password = localStorage.getItem("rk-password");
+    if (this.SignInInfo.Account.length > 0 && this.SignInInfo.Password.length > 0) {
+      this.IsRmeberUser = true;
+    }
   },
   beforeDestroy() {
     document.body.style.background = "";
@@ -149,6 +156,13 @@ export default {
         tokenRequest: data,
         account: this.SignInInfo.Account
       });
+      if (this.IsRmeberUser) {
+        localStorage.setItem("rk-account", this.SignInInfo.Account);
+        localStorage.setItem("rk-password", this.SignInInfo.Password);
+      } else {
+        localStorage.setItem("rk-account", "");
+        localStorage.setItem("rk-password", "");
+      }
       this.$router.push("/Account/List");
     },
     ...mapActions({
@@ -164,10 +178,28 @@ export default {
   width: 380px;
   height: 280px !important;
   border: 2px solid #bfbfbf;
-  background-color: transparent !important;
+  /* background-color: transparent !important; */
+  background: hsla(0, 0%, 100%, 0.25) border-box !important;
   top: 50% !important;
   left: 50% !important;
   transform: translate(-50%, -50%) !important;
+  box-shadow: 0 0 0 1px hsla(0, 0%, 100%, 0.3) inset,
+    0 0.5em 1em rgba(0, 0, 0, 0.6);
+}
+
+.wrapper::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  margin: -30px; /*为了让边缘不出现逐渐消退的效果，需要让伪元素 相对其宿主元素的尺寸再向 外扩大 至少 20px （即它的模糊半径）。由于不同浏览器的模糊算法可能存在差异， 用一个更大的绝对值（比 如 -30px ）会更保险一些。*/
+
+  z-index: -1; /*把伪元素移动到宿主元素后面*/
+
+  -webkit-filter: blur(20px); /*设置伪元素模糊效果*/
+  filter: blur(20px);
 }
 
 /* .signIn, .signUp{
@@ -270,8 +302,7 @@ button:focus {
 
 /* .flipOutY-enter-active, */
 .flipOutY-leave-active {
-    
-  animation: flipOutY .5s;
+  animation: flipOutY 0.5s;
 }
 
 /* .flipOutY-enter,
