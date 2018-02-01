@@ -1,5 +1,5 @@
 <template>
-<transition name="slide-left">
+<transition name="slide-fade">
   <Layout>
     <div v-show="RemarkNotOpen" class="container">
       <div class="row add-header">
@@ -332,23 +332,4 @@ export default {
   color: #77787a;
 }
 
-.slide-left-enter-active {
-  transition: all .8s ease;
-}
-.slide-left-leave-active {
-  transition: all .8s cubic-bezier(2, 0.5, 0.8, 1);
-}
-.slide-left-enter{
-  /* left:0;right: 0; */
-  transform: translate3d(-100%, 0, 0);
-  /* left: 100%; */
-  opacity: .5;
-}
-
-.slide-left-leave-to {
-  /* left:0;right: 0; */
-  transform: translate3d(100%, 0, 0);
-  /* left: 100%; */
-  opacity: .5;
-}
 </style>

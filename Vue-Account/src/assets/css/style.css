@@ -728,21 +728,21 @@ div#app {
 
 .slide-up-enter,
 .slide-up-leave-to {
-    opacity: 0;
+    opacity: .6;
     transform: translate3d(0, 100%, 0);
 }
 
 .slide-go-enter-active,
 .slide-go-leave-active {
     transition: all .5s;
-    opacity: .8;
+    opacity: 1;
 }
 
 .slide-go-enter,
 .slide-go-leave-to {
     transition: all .5s;
     transform: translate3d(100%, 0, 0);
-    opacity: .8;
+    opacity: 1;
 }
 
 .slide-back-enter-active,
@@ -754,4 +754,17 @@ div#app {
 .slide-back-leave-to {
     transition: all .5s;
     transform: translate3d(-100%, 0, 0);
+}
+
+
+.slide-fade-enter-active {
+  transition: all .8s ease;
+}
+.slide-fade-leave-active {
+  transition: all .5s ease;
+}
+.slide-fade-enter, .slide-fade-leave-to
+/* .slide-fade-leave-active for below version 2.1.8 */ {
+  /* transform: translateX(10px); */
+  opacity: 0;
 }

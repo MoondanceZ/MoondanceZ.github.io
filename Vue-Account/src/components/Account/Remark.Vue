@@ -1,5 +1,5 @@
 <template>
-<transition name="slide-up">
+<transition name="slide-up" mode="out-in">
   <div class="container">
     <div class="row add-header">
       <i class="title-back icon iconfont icon-fanhui" @click="closeRemark"></i>
