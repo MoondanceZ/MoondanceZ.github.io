@@ -131,12 +131,14 @@ export default {
     },
     async signInAccount() {
       if (this.IsSignUp) return;
+      console.log(this.SignInInfo.Account)
+      console.log(this.SignInInfo.Password)
             // Toast('提示信息');
-      if (this.SignInInfo.Account === "") {
+      if (this.SignInInfo.Account == "") {
         Toast("请输入帐号");
         return;
       }
-      if (this.SignInInfo.Password === "") {
+      if (this.SignInInfo.Password == "") {
         Toast("请输入密码");
         return;
       }
