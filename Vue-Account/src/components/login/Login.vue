@@ -93,7 +93,7 @@ export default {
   created() {
     this.SignInInfo.Account = localStorage.getItem("rk-account");
     this.SignInInfo.Password = localStorage.getItem("rk-password");
-    if (this.SignInInfo.Account.length > 0 && this.SignInInfo.Password.length > 0) {
+    if (this.SignInInfo.Account　&& this.SignInInfo.Password && this.SignInInfo.Account.length > 0 && this.SignInInfo.Password.length > 0) {
       this.IsRmeberUser = true;
     }
   },
@@ -131,10 +131,7 @@ export default {
     },
     async signInAccount() {
       if (this.IsSignUp) return;
-      Indicator.open({
-        text: "登录中..."
-      });
-      // Toast('提示信息');
+            // Toast('提示信息');
       if (this.SignInInfo.Account.length === 0) {
         Toast("请输入帐号");
         return;
@@ -143,6 +140,9 @@ export default {
         Toast("请输入密码");
         return;
       }
+      Indicator.open({
+        text: "登录中..."
+      });
 
       var data = {
         grant_type: "password",
