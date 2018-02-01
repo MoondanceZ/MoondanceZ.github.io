@@ -93,7 +93,12 @@ export default {
   created() {
     this.SignInInfo.Account = localStorage.getItem("rk-account");
     this.SignInInfo.Password = localStorage.getItem("rk-password");
-    if (this.SignInInfo.Account　&& this.SignInInfo.Password && this.SignInInfo.Account.length > 0 && this.SignInInfo.Password.length > 0) {
+    if (
+      this.SignInInfo.Account &&
+      this.SignInInfo.Password &&
+      this.SignInInfo.Account.length > 0 &&
+      this.SignInInfo.Password.length > 0
+    ) {
       this.IsRmeberUser = true;
     }
   },
@@ -108,11 +113,11 @@ export default {
     async signUpAccount() {
       if (!this.IsSignUp) return;
 
-      if (this.SignUpInfo.Account.length === 0) {
+      if (!this.SignUpInfo.Account) {
         Toast("请输入帐号");
         return;
       }
-      if (this.SignUpInfo.Password.length === 0) {
+      if (!this.SignUpInfo.Password.length) {
         Toast("请输入密码");
         return;
       }
@@ -131,14 +136,14 @@ export default {
     },
     async signInAccount() {
       if (this.IsSignUp) return;
-      console.log(this.SignInInfo.Account)
-      console.log(this.SignInInfo.Password)
-            // Toast('提示信息');
-      if (this.SignInInfo.Account == "") {
+      console.log(this.SignInInfo.Account);
+      console.log(this.SignInInfo.Password);
+      // Toast('提示信息');
+      if (!this.SignInInfo.Account) {
         Toast("请输入帐号");
         return;
       }
-      if (this.SignInInfo.Password == "") {
+      if (!this.SignInInfo.Password) {
         Toast("请输入密码");
         return;
       }
