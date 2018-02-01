@@ -2,7 +2,8 @@
 <div>
   <div class="wrapper mid">
     <div class="container">
-      <div class="signIn" v-show="!IsSignUp">
+      <transition name="flipOutY" mode="out-in">
+      <div class="signIn" v-if="!IsSignUp" key="signIn">
         <div class="form-group">
           <label for="account">帐号：</label>
           <input type="text" name="account" id="account" v-model="SignInInfo.Account" required>
@@ -29,7 +30,7 @@
           </div>
         </div>
       </div>
-      <div class="signUp" v-show="IsSignUp">
+      <div class="signUp" v-if="IsSignUp" key="signUp">
         <div class="form-group">
           <label for="signUp-account">帐号：</label>
           <input type="text" name="account" id="signUp-account" v-model="SignUpInfo.Account" min-length="4" maxlength="12">
@@ -53,6 +54,7 @@
           </div>
         </div>
       </div>
+      </transition>
     </div>
   </div>
   </div>
@@ -168,6 +170,12 @@ export default {
   transform: translate(-50%, -50%) !important;
 }
 
+/* .signIn, .signUp{
+  float: left;
+} */
+/* .signUp{
+  margin-top: -210px; 
+}  */
 .form-group,
 .btn-group {
   width: 100%;
@@ -257,6 +265,36 @@ button:focus {
 @media screen and (max-width: 640px) {
   .wrapper {
     width: 90%;
+  }
+}
+
+/* .flipOutY-enter-active, */
+.flipOutY-leave-active {
+    
+  animation: flipOutY .5s;
+}
+
+/* .flipOutY-enter,
+.flipOutY-leave-to {
+  animation: flipOutY .5s;
+} */
+
+@keyframes flipOutY {
+  from {
+    -webkit-transform: perspective(400px);
+    transform: perspective(400px);
+  }
+
+  30% {
+    -webkit-transform: perspective(400px) rotate3d(0, 1, 0, -15deg);
+    transform: perspective(400px) rotate3d(0, 1, 0, -15deg);
+    opacity: 1;
+  }
+
+  to {
+    -webkit-transform: perspective(400px) rotate3d(0, 1, 0, 90deg);
+    transform: perspective(400px) rotate3d(0, 1, 0, 90deg);
+    opacity: 0;
   }
 }
 </style>
