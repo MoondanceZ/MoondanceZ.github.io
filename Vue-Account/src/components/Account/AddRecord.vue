@@ -162,32 +162,38 @@ export default {
             Toast("操作异常");
           });
       } else {
-        Rk.Account.updateAccountRecord(this.Id, recordData).then(response => {
-          let res = response.data;
-          if (res.IsSuccess) {
-            recordData.Id = this.Id;
-            recordData.TypeCode = this.SelectedType;
-            recordData.TypeName = this.SelectedTypeName;
-            let updateInfo = {
-              hasUpdateDate: this.AccountDateBack !== this.AccountDate,
-              index1: this.$route.params.index1,
-              index2: this.$route.params.index2,
-              updateAmount: (
-                parseFloat(this.Amount) - parseFloat(this.AmountBack)
-              ).toFixed(2)
-            };
-            this.updateAccountRecord({
-              updateInfo: updateInfo,
-              record: recordData
-            }).then(() => {
-              this.$router.go(-1);
-            });
-            // this.$router.push("/Account/List");
-          } else {
+        Rk.Account.updateAccountRecord(this.Id, recordData)
+          .then(response => {
+            let res = response.data;
+            if (res.IsSuccess) {
+              recordData.Id = this.Id;
+              recordData.TypeCode = this.SelectedType;
+              recordData.TypeName = this.SelectedTypeName;
+              let updateInfo = {
+                hasUpdateDate: this.AccountDateBack !== this.AccountDate,
+                index1: this.$route.params.index1,
+                index2: this.$route.params.index2,
+                updateAmount: (
+                  parseFloat(this.Amount) - parseFloat(this.AmountBack)
+                ).toFixed(2)
+              };
+              this.updateAccountRecord({
+                updateInfo: updateInfo,
+                record: recordData
+              }).then(() => {
+                this.$router.go(-1);
+              });
+              // this.$router.push("/Account/List");
+            } else {
+              Indicator.close();
+              Toast(res.Message);
+            }
+          })
+          .catch(error => {
+            console.log(error);
             Indicator.close();
-            Toast(res.Message);
-          }
-        });
+            Toast("操作异常");
+          });
       }
     },
     getAccountTypeList() {
@@ -331,5 +337,4 @@ export default {
   font-size: 1em;
   color: #77787a;
 }
-
 </style>

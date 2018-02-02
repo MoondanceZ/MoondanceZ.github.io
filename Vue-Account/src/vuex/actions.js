@@ -72,7 +72,6 @@ export const userSignIn = async function ({
   //   Toast("登录异常：获取 TOKEN 失败");
   // });
   await Rk.User.signIn(param).then(response => {
-    debugger;
     var res = response.data;
     if (res.IsSuccess) {
       console.log(res);
