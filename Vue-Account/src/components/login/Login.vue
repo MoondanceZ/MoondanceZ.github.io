@@ -71,7 +71,6 @@ export default {
       IsSignUp: false,
       IsRmeberUser: false,
       SignInInfo: {
-        UserId: "",
         Account: "",
         Password: ""
       },
@@ -131,13 +130,12 @@ export default {
       await this.signUp({
         Account: this.SignUpInfo.Account,
         Password: this.SignUpInfo.Password
+      }).then(() => {
+        this.$router.push("/Account/List");
       });
-      this.$router.push("/Account/List");
     },
     async signInAccount() {
       if (this.IsSignUp) return;
-      console.log(this.SignInInfo.Account);
-      console.log(this.SignInInfo.Password);
       // Toast('提示信息');
       if (!this.SignInInfo.Account) {
         Toast("请输入帐号");
@@ -151,26 +149,16 @@ export default {
         text: "登录中..."
       });
 
-      var data = {
-        grant_type: "password",
-        client_id: "pwd_client",
-        client_secret: "pwd_secret",
-        scope: "rk offline_access",
-        username: this.SignInInfo.Account,
-        password: this.SignInInfo.Password
-      };
-      await this.signIn({
-        tokenRequest: data,
-        account: this.SignInInfo.Account
+      await this.signIn(this.SignInInfo).then(() => {
+        if (this.IsRmeberUser) {
+          localStorage.setItem("rk-account", this.SignInInfo.Account);
+          localStorage.setItem("rk-password", this.SignInInfo.Password);
+        } else {
+          localStorage.setItem("rk-account", "");
+          localStorage.setItem("rk-password", "");
+        }
+        this.$router.push("/Account/List");
       });
-      if (this.IsRmeberUser) {
-        localStorage.setItem("rk-account", this.SignInInfo.Account);
-        localStorage.setItem("rk-password", this.SignInInfo.Password);
-      } else {
-        localStorage.setItem("rk-account", "");
-        localStorage.setItem("rk-password", "");
-      }
-      this.$router.push("/Account/List");
     },
     ...mapActions({
       signIn: "userSignIn",

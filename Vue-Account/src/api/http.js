@@ -17,7 +17,7 @@ axios.interceptors.request.use(config => {
   return config
 }, error => {
   Indicator.close()
-  Toast("响应超市");
+  Toast("响应超时");
   return Promise.reject(error)
 })
 // http response 服务器响应拦截器，这里拦截401错误，并重新跳入登页重新获取token

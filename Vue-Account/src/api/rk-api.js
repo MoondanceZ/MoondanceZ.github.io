@@ -25,8 +25,8 @@ export default {
     }
   },
   User: {
-    getToken: param => {
-      return axios.post(`${identityserver4Url}/connect/token`, qs.stringify(param));
+    signIn: param => {
+      return axios.post(`${baseUrl}/UserInfo/Login`, param);
     },
     signUp: param => {
       return axios.post(`${baseUrl}/UserInfo`, param);
