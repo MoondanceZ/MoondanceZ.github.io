@@ -224,6 +224,7 @@ export const getAccountRecords = function ({
     console.error(error);
     Toast("获取列表异常");
     commit('SET_IS_LOADING', false);
+    commit('SET_ALL_LOADED', true);
   });
 }
 

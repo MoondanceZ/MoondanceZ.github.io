@@ -10,22 +10,22 @@ module.exports = {
     // Paths
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
-    // proxyTable: {
-    //   '/api': {
-    //     target: 'https://api.round-king.com/',
-    //     changeOrigin: true,
-    //     pathRewrite: {
-    //       '^/api': ''
-    //     }
-    //   },
-    //   '/identityserver4': {
-    //     target: 'https://identityserver4.round-king.com/',
-    //     changeOrigin: true,
-    //     pathRewrite: {
-    //       '^/identityserver4': ''
-    //     }
-    //   }
-    // },
+    proxyTable: {
+      '/api': {
+        target: 'http://core-rk.local.cn/',
+        changeOrigin: true,
+        pathRewrite: {
+          '^/api': ''
+        }
+      },
+      '/identityserver4': {
+        target: 'http://identityserver4.local.cn/',
+        changeOrigin: true,
+        pathRewrite: {
+          '^/identityserver4': ''
+        }
+      }
+    },
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
     proxyTable: {

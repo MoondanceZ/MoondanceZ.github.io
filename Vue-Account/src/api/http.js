@@ -11,9 +11,6 @@ import {
 axios.defaults.timeout = 60000
 // http请求拦截器
 axios.interceptors.request.use(config => {
-  console.log(config.headers);
-  console.log(    config.headers.common);
-  
   if (store.state.user.token.access_token) { // 判断是否存在token，如果存在的话，则每个http header都加上token
     config.headers.Authorization = `${store.state.user.token.token_type} ${store.state.user.token.access_token}`;
 
