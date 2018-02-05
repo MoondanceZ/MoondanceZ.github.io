@@ -132,7 +132,7 @@ export default {
       }
 
       var recordData = {
-        UserId: this.UserId,
+        UserId: 99,
         Type: this.Type,
         AccountTypeId: this.SelectedId,
         Amount: this.Amount,
