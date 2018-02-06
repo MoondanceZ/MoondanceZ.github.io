@@ -1,5 +1,4 @@
 <template>
-<transition name="slide-fade">
   <div class="account-list">
     <div class="top">
       <div class="header">
@@ -66,11 +65,8 @@
       <router-link class="fix-add-link" to="/Account/Add">+</router-link>
     </div>
   </div>
-  </transition>
 </template>
 <script>
-
-import Layout from "@/components/Layout";
 import { Indicator, Toast } from "mint-ui";
 import Rk from "@/api/rk-api";
 import { mapActions, mapState } from "vuex";
@@ -88,19 +84,24 @@ export default {
     ...mapActions({
       getAccountRecords: "getAccountRecords"
     })
-  },
-  components: {
-    Layout
   }
 };
 </script>
 <style scoped>
-.top {
-  position: fixed;
-  top: 0;
-  left: 0;
+.account-list {
   width: 100%;
-  z-index: 999;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+.top {
+  width: 100%;
+  height: 72px;
+  flex: 1 1 72px;
 }
 .header {
   /* background-image:  */
@@ -116,10 +117,13 @@ export default {
 }
 
 .container {
-  position: absolute;
+  /* position: absolute;
   top: 68px;
   left: 0;
+  width: 100%; */
   width: 100%;
+  flex: 1 1 auto;
+  overflow: auto;
 }
 
 .income > p,
@@ -218,7 +222,7 @@ export default {
 
 .fix-add {
   display: block;
-  position: fixed;
+  position: absolute;
   right: 20px;
   bottom: 20px;
   background-color: #62dfed;
@@ -261,5 +265,4 @@ export default {
   opacity: 0;
   transform: translateY(30px);
 }
-
 </style>

@@ -1,6 +1,5 @@
 <template>
-<transition name="slide-fade">
-  <Layout>
+  <div>
     <div v-show="RemarkNotOpen" class="container">
       <div class="row add-header">
           <i class="title-back icon iconfont icon-fanhui" @click="clickClose"></i>
@@ -33,15 +32,13 @@
         @setAccountDate="getAccountDate"></Calculator>
     </div>
     <Remark v-show="!RemarkNotOpen" @closeRemark="closeRemark" @setRemarkInfo="getRemarkInfo"></Remark>
-  </Layout>
-</transition>
+  </div>
 </template>
 
 <script>
 import { Indicator, Toast } from "mint-ui";
 import Calculator from "@/components/account/Calculator";
 import Remark from "@/components/account/Remark";
-import Layout from "@/components/Layout";
 import Rk from "@/api/rk-api";
 import { mapActions } from "vuex";
 let _self;
@@ -269,8 +266,7 @@ export default {
   },
   components: {
     Calculator,
-    Remark,
-    Layout
+    Remark
   }
 };
 </script>

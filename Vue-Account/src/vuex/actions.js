@@ -74,7 +74,7 @@ export const userSignIn = async function ({
   await Rk.User.signIn(param).then(response => {
     var res = response.data;
     if (res.IsSuccess) {
-      console.log(res);
+      // console.log(res);
       commit('SET_TOKEN', res.Data.Token);
       commit('SET_CURRENT_USER', res.Data.UserInfo);
       commit('SET_IS_LOGIN', true);

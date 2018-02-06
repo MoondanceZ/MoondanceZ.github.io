@@ -1,6 +1,6 @@
 <template>
 <div>
-  <div class="wrapper mid">
+  <div class="wrapper">
     <div class="container">
       <transition name="flipOutY" mode="out-in">
       <div class="signIn" v-if="!IsSignUp" key="signIn">
@@ -169,15 +169,17 @@ export default {
 </script>
 
 <style scoped>
+.child-view {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .wrapper {
   width: 380px;
   height: 280px !important;
   border: 2px solid #bfbfbf;
-  /* background-color: transparent !important; */
   background: hsla(0, 0%, 100%, 0.25) border-box !important;
-  top: 50% !important;
-  left: 50% !important;
-  transform: translate(-50%, -50%) !important;
   box-shadow: 0 0 0 1px hsla(0, 0%, 100%, 0.3) inset,
     0 0.5em 1em rgba(0, 0, 0, 0.6);
 }

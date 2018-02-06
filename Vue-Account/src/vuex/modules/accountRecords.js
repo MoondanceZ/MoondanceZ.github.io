@@ -5,7 +5,8 @@ const state = {
   allLoaded: false,
   accountList: [],
   monthIncome: 0,
-  monthExpend: 0
+  monthExpend: 0,
+  savedPosition: 0
 }
 
 //mutations
@@ -60,6 +61,9 @@ const mutations = {
       }
       state.accountList[param.index1].AccountRecords.splice(param.index2, 1);
     }
+  },
+  'SET_SAVED_POSITION'(state, position){
+    state.savedPosition = position;
   }
 }
 

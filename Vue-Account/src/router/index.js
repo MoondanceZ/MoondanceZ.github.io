@@ -8,37 +8,38 @@ import Layout from '@/components/Layout'
 
 Vue.use(Router)
 
+
 const router = new Router({
-  // routes: [{
-  //   path:'/',
-  //   component: Layout,
-  //   children:[{
-  //     path: '',
-  //     alias: '/Login',
-  //     component: Login
-  //   }, {
-  //     path: '/Account/List',
-  //     name: 'accountList',
-  //     component: AcountList
-  //   }, {
-  //     path: '/Account/Add',
-  //     name: 'addAccount',
-  //     component: AddAccount
-  //   }]
-  // }],
   routes: [{
-    path: '',
-    alias: '/Login',
-    component: Login
-  }, {
-    path: '/Account/List',
-    name: 'accountList',
-    component: AcountList
-  }, {
-    path: '/Account/Add',
-    name: 'addAccount',
-    component: AddAccount
+    path: '/',
+    component: Layout,
+    children: [{
+      path: '',
+      alias: '/Login',
+      component: Login
+    }, {
+      path: '/Account/List',
+      name: 'accountList',
+      component: AcountList
+    }, {
+      path: '/Account/Add',
+      name: 'addAccount',
+      component: AddAccount
+    }]
   }],
+  // routes: [{
+  //   path: '',
+  //   alias: '/Login',
+  //   component: Login
+  // }, {
+  //   path: '/Account/List',
+  //   name: 'accountList',
+  //   component: AcountList
+  // }, {
+  //   path: '/Account/Add',
+  //   name: 'addAccount',
+  //   component: AddAccount
+  // }],
   scrollBehavior(to, from, savedPosition) {
     if (savedPosition) {
       return savedPosition
@@ -53,10 +54,6 @@ const router = new Router({
 
 
 router.beforeEach((to, from, next) => {
-  store.commit('SET_ROUTER_LOG', {
-    prev: from.path.toLowerCase(),
-    next: to.path.toLowerCase()
-  });
   if (from.path != '/' || from.path !== '/Login') {
     next();
   }
@@ -70,5 +67,7 @@ router.beforeEach((to, from, next) => {
     next();
   }
 });
-
+router.afterEach((to, from)=>{
+  this.isBack = false;
+})
 export default router
