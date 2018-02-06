@@ -124,6 +124,7 @@ export default {
   width: 100%;
   flex: 1 1 auto;
   overflow: auto;
+  -webkit-overflow-scrolling: touch;
 }
 
 .income > p,
@@ -232,14 +233,18 @@ export default {
   color: #ffffff;
   z-index: 99;
   margin: 0 auto;
+  user-select: none;
+  -webkit-user-select: none;
 }
 
 .fix-add-link {
+  width: 36px;
+  height: 36px;
   display: block;
   position: absolute;
   text-align: center;
-  font-size: 32px;
-  line-height: 32px;
+  font-size: 36px;
+  line-height: 36px;
   text-decoration: none;
   color: #ffffff;
   top: 0;
