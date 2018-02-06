@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>flex-test</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            width: 100%;
+        }
+
+        ul li {
+            list-style: none;
+        }
+
+        ul {
+            display: flex;
+            /* flex-direction: row;
+            flex-wrap: wrap; */
+            flex-flow: column wrap;
+            justify-content: flex-start;
+            align-items: flex-start;
+            /* flex-grow: 1; */
+            /* flex-shrink: 0; */
+            border: 2px solid rgb(228, 125, 114);
+            height: 400px;
+        }
+
+        li {
+            /* width: 100px; */
+            /* height: 100px; */
+            /* flex-grow: 1; */
+            /* flex-shrink: 1; */
+            /* flex-basis: auto; */
+            flex: 1 1 auto;
+            background-color: aqua;
+            margin: 8px;
+            text-align: center;
+            font-size: 40px;
+            line-height: 100px;
+            color: aliceblue;
+            overflow: auto;
+        }
+    </style>
+</head>
+
+<body>
+    <ul>
+        <li>1 flex-basis flex-basis flex-basis flex-basis flex-basis flex-basis flex-basis flex-basis flex-basis  flex-basis flex-basis  flex-basis flex-basis  flex-basis flex-basis  flex-basis flex-basis  flex-basis flex-basis  flex-basis flex-basis  flex-basis flex-basis  flex-basis flex-basis  flex-basis flex-basis  flex-basis flex-basis  flex-basis flex-basis  flex-basis flex-basis  flex-basis flex-basis  flex-basis flex-basis  flex-basis flex-basis  flex-basis flex-basis  flex-basis flex-basis  flex-basis flex-basis  flex-basis flex-basis  flex-basis flex-basis  flex-basis flex-basis  flex-basis flex-basis  flex-basis flex-basis  flex-basis flex-basis  flex-basis flex-basis  flex-basis flex-basis  flex-basis flex-basis  flex-basis flex-basis  flex-basis flex-basis  flex-basis flex-basis  flex-basis flex-basis  flex-basis flex-basis  flex-basis flex-basis  flex-basis flex-basis  flex-basis flex-basis  flex-basis flex-basis </li>
+        <!-- <li>2</li>
+        <li>3</li>
+        <li>4</li>
+        <li>5</li>
+        <li>6</li>
+        <li>7</li>
+        <li>8</li>
+        <li>9</li> -->
+    </ul>
+</body>
+
+</html>

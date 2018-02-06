@@ -3,7 +3,7 @@ import Router from 'vue-router'
 import store from '@/vuex/store'
 import AcountList from '@/components/account/AccountList'
 import AddAccount from '@/components/account/AddRecord'
-import Login from '@/components/login/Login'
+import Login from '@/components/user/Login'
 import Layout from '@/components/Layout'
 
 Vue.use(Router)
