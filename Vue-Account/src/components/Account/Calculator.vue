@@ -195,6 +195,8 @@ export default {
   width: 100%;
   text-align: center;
   font-size: 2em;
+  user-select: none;
+  -webkit-user-select: none;
 }
 
 .calc .col-3,

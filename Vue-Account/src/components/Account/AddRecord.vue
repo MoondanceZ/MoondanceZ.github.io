@@ -132,7 +132,7 @@ export default {
       }
 
       var recordData = {
-        UserId: 99,
+        UserId: this.UserId,
         Type: this.Type,
         AccountTypeId: this.SelectedId,
         Amount: this.Amount,
@@ -278,6 +278,8 @@ export default {
 <style scoped>
 .container {
   height: 100vh;
+  user-select: none;
+  -webkit-user-select: none;
 }
 .add-income,
 .add-expend {
