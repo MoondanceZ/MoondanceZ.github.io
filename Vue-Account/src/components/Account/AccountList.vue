@@ -78,7 +78,7 @@ export default {
       IsLoading: state => state.accountRecords.isLoading,
       MonthIncome: state => state.accountRecords.monthIncome,
       MonthExpend: state => state.accountRecords.monthExpend,
-      AvatarUrl: state => state.user.currentUser.AvatarUrl || "/static/img/avatar.jpg"
+      AvatarUrl: state => state.user.currentUser.AvatarUrl || "./static/img/avatar.jpg"
     })
   },
   methods: {
