@@ -183,6 +183,10 @@ export default {
   padding-left: 10px;
 }
 
+.container::-webkit-scrollbar {
+  display: none;
+}
+
 .day-left,
 .day-right {
   height: 20px;
