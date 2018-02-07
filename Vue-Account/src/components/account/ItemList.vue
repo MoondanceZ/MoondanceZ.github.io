@@ -43,6 +43,9 @@
           </div>
         </div>
       </li> -->
+      <div v-show="AllLoaded" class="row allLoad">
+        
+      </div>
     </scroller>
   </div>
 </template>
@@ -61,7 +64,7 @@
     computed: {
       ...mapState({
         AccountList: state => state.accountRecords.accountList,
-        IsLoading: state => state.accountRecords.isLoading
+        AllLoaded: state => state.accountRecords.allLoaded
       })
     },
     methods: {
@@ -180,6 +183,10 @@
   .loading-mid .mid {
     border-radius: 50%;
     background-color: transparent;
+  }
+
+  .allLoad {
+    height: 80px;
   }
 
   .records-enter-active,
