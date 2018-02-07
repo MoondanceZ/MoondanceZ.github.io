@@ -1,8 +1,8 @@
 <template>
-  <scroller :on-infinite="infinite" style="top: 72px;-webkit-overflow-scrolling: touch;" ref="scrollerBottom">
-    <ul>
+  <div class="container">
+    <scroller style="top: 72px;" :on-infinite="infinite" ref="scrollerBottom">
       <transition-group name="records">
-        <li v-for="(item, index1) in AccountList" :key="item.Date">
+        <div v-for="(item, index1) in AccountList" :key="item.Date">
           <div class="row">
             <div class="col-6 day-left">
               <span class="day">{{item.Date}}</span>
@@ -34,7 +34,7 @@
               </div>
             </div>
           </template>
-        </li>
+        </div>
       </transition-group>
       <!-- <li v-show="IsLoading">
         <div class="row loading-mid">
@@ -43,135 +43,154 @@
           </div>
         </div>
       </li> -->
-    </ul>
-  </scroller>
+    </scroller>
+  </div>
 </template>
 
 <script>
-import { mapActions, mapState } from "vuex";
-let _self;
-export default {
-  created() {
-    _self = this;
-    _self.getAccountRecords();
-  },
-  computed: {
-    ...mapState({
-      AccountList: state => state.accountRecords.accountList,
-      IsLoading: state => state.accountRecords.isLoading
-    })
-  },
-  methods: {
-    infinite: done => {
-      _self.getAccountRecords().then(() => {
-        done();
-      });
+  import {
+    mapActions,
+    mapState
+  } from "vuex";
+  let _self;
+  export default {
+    created() {
+      _self = this;
+      _self.getAccountRecords();
     },
-    ...mapActions({
-      getAccountRecords: "getAccountRecords"
-    })
-  }
-};
+    computed: {
+      ...mapState({
+        AccountList: state => state.accountRecords.accountList,
+        IsLoading: state => state.accountRecords.isLoading
+      })
+    },
+    methods: {
+      infinite: done => {
+        _self.getAccountRecords().then(() => {
+          done();
+        });
+      },
+      ...mapActions({
+        getAccountRecords: "getAccountRecords"
+      })
+    }
+  };
+
 </script>
 
 <style scoped>
-.left {
-  height: 4em;
-  /* background-color: #caf7cd; */
-  line-height: 4em;
-  border-right: 1px solid #a1a2a5;
-  padding-right: 26px;
-  text-align: right;
-  color: #596161;
-}
+  .container {
+    /* top: 72px;  */
+    /* padding-bottom: 30px; */
+    flex: 1 1 100%;
+    /* overflow: auto; */
+    -webkit-overflow-scrolling: touch;
+  }
 
-.right {
-  height: 4em;
-  /* background-color: #738de2; */
-  border-left: 1px solid #a1a2a5;
-  line-height: 4em;
-  padding-left: 26px;
-  color: #596161;
-}
+  /* .wrapper-item {
+    padding-top: 72px;
+  } */
 
-.type-name {
-  font-size: 1.6em;
-  color: #8b8989;
-}
+  .left {
+    height: 4em;
+    /* background-color: #caf7cd; */
+    line-height: 4em;
+    border-right: 1px solid #a1a2a5;
+    padding-right: 26px;
+    text-align: right;
+    color: #596161;
+  }
 
-.amount {
-  font-size: 1.2em;
-  color: #8b8989;
-  padding-left: 10px;
-}
+  .right {
+    height: 4em;
+    /* background-color: #738de2; */
+    border-left: 1px solid #a1a2a5;
+    line-height: 4em;
+    padding-left: 26px;
+    color: #596161;
+  }
 
-.container::-webkit-scrollbar {
-  display: none;
-}
-.link {
-  display: inline-block;
-  height: 4em;
-  line-height: 4em;
-  user-select: none;
-  -webkit-user-select: none;
-  text-decoration: none;
-}
-.day-left,
-.day-right {
-  height: 20px;
-  line-height: 20px;
-}
+  .type-name {
+    font-size: 1.6em;
+    color: #8b8989;
+  }
 
-.day-left {
-  text-align: right;
-  border-right: 1px solid #a1a2a5;
-}
+  .amount {
+    font-size: 1.2em;
+    color: #8b8989;
+    padding-left: 10px;
+  }
 
-.day-right {
-  border-left: 1px solid #a1a2a5;
-}
+  .container::-webkit-scrollbar {
+    display: none;
+  }
 
-.day {
-  font-size: 10px;
-  color: #8b8989;
-}
+  .link {
+    display: inline-block;
+    height: 4em;
+    line-height: 4em;
+    user-select: none;
+    -webkit-user-select: none;
+    text-decoration: none;
+  }
 
-.mid {
-  z-index: 99;
-  background-color: #ffffff;
-  line-height: 1em;
-}
+  .day-left,
+  .day-right {
+    height: 20px;
+    line-height: 20px;
+  }
 
-.mid-day-total {
-  position: absolute;
-  width: 12px;
-  height: 12px;
-  border-radius: 50%;
-  background-color: #a1a2a5;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 99;
-}
+  .day-left {
+    text-align: right;
+    border-right: 1px solid #a1a2a5;
+  }
 
-.loading-mid {
-  height: 28px;
-  padding: 20px 0;
-}
+  .day-right {
+    border-left: 1px solid #a1a2a5;
+  }
 
-.loading-mid .mid {
-  border-radius: 50%;
-  background-color: transparent;
-}
+  .day {
+    font-size: 10px;
+    color: #8b8989;
+  }
 
-.records-enter-active,
-.records-leave-active {
-  transition: all 2s;
-}
+  .mid {
+    z-index: 99;
+    background-color: #ffffff;
+    line-height: 1em;
+  }
 
-.records-enter,
-.records-leave-to {
-  opacity: 0;
-  transform: translate3d(0, 30px, 0);
-}
+  .mid-day-total {
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background-color: #a1a2a5;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 99;
+  }
+
+  .loading-mid {
+    height: 28px;
+    padding: 20px 0;
+  }
+
+  .loading-mid .mid {
+    border-radius: 50%;
+    background-color: transparent;
+  }
+
+  .records-enter-active,
+  .records-leave-active {
+    transition: all 2s;
+  }
+
+  .records-enter,
+  .records-leave-to {
+    opacity: 0;
+    transform: translate3d(0, 30px, 0);
+  }
+
 </style>

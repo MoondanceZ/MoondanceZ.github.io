@@ -17,7 +17,6 @@ export default {
   //监听路由的路径，可以通过不同的路径去选择不同的切换效果
   watch: {
     $route(to, from) {
-      console.log(to)
       if (this.$store.state.user.routerLog.prev == to.path.toLowerCase() && to.path.toLowerCase() == "/account/list") {
         this.transitionName = "slide-right";
       }else{

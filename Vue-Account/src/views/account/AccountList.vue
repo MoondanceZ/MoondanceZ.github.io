@@ -100,17 +100,6 @@
     background-color: #ffffff;
   }
 
-  .container {
-    /* position: absolute;
-  top: 68px;
-  left: 0;
-  width: 100%; */
-    width: 100%;
-    /* flex: 1 1 auto; */
-    overflow: auto;
-    -webkit-overflow-scrolling: touch;
-  }
-
   .income>p,
   .expend>p {
     margin: 0;
