@@ -75,12 +75,6 @@ export default {
 </script>
 
 <style scoped>
-a {
-  user-select: none;
-  -webkit-user-select: none;
-  text-decoration: none;
-}
-
 .left {
   height: 4em;
   /* background-color: #caf7cd; */
@@ -118,6 +112,9 @@ a {
   display: inline-block;
   height: 4em;
   line-height: 4em;
+  user-select: none;
+  -webkit-user-select: none;
+  text-decoration: none;
 }
 .day-left,
 .day-right {
