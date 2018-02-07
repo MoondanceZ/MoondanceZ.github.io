@@ -5,6 +5,8 @@ import App from './App'
 import router from './router'
 import store from './vuex/store'
 import FastClick from 'fastclick'
+import VueScroller from 'vue-scroller'
+
 import {
   InfiniteScroll,
   Spinner,
@@ -15,6 +17,8 @@ import 'mint-ui/lib/style.css'
 
 import '../static/css/iconfont.css'
 import '@/assets/css/style.css'
+
+Vue.use(VueScroller)
 
 Vue.use(InfiniteScroll);
 Vue.component(Spinner.name, Spinner);
