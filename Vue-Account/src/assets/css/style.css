@@ -646,6 +646,15 @@ div#app {
   padding: 0 10px;
 }
 
+.title {
+  margin: 8px 0;
+  font-size: 18px;
+  height: 26px;
+  line-height: 18px;
+  text-align: center;
+  color: #a1a2a5;
+}
+
 .close {
   position: absolute;
   display: inline-block;

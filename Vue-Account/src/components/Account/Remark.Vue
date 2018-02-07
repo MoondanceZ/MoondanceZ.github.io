@@ -1,9 +1,11 @@
 <template>
 <transition name="slide-up" mode="out-in">
   <div class="container">
-    <div class="row add-header">
+    <div class="row">
       <i class="title-back icon iconfont icon-fanhui" @click="closeRemark"></i>
       <div class="col-12 title">备注</div>
+    </div>
+    <div class="row">
       <div class="col-12">
         <span class="txt-count">{{InputCount}}/200</span>
         <textarea rows="8" v-model="Remark" @input="descInput" class="remark" placeholder="请输入备注信息" maxlength="200"></textarea>
@@ -40,14 +42,6 @@ export default {
 </script>
 
 <style scoped>
-.title {
-  margin: 8px 0;
-  font-size: 18px;
-  height: 26px;
-  line-height: 18px;
-  text-align: center;
-  color: #a1a2a5;
-}
 .remark {
   border: 1px solid #a1a2a5;
   border-radius: 1px;
@@ -67,10 +61,10 @@ export default {
   width: 4rem;
   height: 32px;
   /* line-height: 40px; */
-  border: 1px solid #303439;
+  border: 1px solid #a1a2a5;
   border-radius: 1px;
   text-align: center;
   background-color: #ffffff;
-  color: #000000;
+  color: #a1a2a5;
 }
 </style>

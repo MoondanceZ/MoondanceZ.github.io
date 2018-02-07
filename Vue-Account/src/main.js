@@ -13,7 +13,7 @@ import {
 // import MintUI from 'mint-ui'
 import 'mint-ui/lib/style.css'
 
-import '@/assets/css/iconfont.css'
+import '../static/css/iconfont.css'
 import '@/assets/css/style.css'
 
 Vue.use(InfiniteScroll);

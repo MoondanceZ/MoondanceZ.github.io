@@ -2,7 +2,7 @@
   <div class="account-list">
     <div class="top">
       <div class="header">
-        <img class="avatar" src="../../assets/image/avatar.jpg" alt="avatar" srcset="">
+        <img class="avatar" :src=AvatarUrl alt="avatar" srcset="">
       </div>
       <div class="total">
         <div class="col-6 income">
@@ -77,7 +77,8 @@ export default {
       AccountList: state => state.accountRecords.accountList,
       IsLoading: state => state.accountRecords.isLoading,
       MonthIncome: state => state.accountRecords.monthIncome,
-      MonthExpend: state => state.accountRecords.monthExpend
+      MonthExpend: state => state.accountRecords.monthExpend,
+      AvatarUrl: state => state.user.currentUser.AvatarUrl || "/static/img/avatar.jpg"
     })
   },
   methods: {
