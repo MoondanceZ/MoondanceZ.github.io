@@ -1,0 +1,155 @@
+<template>
+  <ul v-infinite-scroll="getAccountRecords" infinite-scroll-disabled="IsLoading" infinite-scroll-distance="0">
+    <transition-group name="records">
+      <li v-for="(item, index1) in AccountList" :key="item.Date">
+        <div class="row">
+          <div class="col-6 day-left">
+            <span class="day">{{item.Date}}</span>
+          </div>
+          <div class="mid-day-total"></div>
+          <div class="col-6 day-right">
+            <span class="day">{{item.DateAmount}}</span>
+          </div>
+        </div>
+        <template v-for="(record, index2) in item.AccountRecords">
+          <div v-if="record.Type == 0" class="row" :key="record.Id">
+            <router-link :to="{ name: 'addAccount', params: {index1: index1, index2: index2} }">
+              <div class="col-6 left">
+                <span class="amount">{{record.Amount}}</span>
+                <span class="type-name">{{record.TypeName}}</span>
+              </div>
+              <i :class="'mid icon iconfont icon-'+record.TypeCode"></i>
+            </router-link>
+            <div class="col-6 right"></div>
+          </div>
+          <div v-if="record.Type == 1" class="row" :key="record.Id">
+            <div class="col-6 left"></div>
+            <router-link :to="{ name: 'addAccount', params: {index1: index1, index2: index2} }">
+              <i :class="'mid icon iconfont icon-'+record.TypeCode"></i>
+              <div class="col-6 right">
+                <span class="type-name">{{record.TypeName}}</span>
+                <span class="amount">{{record.Amount}}</span>
+              </div>
+            </router-link>
+          </div>
+        </template>
+      </li>
+    </transition-group>
+    <li v-show="IsLoading">
+      <div class="row loading-mid">
+        <div class="col-12">
+          <mt-spinner class="mid" type="double-bounce"></mt-spinner>
+        </div>
+      </div>
+    </li>
+  </ul>
+</template>
+
+<script>
+import { mapActions, mapState } from "vuex";
+export default {
+  computed: {
+    ...mapState({
+      AccountList: state => state.accountRecords.accountList,
+      IsLoading: state => state.accountRecords.isLoading
+    })
+  },
+  methods: {
+    ...mapActions({
+      getAccountRecords: "getAccountRecords"
+    })
+  }
+};
+</script>
+
+<style scoped>
+.left {
+  height: 4em;
+  /* background-color: #caf7cd; */
+  line-height: 4em;
+  border-right: 1px solid #a1a2a5;
+  padding-right: 26px;
+  text-align: right;
+  color: #596161;
+}
+
+.right {
+  height: 4em;
+  /* background-color: #738de2; */
+  border-left: 1px solid #a1a2a5;
+  line-height: 4em;
+  padding-left: 26px;
+  color: #596161;
+}
+
+.type-name {
+  font-size: 1.6em;
+  color: #8b8989;
+}
+
+.amount {
+  font-size: 1.2em;
+  color: #8b8989;
+  padding-left: 10px;
+}
+
+.container::-webkit-scrollbar {
+  display: none;
+}
+
+.day-left,
+.day-right {
+  height: 20px;
+  line-height: 20px;
+}
+
+.day-left {
+  text-align: right;
+  border-right: 1px solid #a1a2a5;
+}
+
+.day-right {
+  border-left: 1px solid #a1a2a5;
+}
+
+.day {
+  font-size: 10px;
+  color: #8b8989;
+}
+
+.mid {
+  z-index: 99;
+  background-color: #ffffff;
+  line-height: 1em;
+}
+
+.mid-day-total {
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background-color: #a1a2a5;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 99;
+}
+
+.loading-mid {
+  height: 28px;
+  padding: 20px 0;
+}
+.loading-mid .mid {
+  border-radius: 50%;
+  background-color: transparent;
+}
+.records-enter-active,
+.records-leave-active {
+  transition: all 2s;
+}
+.records-enter,
+.records-leave-to {
+  opacity: 0;
+  transform: translate3d(0, 30px, 0);
+}
+</style>

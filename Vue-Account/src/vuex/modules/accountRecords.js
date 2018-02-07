@@ -1,6 +1,6 @@
 const state = {
   pageIndex: 1,
-  pageSize: 10,
+  pageSize: 8,
   isLoading: false,
   allLoaded: false,
   accountList: [],

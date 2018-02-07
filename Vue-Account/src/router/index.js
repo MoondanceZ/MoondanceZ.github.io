@@ -1,9 +1,9 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import store from '@/vuex/store'
-import AcountList from '@/components/account/AccountList'
-import AddAccount from '@/components/account/AddRecord'
-import Login from '@/components/user/Login'
+import AcountList from '@/views/account/AccountList'
+import AddAccount from '@/views/account/AddRecord'
+import Login from '@/views/user/Login'
 import Layout from '@/components/Layout'
 
 Vue.use(Router)
