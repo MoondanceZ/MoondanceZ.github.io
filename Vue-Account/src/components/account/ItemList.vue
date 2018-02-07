@@ -1,5 +1,5 @@
 <template>
-  <scroller :on-infinite="infinite" style="top: 72px" ref="scrollerBottom">
+  <scroller :on-infinite="infinite" style="top: 72px;-webkit-overflow-scrolling: touch;" ref="scrollerBottom">
     <ul>
       <transition-group name="records">
         <li v-for="(item, index1) in AccountList" :key="item.Date">
