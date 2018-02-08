@@ -15,7 +15,7 @@
           <template v-for="(record, index2) in item.AccountRecords">
             <div v-if="record.Type == 0" class="row" :key="record.Id">
               <div class="col-6 left">
-                <router-link :to="{ name: 'addAccount', params: {index1: index1, index2: index2} }" class="link">
+                <router-link :to="{ name: 'addAccount', params: {index1: index1, index2: index2, type: record.Type} }" class="link">
                   <span class="amount">{{record.Amount}}</span>
                   <span class="type-name">{{record.TypeName}}</span>
                 </router-link>
@@ -27,7 +27,7 @@
               <div class="col-6 left"></div>
               <i :class="'mid icon iconfont icon-'+record.TypeCode"></i>
               <div class="col-6 right">
-                <router-link :to="{ name: 'addAccount', params: {index1: index1, index2: index2} }" class="link">
+                <router-link :to="{ name: 'addAccount', params: {index1: index1, index2: index2, type: record.Type} }" class="link">
                   <span class="type-name">{{record.TypeName}}</span>
                   <span class="amount">{{record.Amount}}</span>
                 </router-link>

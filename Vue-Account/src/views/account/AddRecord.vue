@@ -76,6 +76,7 @@ export default {
         : "0" + (date.getMonth() + 1)) +
       "-" +
       (date.getDate() >= 10 ? date.getDate() : "0" + date.getDate());
+    _self.Type = this.$route.params.type || 1;
     let index1 = this.$route.params.index1;
     let index2 = this.$route.params.index2;
     if (index2 !== undefined && index2 !== undefined) {
