@@ -191,7 +191,7 @@
 
   .records-enter-active,
   .records-leave-active {
-    transition: all 2s;
+    transition: all .5s;
   }
 
   .records-enter,

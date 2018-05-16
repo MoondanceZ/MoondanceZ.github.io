@@ -4,6 +4,7 @@ import store from '@/vuex/store'
 import AcountList from '@/views/account/AccountList'
 import AddAccount from '@/views/account/AddRecord'
 import Login from '@/views/user/Login'
+import UserInfo from '@/views/user/UserInfo'
 import Layout from '@/components/Layout'
 
 Vue.use(Router)
@@ -25,6 +26,10 @@ const router = new Router({
       path: '/Account/Add',
       name: 'addAccount',
       component: AddAccount
+    }, {
+      path: '/User/Info',
+      name: 'userInfo',
+      component: UserInfo
     }]
   }],
   // routes: [{

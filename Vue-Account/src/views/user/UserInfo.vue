@@ -1,18 +1,17 @@
 <template>
   <div class="container">
-    <div class="row">
-      <i class="title-back icon iconfont icon-fanhui" @click="closeUserInfo"></i>
-      <div class="col-12 title">个人信息</div>
-    </div>
+   <Header :Title="个人信息"></Header>
   </div>
 </template>
 
 <script>
-  export default {};
-
+import Header from "@/components/Header";
+export default {
+  components: {
+    Header
+  }
+};
 </script>
 
 <style scoped>
-
-
 </style>
