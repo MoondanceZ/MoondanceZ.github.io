@@ -15,6 +15,12 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.icon-expend:before { content: "\e61d"; }
+
+.icon-income:before { content: "\e61e"; }
+
+.icon-yusuan:before { content: "\e60e"; }
+
 .icon-delete:before { content: "\e602"; }
 
 .icon-shouru:before { content: "\e63b"; }
@@ -32,6 +38,8 @@
 .icon-shuma:before { content: "\e713"; }
 
 .icon-yule:before { content: "\e62b"; }
+
+.icon-huizong:before { content: "\e731"; }
 
 .icon-guanbi:before { content: "\e62c"; }
 
@@ -70,3 +78,5 @@
 .icon-yongcan:before { content: "\e601"; }
 
 .icon-shuiguo:before { content: "\e678"; }
+
+.icon-xiugai:before { content: "\e6a1"; }

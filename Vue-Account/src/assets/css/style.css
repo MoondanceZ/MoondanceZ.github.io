@@ -628,6 +628,22 @@ div#app {
   color: #f11569;
 }
 
+.icon-yusuan {
+  color: #05bf15;
+}
+
+.icon-huizong {
+  color: #d0680d;
+}
+
+.icon-income {
+  color: #3481f7;
+}
+
+.icon-expend {
+  color: #e65c5c;
+}
+
 .title-back {
   background-color: transparent !important;
   font-size: 24px !important;
@@ -650,9 +666,13 @@ div#app {
   margin: 8px 0;
   font-size: 18px;
   height: 26px;
-  line-height: 18px;
+  line-height: 26px;
   text-align: center;
-  color: #a1a2a5;
+  color: #373738;
+}
+
+.ta-center {
+  text-align: center;
 }
 
 .close {

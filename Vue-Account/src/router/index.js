@@ -5,6 +5,7 @@ import AcountList from '@/views/account/AccountList'
 import AddAccount from '@/views/account/AddRecord'
 import Login from '@/views/user/Login'
 import UserInfo from '@/views/user/UserInfo'
+import UserSetting from '@/views/user/Setting'
 import Layout from '@/components/Layout'
 
 Vue.use(Router)
@@ -30,6 +31,10 @@ const router = new Router({
       path: '/User/Info',
       name: 'userInfo',
       component: UserInfo
+    }, {
+      path: '/User/Setting',
+      name: 'userSetting',
+      component: UserSetting
     }]
   }],
   // routes: [{

@@ -8,7 +8,7 @@ import FastClick from 'fastclick'
 import VueScroller from 'vue-scroller'
 
 import {
-  InfiniteScroll,
+  // InfiniteScroll,
   Spinner,
   DatetimePicker
 } from "mint-ui";
@@ -20,7 +20,7 @@ import '@/assets/css/style.css'
 
 Vue.use(VueScroller)
 
-Vue.use(InfiniteScroll);
+// Vue.use(InfiniteScroll);
 Vue.component(Spinner.name, Spinner);
 Vue.component(DatetimePicker.name, DatetimePicker);
 

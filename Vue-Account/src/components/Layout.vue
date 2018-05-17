@@ -13,13 +13,19 @@ export default {
       transitionName: "slide-left"
     };
   },
-  
+
   //监听路由的路径，可以通过不同的路径去选择不同的切换效果
   watch: {
     $route(to, from) {
-      if (this.$store.state.user.routerLog.prev == to.path.toLowerCase() && to.path.toLowerCase() == "/account/list") {
+      if (
+        ((from.path.toLowerCase() == "/account/add" ||
+          from.path.toLowerCase() == "/user/info") &&
+          to.path.toLowerCase() == "/account/list") ||
+        (from.path.toLowerCase() == "/user/setting" &&
+          to.path.toLowerCase() == "/user/info")
+      ) {
         this.transitionName = "slide-right";
-      }else{
+      } else {
         this.transitionName = "slide-left";
       }
 
