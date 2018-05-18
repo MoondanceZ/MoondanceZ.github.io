@@ -10,9 +10,9 @@
        <p class="p-expend">当前日均消费12.00</p>
      </div>
      <div class="col-3 ta-center">
-       <router-link to="/User/Setting">
-       <span class="setting">修改信息</span>
-       <i class="set-icon icon iconfont icon-xiugai"></i>
+       <router-link to="/User/Setting" class="link">
+        <span class="setting">修改信息</span>
+        <i class="set-icon icon iconfont icon-xiugai"></i>
        </router-link>
      </div>
    </div>
@@ -70,7 +70,7 @@
 <script>
 import { mapState } from "vuex";
 import Header from "@/components/Header";
-import Footer from "@/components/User/Footer"
+import Footer from "@/components/User/Footer";
 export default {
   data() {
     return {
@@ -91,6 +91,11 @@ export default {
 </script>
 
 <style scoped>
+.link {
+  user-select: none;
+  -webkit-user-select: none;
+  text-decoration: none;
+}
 .avatar {
   /* position: absolute;
   top: 100%;

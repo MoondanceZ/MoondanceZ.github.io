@@ -20,7 +20,7 @@ const mutations = {
   'UPDATE_CURRENT_USER' (state, userInfo) {
     for (let key in userInfo) {
       if (user.hasOwnProperty(key)) {
-        state.currentUser[key] = userInfo[key];
+        state.currentUser[key] = userInfo[key] || '';
 
       }
     }

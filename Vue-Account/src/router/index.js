@@ -10,6 +10,7 @@ import Layout from '@/components/Layout'
 
 Vue.use(Router)
 
+const debug = process.env.NODE_ENV !== 'production'
 
 const router = new Router({
   routes: [{
@@ -68,13 +69,15 @@ router.beforeEach((to, from, next) => {
     next();
   }
 
-  if (!store.state.user.isLogin) {
-    next({
-      path: '/Login',
-    });
-  } else {
-    // 如果已经登录了的就可以访问该页面
-    next();
+  if(!debug){
+    if (!store.state.user.isLogin) {
+      next({
+        path: '/Login',
+      });
+    } else {
+      // 如果已经登录了的就可以访问该页面
+      next();
+    }
   }
 });
 router.afterEach((to, from)=>{

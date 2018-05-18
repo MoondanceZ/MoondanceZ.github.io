@@ -65,6 +65,6 @@ export default {
   border-radius: 1px;
   text-align: center;
   background-color: #ffffff;
-  color: #a1a2a5;
+  color: #585858;
 }
 </style>

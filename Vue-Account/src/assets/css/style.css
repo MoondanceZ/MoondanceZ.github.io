@@ -803,3 +803,7 @@ div#app {
   /* transform: translateX(10px); */
   opacity: 0;
 }
+
+.hidden {
+  display: none;
+}
