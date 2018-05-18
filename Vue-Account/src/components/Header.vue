@@ -8,11 +8,14 @@
 <script>
 
 export default {
-  props: ["Title"],
+  props: ["Title", "IsClose"],
   methods: {
     clickClose() {
-      var a= this.Method;
-      this.$router.go(-1);
+      if(this.IsClose){  //IsClose 为 true 时, 不返回上一页
+        this.$emit("clickClose");
+      }else{
+        this.$router.go(-1);
+      }
     }
   }
 };

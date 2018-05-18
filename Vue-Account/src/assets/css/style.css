@@ -754,12 +754,13 @@ div#app {
 
 .slide-up-enter-active,
 .slide-up-leave-active {
-  transition: all .5s
+  transition: all 1.5s;
+  opacity: 1;
 }
 
 .slide-up-enter,
 .slide-up-leave-to {
-  opacity: .6;
+  opacity: .2;
   transform: translate3d(0, 100%, 0);
 }
 

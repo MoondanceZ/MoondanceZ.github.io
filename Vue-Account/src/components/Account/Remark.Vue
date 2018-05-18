@@ -1,10 +1,7 @@
 <template>
 <transition name="slide-up" mode="out-in">
   <div class="container">
-    <div class="row">
-      <i class="title-back icon iconfont icon-fanhui" @click="closeRemark"></i>
-      <div class="col-12 title">备注</div>
-    </div>
+    <Header :Title="Title" :IsClose="IsClose" @clickClose="clickClose"></Header>
     <div class="row">
       <div class="col-12">
         <span class="txt-count">{{InputCount}}/200</span>
@@ -19,10 +16,13 @@
 </template>
 
 <script>
+import Header from "@/components/Header";
 export default {
   data() {
     return {
       InputCount: 0,
+      Title: "备注",
+      IsClose: true,
       Remark: ""
     };
   },
@@ -30,13 +30,16 @@ export default {
     descInput() {
       this.InputCount = this.Remark.length;
     },
-    closeRemark() {
+    clickClose() {
       this.$emit("closeRemark", true);
     },
     finish() {
       this.$emit("setRemarkInfo", this.Remark);
       this.$emit("closeRemark", true);
     }
+  },
+  components: {
+    Header
   }
 };
 </script>
