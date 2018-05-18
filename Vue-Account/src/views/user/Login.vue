@@ -131,7 +131,7 @@ export default {
         Account: this.SignUpInfo.Account,
         Password: this.SignUpInfo.Password
       }).then(() => {
-        this.$router.push("/Account/List");
+        // this.$router.push("/Account/List");
       });
     },
     async signInAccount() {
@@ -149,7 +149,7 @@ export default {
         text: "登录中..."
       });
 
-      await this.signIn(this.SignInInfo).then(() => {
+      await this.signIn(this.SignInInfo, this.$router).then(() => {
         if (this.IsRmeberUser) {
           localStorage.setItem("rk-account", this.SignInInfo.Account);
           localStorage.setItem("rk-password", this.SignInInfo.Password);
@@ -157,7 +157,7 @@ export default {
           localStorage.setItem("rk-account", "");
           localStorage.setItem("rk-password", "");
         }
-        this.$router.push("/Account/List");
+        // this.$router.push("/Account/List");
       });
     },
     ...mapActions({

@@ -69,16 +69,24 @@ router.beforeEach((to, from, next) => {
     next();
   }
 
-  if(!debug){
-    if (!store.state.user.isLogin) {
-      next({
-        path: '/Login',
-      });
-    } else {
-      // 如果已经登录了的就可以访问该页面
-      next();
-    }
+  if (!store.state.user.isLogin) {
+    next({
+      path: '/Login',
+    });
+  } else {
+    // 如果已经登录了的就可以访问该页面
+    next();
   }
+  // if(!debug){
+  //   if (!store.state.user.isLogin) {
+  //     next({
+  //       path: '/Login',
+  //     });
+  //   } else {
+  //     // 如果已经登录了的就可以访问该页面
+  //     next();
+  //   }
+  // }
 });
 router.afterEach((to, from)=>{
   this.isBack = false;

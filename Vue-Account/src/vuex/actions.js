@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Rk from "@/api/rk-api";
+import router from '../router';
 import {
   Indicator,
   Toast
@@ -19,6 +20,7 @@ export const userSignUp = async function ({
       commit('SET_CURRENT_USER', res.Data.UserInfo);
       commit('SET_IS_LOGIN', true);
       Indicator.close();
+      router.push("/Account/List");
     } else {
       Indicator.close();
       Toast(res.Message)
@@ -37,10 +39,11 @@ export const userSignIn = async function ({
   await Rk.User.signIn(param).then(response => {
     var res = response.data;
     if (res.IsSuccess) {
-      // console.log(res);
       commit('SET_TOKEN', res.Data.Token);
       commit('SET_CURRENT_USER', res.Data.UserInfo);
       commit('SET_IS_LOGIN', true);
+      Indicator.close();
+      router.push("/Account/List");
     } else {
       Indicator.close();
       Toast(res.Message)
@@ -48,6 +51,27 @@ export const userSignIn = async function ({
   }).catch(error => {
     Indicator.close();
     Toast("登录异常");
+  });
+}
+
+export const userSetting = async function ({
+  commit,
+  state
+}, param) {
+  await Rk.User.setting(param).then(response => {
+    var res = response.data;
+    if (res.IsSuccess) {
+      commit('SET_CURRENT_USER', param);
+      Indicator.close();
+      Toast(res.Message)
+    } else {
+      Indicator.close();
+      Toast(res.Message)
+    }
+  }).catch(error => {
+    debugger;
+    Indicator.close();
+    Toast("保存异常");
   });
 }
 

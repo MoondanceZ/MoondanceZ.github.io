@@ -1,6 +1,5 @@
 import axios from './http';
 import qs from 'qs'
-import router from '../router';
 
 const dev = process.env.NODE_ENV === 'production' ? false : true
 let baseUrl = dev ? '/api' : 'https://api.round-king.com'
@@ -33,6 +32,9 @@ export default {
     },
     getUser: param => {
       return axios.get(`${baseUrl}/UserInfo/${param}`);
+    },
+    setting: param => {
+      return axios.put(`${baseUrl}/UserInfo`, param);
     }
   }
 }
