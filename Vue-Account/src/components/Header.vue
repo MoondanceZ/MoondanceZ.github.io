@@ -22,4 +22,8 @@ export default {
 </script>
 
 <style scoped>
+  .row {
+    border-bottom: 1px solid #efeeee;
+    margin-bottom: 10px;
+  }
 </style>
