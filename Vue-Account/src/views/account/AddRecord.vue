@@ -1,36 +1,39 @@
 <template>
   <div>
-    <div v-show="RemarkNotOpen" class="container">
-      <div class="row add-header">
+    <transition name="slide-up" mode="out-in">
+      <div v-show="RemarkNotOpen" class="container">
+        <div class="row add-header">
           <i class="title-back icon iconfont icon-fanhui" @click="clickClose"></i>
-          <i v-if="$route.params.index1 !== undefined && $route.params.index2 !== undefined" class="title-delete icon iconfont icon-guanbi" @click="clickDelete"></i>
-        <div :class="'col-6 add-income'+ IsIncome" @click="selectAccountType(0)">收入</div>
-        <div :class="'col-6 add-expend'+ IsExpend" @click="selectAccountType(1)">支出</div>
+          <i v-if="$route.params.index1 !== undefined && $route.params.index2 !== undefined" class="title-delete icon iconfont icon-guanbi"
+            @click="clickDelete"></i>
+          <div :class="'col-6 add-income'+ IsIncome" @click="selectAccountType(0)">收入</div>
+          <div :class="'col-6 add-expend'+ IsExpend" @click="selectAccountType(1)">支出</div>
+        </div>
+        <div class="row add-type">
+          <div class="col-2">
+            <i :class="'selectedType icon iconfont icon-' + SelectedType"></i>
+          </div>
+          <div class="col-2 type-info">
+            {{SelectedTypeName}}
+          </div>
+          <div class="col-8 type-amount">
+            {{Amount}}
+          </div>
+        </div>
+        <div class="row">
+          <div v-show="Type==0" v-for="item in AccountIncomeTypeList" :key="item.Code" class="col-2 type-icon-list-icon" @click="selectType(item.Id, item.Code, item.Name)">
+            <i :class="'icon iconfont icon-' + item.Code"></i>
+            <p>{{item.Name}}</p>
+          </div>
+          <div v-show="Type==1" v-for="item in AccountExpendTypeList" :key="item.Code" class="col-2 type-icon-list-icon" @click="selectType(item.Id, item.Code, item.Name)">
+            <i :class="'icon iconfont icon-' + item.Code"></i>
+            <p>{{item.Name}}</p>
+          </div>
+        </div>
+        <Calculator :Amount="Amount" :RecordDate="AccountDate" @showAmount="showAmount" @openRemark="showRemark" @clickOk="saveRecord"
+          @setAccountDate="getAccountDate"></Calculator>
       </div>
-      <div class="row add-type">
-        <div class="col-2">
-          <i :class="'selectedType icon iconfont icon-' + SelectedType"></i>
-        </div>
-        <div class="col-2 type-info">
-          {{SelectedTypeName}}
-        </div>
-        <div class="col-8 type-amount">
-          {{Amount}}
-        </div>
-      </div>
-      <div class="row">
-        <div v-show="Type==0" v-for="item in AccountIncomeTypeList" :key="item.Code" class="col-2 type-icon-list-icon" @click="selectType(item.Id, item.Code, item.Name)">
-          <i :class="'icon iconfont icon-' + item.Code"></i>
-          <p>{{item.Name}}</p>
-        </div>
-        <div v-show="Type==1" v-for="item in AccountExpendTypeList" :key="item.Code" class="col-2 type-icon-list-icon" @click="selectType(item.Id, item.Code, item.Name)">
-          <i :class="'icon iconfont icon-' + item.Code"></i>
-          <p>{{item.Name}}</p>
-        </div>
-      </div>
-      <Calculator :Amount="Amount" :RecordDate="AccountDate" @showAmount="showAmount" @openRemark="showRemark" @clickOk="saveRecord"
-        @setAccountDate="getAccountDate"></Calculator>
-    </div>
+    </transition>
     <Remark v-show="!RemarkNotOpen" @closeRemark="closeRemark" @setRemarkInfo="getRemarkInfo"></Remark>
   </div>
 </template>
@@ -278,6 +281,7 @@ export default {
   user-select: none;
   -webkit-user-select: none;
 }
+
 .add-income,
 .add-expend {
   margin: 8px 0;

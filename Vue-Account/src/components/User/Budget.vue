@@ -1,9 +1,9 @@
 <template>
-<transition name="slide-up" mode="out-in">
+  <transition name="slide-down" mode="out-in">
     <div class="container">
-        <Header :Title="Title" :IsClose="IsClose" @clickClose="clickClose"></Header>
+      <Header :Title="Title" :IsClose="IsClose" @clickClose="clickClose"></Header>
     </div>
-</transition>
+  </transition>
 </template>
 
 <script>

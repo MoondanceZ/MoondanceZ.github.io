@@ -23,7 +23,7 @@ export default {
 
 <style scoped>
   .row {
-    border-bottom: 1px solid #efeeee;
+    border-bottom: 1px solid #eae8e8;
     margin-bottom: 10px;
   }
 </style>

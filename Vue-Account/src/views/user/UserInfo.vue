@@ -1,74 +1,77 @@
 <template>
   <div>
-    <div class="container" v-show="!IsOpenTab">
-      <Header :Title="Title"></Header>
-      <div class="row">
-        <div class="col-3">
-          <img class="avatar" :src=AvatarUrl alt="avatar" srcset="">
-        </div>
-        <div class="col-6 ta-center">
-          <p class="p-date">05月01日 - 05月17日</p>
-          <p class="p-expend">当前日均消费12.00</p>
-        </div>
-        <div class="col-3 ta-center">
-          <router-link to="/User/Setting" class="link">
-            <span class="setting">修改信息</span>
-            <i class="set-icon icon iconfont icon-xiugai"></i>
-          </router-link>
-        </div>
-      </div>
-      <div class="row computed">
-        <div class="col-4">
-          <p class="c-type">支出</p>
-          <p class="c-amount">0.00</p>
-        </div>
-        <div class="col-4">
-          <p class="c-type">收入</p>
-          <p class="c-amount">0.00</p>
-        </div>
-        <div class="col-4">
-          <p class="c-type">结余</p>
-          <p class="c-amount">0.00</p>
-        </div>
-      </div>
-      <div class="row compare ta-center">
+    <transition name="slide-up" mode="out-in">
+      <div class="container h100-p" v-show="!IsOpenTab">
+        <Header :Title="Title"></Header>
         <div class="row">
-          <span class="col-12 cp-title">上月同期支出对比Top3</span>
-        </div>
-        <div class="row">
-          <div class="col-4 cp-row">
-            <p class="cp-percent">0%</p>
-            <p class="cp-type">-</p>
-            <p class="cp-name">无数据</p>
-            <p class="cp-amount">0.00</p>
+          <div class="col-3">
+            <img class="avatar" :src=AvatarUrl alt="avatar" srcset="">
           </div>
-          <div class="col-4 cp-row">
-            <p class="cp-percent">0%</p>
-            <p class="cp-type">-</p>
-            <p class="cp-name">无数据</p>
-            <p class="cp-amount">0.00</p>
+          <div class="col-6 ta-center">
+            <p class="p-date">05月01日 - 05月17日</p>
+            <p class="p-expend">当前日均消费12.00</p>
           </div>
-          <div class="col-4 cp-row">
-            <p class="cp-percent">0%</p>
-            <p class="cp-type">-</p>
-            <p class="cp-name">无数据</p>
-            <p class="cp-amount">0.00</p>
+          <div class="col-3 ta-center">
+            <router-link to="/User/Setting" class="link">
+              <span class="setting">修改信息</span>
+              <i class="set-icon icon iconfont icon-xiugai"></i>
+            </router-link>
           </div>
         </div>
+        <div class="row computed">
+          <div class="col-4">
+            <p class="c-type">支出</p>
+            <p class="c-amount">0.00</p>
+          </div>
+          <div class="col-4">
+            <p class="c-type">收入</p>
+            <p class="c-amount">0.00</p>
+          </div>
+          <div class="col-4">
+            <p class="c-type">结余</p>
+            <p class="c-amount">0.00</p>
+          </div>
+        </div>
+        <div class="row compare ta-center">
+          <div class="row">
+            <span class="col-12 cp-title">上月同期支出对比Top3</span>
+          </div>
+          <div class="row">
+            <div class="col-4 cp-row">
+              <p class="cp-percent">0%</p>
+              <p class="cp-type">-</p>
+              <p class="cp-name">无数据</p>
+              <p class="cp-amount">0.00</p>
+            </div>
+            <div class="col-4 cp-row">
+              <p class="cp-percent">0%</p>
+              <p class="cp-type">-</p>
+              <p class="cp-name">无数据</p>
+              <p class="cp-amount">0.00</p>
+            </div>
+            <div class="col-4 cp-row">
+              <p class="cp-percent">0%</p>
+              <p class="cp-type">-</p>
+              <p class="cp-name">无数据</p>
+              <p class="cp-amount">0.00</p>
+            </div>
+          </div>
+        </div>
+        <div class="row cp-expend">
+          <div class="col-12">
+            <span class="cp-expend-title">当月支出</span>
+            <span class="cp-expend-amount">0.00</span>
+          </div>
+          <div class="col-12">
+            <span class="cp-expend-title">上月同期</span>
+            <span class="cp-expend-amount">0.00</span>
+          </div>
+        </div>
+        <Footer @openTab="openTab"></Footer>
       </div>
-      <div class="row cp-expend">
-        <div class="col-12">
-          <span class="cp-expend-title">当月支出</span>
-          <span class="cp-expend-amount">0.00</span>
-        </div>
-        <div class="col-12">
-          <span class="cp-expend-title">上月同期</span>
-          <span class="cp-expend-amount">0.00</span>
-        </div>
-      </div>
-      <Footer @openTab="openTab"></Footer>
-    </div>
-  <component v-show="IsOpenTab" :is="OpenTabComponent" @closeTab="closeTab"></component>
+    </transition>
+
+    <component class="h100-p" v-show="IsOpenTab" :is="OpenTabComponent" @closeTab="closeTab"></component>
   </div>
 </template>
 
