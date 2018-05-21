@@ -164,7 +164,7 @@ export default {
 }
 
 .setting {
-  font-size: 0.6em;
+  font-size: 1.2em;
   color: #8b8989;
 }
 
