@@ -25,6 +25,8 @@
 
 .icon-shouru:before { content: "\e63b"; }
 
+.icon-weibo:before { content: "\e636"; }
+
 .icon-yundong:before { content: "\e66e"; }
 
 .icon-tongxun:before { content: "\e603"; }
@@ -36,6 +38,8 @@
 .icon-tushu:before { content: "\e6aa"; }
 
 .icon-shuma:before { content: "\e713"; }
+
+.icon-qq:before { content: "\e623"; }
 
 .icon-yule:before { content: "\e62b"; }
 

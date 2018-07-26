@@ -32,7 +32,7 @@ export default {
       MonthIncome: state => state.accountRecords.monthIncome,
       MonthExpend: state => state.accountRecords.monthExpend,
       AvatarUrl: state =>
-        state.user.currentUser.AvatarUrl || "./static/img/avatar.jpg"
+        state.user.currentUser.AvatarUrl || "./static/images/avatar.jpg"
     })
   },
   components: {
