@@ -9,9 +9,11 @@ const state = {
 //mutations
 const mutations = {
   'SET_TOKEN' (state, token) {
+    sessionStorage.setItem("Token", JSON.stringify(token));
     state.token = token;
   },
   'SET_CURRENT_USER' (state, user) {
+    sessionStorage.setItem("User", JSON.stringify(user));
     state.currentUser = user;
   },
   'SET_IS_LOGIN' (state, isLogin) {

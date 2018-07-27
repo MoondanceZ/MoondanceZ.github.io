@@ -68,8 +68,18 @@ router.beforeEach((to, from, next) => {
   if (from.path != '/' || from.path !== '/Login') {
     next();
   }
+  let sessionUser = sessionStorage.getItem("User");
+  let sessionToken = sessionStorage.getItem("Token");
 
-  if (!store.state.user.isLogin) {
+  if (sessionUser && sessionToken) {
+    let user = JSON.parse(sessionUser);
+    let token = JSON.parse(sessionToken);
+
+    if (!store.state.user.currentUser.Id) store.commit("SET_CURRENT_USER", user);
+    if (!store.state.user.token.access_token) store.commit("SET_TOKEN", token);
+    if (!store.state.user.isBack) store.commit("SET_IS_LOGIN", true);
+    next();
+  } else if (!store.state.user.isLogin) {
     next({
       path: '/Login',
     });
@@ -88,7 +98,7 @@ router.beforeEach((to, from, next) => {
   //   }
   // }
 });
-router.afterEach((to, from)=>{
+router.afterEach((to, from) => {
   this.isBack = false;
 })
 export default router

@@ -101,7 +101,18 @@
       };
     },
     beforeCreate() {
-      var pattern = Trianglify({
+      let sessionUser = sessionStorage.getItem("User");
+      let sessionToken = sessionStorage.getItem("Token");
+
+      if (sessionUser && sessionToken) {
+        let user = JSON.parse(sessionUser);
+        let token = JSON.parse(sessionToken);
+        this.$store.commit("SET_CURRENT_USER", user);
+        this.$store.commit("SET_TOKEN", token);
+        this.$store.commit("SET_IS_LOGIN", true);
+        this.$router.push("/Account/List");
+      }
+      let pattern = Trianglify({
         width: window.innerWidth,
         height: window.innerHeight
       });
