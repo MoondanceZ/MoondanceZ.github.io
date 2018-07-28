@@ -83,6 +83,7 @@ import Budget from "@/components/User/Budget";
 import Collect from "@/components/User/Collect";
 import Income from "@/components/User/Income";
 import Expend from "@/components/User/Expend";
+import Avartar from "../../../static/images/avatar.jpg";
 export default {
   data() {
     return {
@@ -103,7 +104,7 @@ export default {
   computed: {
     ...mapState({
       AvatarUrl: state =>
-        state.user.currentUser.AvatarUrl || "./static/img/avatar.jpg"
+        state.user.currentUser.AvatarUrl || Avartar
     })
   },
   components: {

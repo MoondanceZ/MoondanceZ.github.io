@@ -26,13 +26,14 @@
 <script>
 import { mapState } from "vuex";
 import ItemList from "@/components/account/ItemList";
+import Avartar from "../../../static/images/avatar.jpg";
 export default {
   computed: {
     ...mapState({
       MonthIncome: state => state.accountRecords.monthIncome,
       MonthExpend: state => state.accountRecords.monthExpend,
       AvatarUrl: state =>
-        state.user.currentUser.AvatarUrl || "./static/images/avatar.jpg"
+        state.user.currentUser.AvatarUrl || Avartar
     })
   },
   components: {

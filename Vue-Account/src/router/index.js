@@ -29,6 +29,10 @@ const router = new Router({
       name: 'addAccount',
       component: AddAccount
     }, {
+      path: '/Account/Edit',
+      name: 'editAccount',
+      component: AddAccount
+    }, {
       path: '/User/Info',
       name: 'userInfo',
       component: UserInfo
@@ -68,18 +72,20 @@ router.beforeEach((to, from, next) => {
   if (from.path != '/' || from.path !== '/Login') {
     next();
   }
-  let sessionUser = sessionStorage.getItem("User");
-  let sessionToken = sessionStorage.getItem("Token");
+  // let sessionUser = sessionStorage.getItem("User");
+  // let sessionToken = sessionStorage.getItem("Token");
 
-  if (sessionUser && sessionToken) {
-    let user = JSON.parse(sessionUser);
-    let token = JSON.parse(sessionToken);
+  // if (sessionUser && sessionToken) {
+  //   let user = JSON.parse(sessionUser);
+  //   let token = JSON.parse(sessionToken);
 
-    if (!store.state.user.currentUser.Id) store.commit("SET_CURRENT_USER", user);
-    if (!store.state.user.token.access_token) store.commit("SET_TOKEN", token);
-    if (!store.state.user.isBack) store.commit("SET_IS_LOGIN", true);
-    next();
-  } else if (!store.state.user.isLogin) {
+  //   if (!store.state.user.currentUser.Id) store.commit("SET_CURRENT_USER", user);
+  //   if (!store.state.user.token.access_token) store.commit("SET_TOKEN", token);
+  //   if (!store.state.user.isBack) store.commit("SET_IS_LOGIN", true);
+  //   next();
+  // } else 
+  
+  if (!store.state.user.isLogin) {
     next({
       path: '/Login',
     });

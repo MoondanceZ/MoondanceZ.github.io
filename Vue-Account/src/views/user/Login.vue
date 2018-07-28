@@ -110,6 +110,10 @@
         this.$store.commit("SET_CURRENT_USER", user);
         this.$store.commit("SET_TOKEN", token);
         this.$store.commit("SET_IS_LOGIN", true);
+
+        sessionStorage.removeItem("User");
+        sessionStorage.removeItem("Token");
+
         this.$router.push("/Account/List");
       }
       let pattern = Trianglify({

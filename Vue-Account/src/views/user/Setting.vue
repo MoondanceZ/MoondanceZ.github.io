@@ -66,14 +66,6 @@ export default {
     //   this.CurrentUser = _.cloneDeep(this.$store.state.user.currentUser);
     this.CurrentUser = Object.assign({}, this.$store.state.user.currentUser);
   },
-  computed: {
-    //   ...mapState({
-    //     CurrentUser: state => state.user.currentUser,
-    //     AvatarUrl: state =>
-    //       state.user.currentUser.AvatarUrl || "./static/img/avatar.jpg"
-    //   })
-    //   this.CurrentUser = this.$store.state.user.currenUser;
-  },
   methods: {
     async saveUser() {
       Indicator.open("正在保存, 请稍等...");
