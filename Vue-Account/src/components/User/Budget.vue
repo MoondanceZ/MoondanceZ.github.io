@@ -16,6 +16,9 @@ export default {
       CurrentUser: {}
     };
   },
+  computed: {
+
+  },
   methods: {
     clickClose() {
       this.$emit("closeTab");

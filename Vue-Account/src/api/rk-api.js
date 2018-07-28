@@ -21,6 +21,9 @@ export default {
     },
     deleteAccountRecord: id => {
       return axios.delete(`${baseUrl}/Account/${id}`);
+    },
+    getAccountInfo: param => {
+      return axios.get(`${baseUrl}/Account/Info/${param}`);
     }
   },
   User: {
