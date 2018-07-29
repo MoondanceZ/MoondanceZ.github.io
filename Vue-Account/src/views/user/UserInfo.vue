@@ -40,7 +40,9 @@
             <template v-for="(item, index) in AccountMonthInfo.LastMonthTop3Expend">
               <div v-if="item" class="col-4 cp-row" :key="index">
                 <p class="cp-percent">{{item.ExpendPercent}}%</p>
-                <p class="cp-type"><i :class="'icon iconfont icon-' + item.TypeCode"></i></p>
+                <p class="cp-type">
+                  <i :class="'icon iconfont icon-' + item.TypeCode"></i>
+                </p>
                 <p class="cp-name">{{item.TypeName}}</p>
                 <p class="cp-amount">{{item.Expend}}</p>
               </div>
@@ -168,6 +170,10 @@
   .p-expend {
     font-size: 0.8em;
     color: #8b8989;
+  }
+
+  .cp-type, .cp-type i {
+    font-size: 36px !important;
   }
 
   .c-type {
