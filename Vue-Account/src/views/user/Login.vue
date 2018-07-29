@@ -141,7 +141,7 @@
     },
     methods: {
       qqLogin() {
-        window.location.href = window.location.href.split("//")[0] + "//" + window.location.host + "/Connect/QQ_Login";
+        window.location.href = Rk.LoginUrl;
       },
 
       switchSignUp(val) {

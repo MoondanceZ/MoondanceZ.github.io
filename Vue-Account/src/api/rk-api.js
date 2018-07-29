@@ -6,6 +6,7 @@ let baseUrl = dev ? '/api' : 'https://api.round-king.com'
 let identityserver4Url = dev ? '/identityserver4' : 'https://identityserver4.round-king.com'
 
 export default {
+  LoginUrl: 'https://round-king.com/Connect/QQ_Login',
   Account: {
     getAccountTypes: param => {
       return axios.get(`${baseUrl}/Account/Types/${param}`);
